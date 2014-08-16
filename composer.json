@@ -1,0 +1,27 @@
+{
+    "name": "clumsy/utils",
+    "description": "A set of utilities for building Laravel applications",
+    "keywords": ["laravel", "helper", "utilities"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tomas Buteler",
+            "email": "tbuteler@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "clumsy/assets": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Clumsy\\Utils": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.3.6-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
