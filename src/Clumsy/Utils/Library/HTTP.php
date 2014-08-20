@@ -64,6 +64,40 @@ class HTTP {
 	{
     	Queue::push('\Clumsy\Utils\Library\HTTP', array('url' => $url, 'method' => 'get'));
 	}
+
+	public function post($url, $data, $charset = 'UTF-8')
+	{
+		foreach ($data as $key => $value)
+		{
+			$data[$key] = rawurlencode($key) . '=' . rawurlencode($value);
+		}
+		
+		$data = implode('&', preg_replace('/%20/', '+', $data));
+		$headers = array(
+			'Content-Type: application/x-www-form-urlencoded',
+		);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        curl_setopt($ch, CURLOPT_ENCODING , $charset);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		$html = curl_exec($ch);
+        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		curl_close($ch);
+
+        $response = array(
+		    'html'      => $html,
+		    'status'    => $http_status,
+        );
+
+        \Illuminate\Support\Facades\Log::info("(POST) URL: $url -- Response: " . print_r($response, true));
+
+        return $response;
+	}
 	
 	public function fire($job, $data)
 	{
