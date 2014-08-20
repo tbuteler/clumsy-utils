@@ -26,35 +26,38 @@ Form::macro('boolean', function($name, $label)
 
 /*
 |--------------------------------------------------------------------------
-| Dropdown
-|--------------------------------------------------------------------------
-|
-| Select input with auxiliary HTML
-|
-*/
-Form::macro('dropdown', function($name, $label, $values, $selected = null, $field_attributes = array('class' => 'form-control'))
-{
-    $output = '<div class="form-group">';
-    $output .= Form::label($name, $label);
-    $output .= Form::select($name, $values, $selected, $field_attributes);
-    $output .= '</div>';
-
-    return $output;
-});
-
-/*
-|--------------------------------------------------------------------------
 | Field
 |--------------------------------------------------------------------------
 |
 | Versatile input macro with auxiliary HTML and error feedback
 |
 */
-Form::macro('field', function($name, $label, $type = 'text', $attributes = array(), $input_group = array())
+Form::macro('field', function($name, $label, $type = 'text', $attributes = array())
 {
-    $help = null;
+    $input_group = array_pull($attributes, 'input_group');
+    
+    $label_attributes = array_pull($attributes, 'label');
+    
+    $field_attributes = array_pull($attributes, 'field');
+    $field_attributes = array_merge(
+        array(
+            'class' => 'form-control',
+        ),
+        (array)$field_attributes
+    );
 
-    $class = array('form-group');
+    $defaults = array(
+        'value'        => null,
+        'class'        => 'form-group',
+        'before_label' => null,
+        'before'       => null,
+        'after'        => null,
+    );
+
+    $attributes = array_merge($defaults, $attributes);
+    extract($attributes, EXTR_SKIP);
+
+    $class = explode(' ', $class);
 
     if (Session::has('errors'))
     {
@@ -65,8 +68,8 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
             $class[] = 'has-error';
             $class[] = 'has-feedback';
 
-            $help = '<span class="glyphicon glyphicon-remove form-control-feedback"></span>';
-            $help .= '<p class="help-block">' . $errors->first($name) . '</p>';
+            $after .= '<span class="glyphicon glyphicon-remove form-control-feedback"></span>';
+            $after .= '<p class="help-block">' . $errors->first($name) . '</p>';
         }
     }
 
@@ -74,23 +77,11 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
 
     $output = "<div class=\"$class\">";
 
-    $label_attributes = array_pull($attributes, 'label');
+    $output .= $before_label;
 
     $output .= Form::label($name, $label, $label_attributes);
 
-    $field_attributes = array_get($attributes, 'field');
-
-    if (!$field_attributes && sizeof($attributes))
-    {
-        $field_attributes = $attributes;
-    }
-
-    $field_attributes = array_merge(
-        array(
-            'class' => 'form-control',
-        ),
-        (array)$field_attributes
-    );
+    $output .= $before;
 
     if (sizeof($input_group))
     {
@@ -107,9 +98,13 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     {
         $output .= Form::$type($name, $field_attributes);
     }
+    elseif (in_array($type, array('select')))
+    {
+        $output .= Form::$type($name, $options, $value, $field_attributes);
+    }
     else
     {
-        $output .= Form::$type($name, $value = null, $field_attributes);        
+        $output .= Form::$type($name, $value, $field_attributes);        
     }
 
     if (sizeof($input_group))
@@ -123,10 +118,32 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
         $output .= '</div>';
     }
 
-    $output .= $help;
+    $output .= $after;
+
     $output .= '</div>';
     
     return $output;
+});
+
+/*
+|--------------------------------------------------------------------------
+| Dropdown
+|--------------------------------------------------------------------------
+|
+| Select input with auxiliary HTML
+|
+*/
+Form::macro('dropdown', function($name, $label, $options, $selected = null, $attributes = array())
+{
+    $attributes = array_merge(
+        $attributes,
+        array(
+            'value'   => $selected,
+            'options' => $options,
+        )
+    );
+
+    return Form::field($name, $label, 'select', $attributes);
 });
 
 /*
