@@ -15,6 +15,30 @@ class Geo {
     
         switch ($country)
         {
+            case 'es' :
+
+                $result = DB::table('utils_geo_es_cities')
+                            ->join('utils_geo_es_subregions', 'utils_geo_es_cities.subregion_id', '=', 'utils_geo_es_subregions.id')
+                            ->join('utils_geo_es_regions', 'utils_geo_es_subregions.region_id', '=', 'utils_geo_es_regions.id')
+                            ->where('postal', '<=', $postal)
+                            ->orderBy('postal', 'desc')
+                            ->first();
+                
+                if ($result)
+                {
+                    $address = array();
+                    $address['country'] = $country;
+                    $address['region'] = $result->region;
+                    $address['subregion'] = $result->subregion;
+                    $address['city'] = $result->city;
+
+                    // TODO?: Build locations table
+                
+                    return $address;
+                }
+                
+                return false;
+                
             case 'pt' :
 
                 list($prefix, $suffix) = explode('-', $postal);
@@ -49,30 +73,6 @@ class Geo {
                     return $address;
                 }
 
-                return false;
-
-            case 'es' :
-
-                $result = DB::table('utils_geo_es_cities')
-                            ->join('utils_geo_es_subregions', 'utils_geo_es_cities.subregion_id', '=', 'utils_geo_es_subregions.id')
-                            ->join('utils_geo_es_regions', 'utils_geo_es_subregions.region_id', '=', 'utils_geo_es_regions.id')
-                            ->where('postal', '<=', $postal)
-                            ->orderBy('postal', 'desc')
-                            ->first();
-                
-                if ($result)
-                {
-                    $address = array();
-                    $address['country'] = $country;
-                    $address['region'] = $result->region;
-                    $address['subregion'] = $result->subregion;
-                    $address['city'] = $result->city;
-
-                    // TODO?: Build locations table
-                
-                    return $address;
-                }
-                
                 return false;
         }
     }
