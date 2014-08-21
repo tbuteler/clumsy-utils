@@ -37,6 +37,14 @@ class UtilsServiceProvider extends ServiceProvider {
 		// Extended validation
         Validator::extend('email_advanced', 'Clumsy\Utils\Validators\EmailAdvanced@validate');
 		Validator::extend('postal', 'Clumsy\Utils\Validators\Postal@validate');
+		Validator::extend('id', 'Clumsy\Utils\Validators\Identities@validate');
+		Validator::replacer('id', function($message, $attribute, $rule, $parameters)
+		{
+			$id = head($parameters);
+    		
+    		return str_replace(':id', Lang::get("clumsy/utils::validation.identities.$id"), $message);
+		});
+
 		Validator::resolver(function($translator, $data, $rules, $messages)
 		{
 			// Append custom messages

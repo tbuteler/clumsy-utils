@@ -6,4 +6,17 @@ return array(
 
 	'postal'		 => 'O código postal inserido não é válido.',
 
+	'id'			 => 'O :id inserido não é válido.',
+
+	/*
+	|--------------------------------------------------------------------------
+	| Indentity names
+	|--------------------------------------------------------------------------
+	|
+	*/
+
+	'identities' => array(
+
+		'pt_nif' => 'NIF',
+	),
 );
