@@ -7,25 +7,6 @@ use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
-| Boolean
-|--------------------------------------------------------------------------
-|
-| Checkbox with auxiliary HTML
-|
-*/
-Form::macro('boolean', function($name, $label)
-{
-    $output = '<div class="checkbox">';
-    $output .= '<label for="' . $name . '">';
-    $output .= Form::checkbox($name, 1, null, array('id' => $name)) . $label;
-    $output .= '</label>';
-    $output .= '</div>';
-
-    return $output;
-});
-
-/*
-|--------------------------------------------------------------------------
 | Field
 |--------------------------------------------------------------------------
 |
@@ -52,10 +33,22 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
         'before_label' => null,
         'before'       => null,
         'after'        => null,
+        'id'           => null,
+        'id_prefix'    => null,
     );
 
     $attributes = array_merge($defaults, $attributes);
     extract($attributes, EXTR_SKIP);
+
+    if (!$id)
+    {
+        $id = $id_prefix.$name;
+    }
+    $label_attributes['for'] = $id;
+    if (!isset($field_attributes['id']))
+    {
+        $field_attributes['id'] = $id;
+    }
 
     $class = explode(' ', $class);
 
@@ -102,6 +95,11 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     {
         $output .= Form::$type($name, $options, $value, $field_attributes);
     }
+    elseif (in_array($type, array('checkbox')))
+    {
+        $label_end = strpos($output, '>', strpos($output, '<label'))+1;
+        $output = substr_replace($output, Form::$type($name, 1, null, $field_attributes), $label_end, 0);
+    }
     else
     {
         $output .= Form::$type($name, $value, $field_attributes);        
@@ -123,6 +121,19 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     $output .= '</div>';
     
     return $output;
+});
+
+/*
+|--------------------------------------------------------------------------
+| Boolean
+|--------------------------------------------------------------------------
+|
+| Checkbox with auxiliary HTML
+|
+*/
+Form::macro('boolean', function($name, $label)
+{
+    return Form::field($name, $label, 'checkbox');
 });
 
 /*

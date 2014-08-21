@@ -18,6 +18,6 @@ class Identities {
 
         list($object, $method) = explode('@', $this->types[$type]);
 
-        with(new $object)->$method($attribute, $value, $parameters);
+        return with(new $object)->$method($attribute, $value, $parameters);
     }
 }
