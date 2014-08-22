@@ -131,7 +131,7 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
 | Checkbox with auxiliary HTML
 |
 */
-Form::macro('boolean', function($name, $label)
+Form::macro('boolean', function($name, $label, $attributes = array())
 {
     return Form::field($name, $label, 'checkbox');
 });
@@ -165,11 +165,16 @@ Form::macro('dropdown', function($name, $label, $options, $selected = null, $att
 | Shorthand for calling Field macro while enqueuing RTE scripts
 |
 */
-Form::macro('richText', function($name, $label)
+Form::macro('richText', function($name, $label, $attributes = array())
 {
     Asset::enqueue('tinymce');
 
-    return Form::field($name, $label, 'textarea', array('class' => 'form-control rich-text'));
+    $defaults = array(
+        'class' => 'form-control rich-text',
+    );
+    $attributes['field'] = isset($attributes['field']) ? array_merge($defaults, $attributes['field']) : $defaults;
+
+    return Form::field($name, $label, 'textarea', $attributes);
 });
 
 /*
