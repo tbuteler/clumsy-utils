@@ -22,14 +22,14 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     $field_attributes = array_pull($attributes, 'field');
     $field_attributes = array_merge(
         array(
-            'class' => 'form-control',
+            'class' => in_array($type, array('checkbox', 'radio')) ? '' : 'form-control',
         ),
         (array)$field_attributes
     );
 
     $defaults = array(
         'value'        => null,
-        'class'        => 'form-group',
+        'class'        => "form-group $type",
         'before_label' => null,
         'before'       => null,
         'after'        => null,
@@ -95,7 +95,7 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     {
         $output .= Form::$type($name, $options, $value, $field_attributes);
     }
-    elseif (in_array($type, array('checkbox')))
+    elseif (in_array($type, array('checkbox', 'radio')))
     {
         $label_end = strpos($output, '>', strpos($output, '<label'))+1;
         $output = substr_replace($output, Form::$type($name, 1, null, $field_attributes), $label_end, 0);
