@@ -4,34 +4,75 @@ if (!function_exists('ebr'))
 {
     function ebr($string)
     {
-    	$string = e(preg_replace('#<br\s*/?>#', "\n", $string));
+        $string = e(preg_replace('#<br\s*/?>#', "\n", $string));
  
-    	return nl2br($string);
+        return nl2br($string);
     }
 }
 
 if (!function_exists('locale'))
 {
-	function locale()
+    function locale()
     {
-		return app('config')->get('app.locale');
-	}
+        return app('config')->get('app.locale');
+    }
 }
 
 if (!function_exists('n'))
 {
-	function n($number, $dec = 2, $thousands = true)
+    function n($number)
     {
-        return number_format($number, $dec, ',', ($thousands ? '.' : ''));
-	}
+        if (class_exists('NumberFormatter'))
+        {
+            $locale = class_exists('Clumsy\Locale\Facade') ? Clumsy\Locale\Facade::composite() : app('config')->get('app.locale');
+
+            $formatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+
+            return $formatter->format($number);
+        }
+
+        return number_format($number);
+    }
+}
+
+if (!function_exists('money'))
+{
+    function money($number)
+    {
+        if (class_exists('NumberFormatter'))
+        {
+            $locale = class_exists('Clumsy\Locale\Facade') ? Clumsy\Locale\Facade::composite() : app('config')->get('app.locale');
+
+            $formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
+
+            return $formatter->formatCurrency($number, $formatter->getTextAttribute(NumberFormatter::CURRENCY_CODE));
+        }
+
+        extract(localeconv());
+
+        $space = $p_sep_by_space ? ' ' : '';
+        
+        $n = n($number);
+        
+        return $p_cs_precedes ? $currency_symbol.$space.$n : $n.$space.$currency_symbol;
+    }
 }
 
 if (!function_exists('pc'))
 {
-	function pc($number, $dec = 2, $thousands = true)
+    function pc($number)
     {
-        return n((($eq)*100)) . '%';
-	}
+        if (class_exists('NumberFormatter'))
+        {
+            $locale = class_exists('Clumsy\Locale\Facade') ? Clumsy\Locale\Facade::composite() : app('config')->get('app.locale');
+
+            $formatter = new NumberFormatter($locale, NumberFormatter::PERCENT);
+
+            return $formatter->format($number);
+        }
+
+        return n((($number)*100)).'%';
+    }
 }
 
 if (!function_exists('display_date'))
