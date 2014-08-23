@@ -44,7 +44,7 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     {
         $id = $id_prefix.$name;
     }
-    $label_attributes['for'] = $id;
+
     if (!isset($field_attributes['id']))
     {
         $field_attributes['id'] = $id;
@@ -72,7 +72,7 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
 
     $output .= $before_label;
 
-    $output .= Form::label($name, $label, $label_attributes);
+    $output .= Form::label($id, $label, $label_attributes);
 
     $output .= $before;
 
