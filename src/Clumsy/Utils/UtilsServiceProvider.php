@@ -1,8 +1,10 @@
 <?php namespace Clumsy\Utils;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
+use Clumsy\Assets\Facade as Asset;
 
 class UtilsServiceProvider extends ServiceProvider {
 
@@ -28,9 +30,12 @@ class UtilsServiceProvider extends ServiceProvider {
 	public function boot()
 	{
         $this->package('clumsy/utils', 'clumsy/utils');
+        $this->app['config']->package('clumsy/utils', $this->guessPackagePath() . '/config');
+        
+        $assets = Config::get('utils::assets');
+		Asset::batchRegister($assets);
 
 		require $this->guessPackagePath().'/helpers.php';
-
 		require $this->guessPackagePath().'/macros/form.php';
 		require $this->guessPackagePath().'/macros/string.php';
 
