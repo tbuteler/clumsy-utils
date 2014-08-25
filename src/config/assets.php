@@ -55,8 +55,8 @@ return array(
     ),
 
     'datepicker' => array(
-        'set'   => 'styles',
-        'path'  => 'packages/clumsy/utils/js/libs/datepicker/'.Config::get('app.locale').'.js',
+        'set'   => 'footer',
+        'path'  => 'packages/clumsy/utils/js/libs/datepicker/'.Config::get('app.locale').'.min.js',
         'v'     => '1.11.0',
         'req'   => array('jquery', 'jquery-ui.css'),
     ),
