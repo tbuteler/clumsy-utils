@@ -176,26 +176,3 @@ Form::macro('richText', function($name, $label, $attributes = array())
 
     return Form::field($name, $label, 'textarea', $attributes);
 });
-
-/*
-|--------------------------------------------------------------------------
-| Delete button
-|--------------------------------------------------------------------------
-|
-| This macro creates a form with only a submit button. 
-| We'll use it to generate forms that will post to a certain url with the
-| DELETE method, following REST principles.
-|
-*/
-Form::macro('delete', function($resource_type, $id) {
-
-    $form_parameters = array(
-        'method' => "DELETE",
-        'url'    => URL::route("admin.$resource_type.destroy", $id),
-        'class'  => "delete-form btn-outside pull-right $resource_type",
-    );
- 
-    return Form::open($form_parameters)
-            . Form::submit(trans('clumsy/cms::buttons.delete'), array('class' => 'btn btn-danger'))
-            . Form::close();
-});
