@@ -20,6 +20,7 @@ class HTTP {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
         curl_setopt($ch, CURLOPT_ENCODING , $charset);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'cURL');
 		$html = curl_exec($ch);
         $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
@@ -82,6 +83,7 @@ class HTTP {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
         curl_setopt($ch, CURLOPT_ENCODING , $charset);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'cURL');
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
