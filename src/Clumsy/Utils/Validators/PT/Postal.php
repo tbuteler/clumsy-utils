@@ -6,7 +6,7 @@ class Postal {
 
     public function validate($attribute, $value, $parameters)
     {
-        if (!preg_match('/[0-9]{4}\-[0-9]{3}/', $value))
+        if (!preg_match('/^[0-9]{4}\-[0-9]{3}$/', $value))
         {
             return false;
         }
