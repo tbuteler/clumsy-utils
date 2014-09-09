@@ -48,21 +48,21 @@ return array(
 
     'tinymce' => array(
         'set'   => 'footer',
-        'path'  => 'packages/clumsy/utils/js/libs/tinymce/tinymce.jquery.min.js',
+        'path'  => 'packages/clumsy/utils/js/tinymce/tinymce.jquery.min.js',
         'req'   => 'jquery',
         'v'     => '4.0.28',
     ),
 
     'jquery-ui.css' => array(
         'set'   => 'styles',
-        'path'  => 'packages/clumsy/utils/css/libs/jquery-ui.css',
-        'v'     => '1.11.0',
+        'path'  => 'packages/clumsy/utils/css/jquery-ui.css',
+        'v'     => '1.11.1',
     ),
 
     'datepicker' => array(
         'set'   => 'footer',
-        'path'  => 'packages/clumsy/utils/js/libs/datepicker/'.Config::get('app.locale').'.min.js',
-        'v'     => '1.11.0',
+        'path'  => 'packages/clumsy/utils/js/datepicker/'.Config::get('app.locale').'.min.js',
+        'v'     => '1.11.1',
         'req'   => array('jquery', 'jquery-ui.css'),
     ),
 );

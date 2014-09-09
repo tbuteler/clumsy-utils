@@ -38,7 +38,7 @@ module.exports = function(grunt) {
                         'bower_components/jquery-ui/ui/core.js',
                         'bower_components/jquery-ui/ui/datepicker.js',
                     ],
-                    dest : 'src/assets/js/libs/datepicker/en.js'
+                    dest : 'src/assets/js/datepicker/en.js'
                 }
                 ]
             },
@@ -46,10 +46,10 @@ module.exports = function(grunt) {
                 files : [
                 {
                     src  : [
-                        'src/assets/js/libs/datepicker/en.js',
-                        '<%= vars.datepickerLocales("src/assets/js/libs/datepicker/", ".js") %>'
+                        'src/assets/js/datepicker/en.js',
+                        '<%= vars.datepickerLocales("src/assets/js/datepicker/", ".js") %>'
                     ],
-                    dest : '<%= vars.datepickerLocales("src/assets/js/libs/datepicker/", ".js") %>'
+                    dest : '<%= vars.datepickerLocales("src/assets/js/datepicker/", ".js") %>'
                 }
                 ]
             }
@@ -61,9 +61,9 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: 'bower_components/jquery-ui/themes/<%= vars.jqueryUiTheme %>/images/',
                     src: '**',
-                    dest: 'public/media/img/libs/jqueryui/',
+                    dest: 'public/media/img/jqueryui/',
                     flatten: true,
-                    filter: 'isFile',
+                    filter: 'isFile'
                 },
                 {
                     src: '<%= vars.datepickerLocales("bower_components/jquery-ui/ui/i18n/datepicker-", ".js") %>',
@@ -74,14 +74,10 @@ module.exports = function(grunt) {
                     dest: 'src/assets/temp/jquery-ui.less',
                 },
                 {
-                    src: 'bower_components/respond/src/respond.js',
-                    dest: 'src/assets/js/libs/respond.js',
-                },
-                {
                     expand: true,
                     cwd: 'bower_components/tinymce/',
                     src: '**',
-                    dest: 'public/js/libs/tinymce/',
+                    dest: 'public/js/tinymce/',
                     flatten: false,
                     filter: 'isFile',
                 }
@@ -93,7 +89,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: 'src/assets/temp',
                     src: '<%= vars.datepickerLocales("", ".js") %>',
-                    dest: 'src/assets/js/libs/datepicker',
+                    dest: 'src/assets/js/datepicker',
                     ext: '.js',
                     rename: function(base, src) {
                         src = src.replace(/\.js/, '');
@@ -109,7 +105,7 @@ module.exports = function(grunt) {
                 dest: 'src/assets/temp/jquery-ui.less',
                 replacements: [{
                     from: 'url(images/',
-                    to: 'url(../../media/img/libs/jqueryui/'
+                    to: 'url(../media/img/jqueryui/'
                 }]
             }
         },
@@ -155,7 +151,7 @@ module.exports = function(grunt) {
             },
             update: {
                 files: [
-                {src: ['src/assets/temp/jquery-ui.less'], dest: 'src/assets/less/libs/jquery-ui.less'},
+                {src: ['src/assets/temp/jquery-ui.less'], dest: 'src/assets/less/jquery-ui.less'},
                 ]
             }
         },
