@@ -82,8 +82,8 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
         
         if (isset($input_group['before']))
         {
-            $type = strpos($input_group['before'], 'button') ? 'btn' : 'addon';
-            $output .= '<span class="input-group-'.$type.'">'.$input_group['before'].'</span>';
+            $group_type = strpos($input_group['before'], 'button') ? 'btn' : 'addon';
+            $output .= '<div class="input-group-'.$group_type.'">'.$input_group['before'].'</div>';
         }
     }
 
@@ -109,8 +109,8 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     {
         if(isset($input_group['after']))
         {
-            $type = strpos($input_group['after'], 'button') ? 'btn' : 'addon';
-            $output .= '<span class="input-group-'.$type.'">'.$input_group['after'].'</span>';
+            $group_type = strpos($input_group['after'], 'button') ? 'btn' : 'addon';
+            $output .= '<div class="input-group-'.$group_type.'">'.$input_group['after'].'</div>';
         }
         
         $output .= '</div>';
