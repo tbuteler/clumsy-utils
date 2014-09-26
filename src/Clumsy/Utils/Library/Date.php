@@ -1,15 +1,14 @@
 <?php namespace Clumsy\Utils\Library;
 
+use Clumsy\Utils\Facades\EnvironmentLocale;
 use Illuminate\Support\Facades\Lang;
 use Carbon\Carbon;
 
 class Date {
 
 	public function __construct()
-	{
-		$locale = class_exists('Clumsy\Locale\Facade') ? \Clumsy\Locale\Facade::codes() : app('config')->get('app.locale');
-	
-		setlocale(LC_TIME, $locale);
+	{	
+		set_locale(LC_TIME);
 	}
     
     public function format($date, $format)

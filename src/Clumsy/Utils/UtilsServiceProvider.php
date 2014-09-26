@@ -1,6 +1,7 @@
 <?php namespace Clumsy\Utils;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
@@ -29,15 +30,27 @@ class UtilsServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-        $this->package('clumsy/utils', 'clumsy/utils');
-        $this->app['config']->package('clumsy/utils', $this->guessPackagePath() . '/config');
+        $path = __DIR__.'/../..';
+
+        $this->package('clumsy/utils', 'clumsy/utils', $path);
         
-        $assets = Config::get('utils::assets');
+        $assets = Config::get('clumsy/utils::assets');
 		Asset::batchRegister($assets);
 
 		require $this->guessPackagePath().'/helpers.php';
 		require $this->guessPackagePath().'/macros/form.php';
 		require $this->guessPackagePath().'/macros/string.php';
+
+		// Locale fallbacks
+		if (!Config::get('clumsy/utils::locales.passive'))
+		{
+			$locale = App::getLocale();
+			$fallbacks = Config::get('clumsy/utils::locales.fallbacks');
+			if (isset($fallbacks[$locale]))
+			{
+				Lang::setFallback($fallbacks[$locale]);
+			}
+		}
 
 		// Extended validation
         Validator::extend('email_advanced', 'Clumsy\Utils\Validators\EmailAdvanced@validate');

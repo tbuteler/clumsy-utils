@@ -1,5 +1,7 @@
 <?php
 
+use Clumsy\Utils\Facades\EnvironmentLocale;
+
 if (!function_exists('ebr'))
 {
     function ebr($string)
@@ -10,11 +12,11 @@ if (!function_exists('ebr'))
     }
 }
 
-if (!function_exists('locale'))
+if (!function_exists('set_locale'))
 {
-    function locale()
+    function set_locale($category, $locale = false)
     {
-        return app('config')->get('app.locale');
+        return EnvironmentLocale::set($category, $locale);
     }
 }
 
@@ -24,9 +26,7 @@ if (!function_exists('n'))
     {
         if (class_exists('NumberFormatter'))
         {
-            $locale = class_exists('Clumsy\Locale\Facade') ? Clumsy\Locale\Facade::composite() : app('config')->get('app.locale');
-
-            $formatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+            $formatter = new NumberFormatter(EnvironmentLocale::preferred(), NumberFormatter::DECIMAL);
 
             return $formatter->format($number);
         }
@@ -41,11 +41,9 @@ if (!function_exists('money'))
     {
         if (class_exists('NumberFormatter'))
         {
-            $locale = class_exists('Clumsy\Locale\Facade') ? Clumsy\Locale\Facade::composite() : app('config')->get('app.locale');
+            $formatter = new NumberFormatter(EnvironmentLocale::preferred(), NumberFormatter::CURRENCY);
 
-            $formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
-
-            return $formatter->formatCurrency($number, $formatter->getTextAttribute(NumberFormatter::CURRENCY_CODE));
+            return $formatter->formatCurrency((int)$number, $formatter->getTextAttribute(NumberFormatter::CURRENCY_CODE));
         }
 
         extract(localeconv());
@@ -64,9 +62,7 @@ if (!function_exists('pc'))
     {
         if (class_exists('NumberFormatter'))
         {
-            $locale = class_exists('Clumsy\Locale\Facade') ? Clumsy\Locale\Facade::composite() : app('config')->get('app.locale');
-
-            $formatter = new NumberFormatter($locale, NumberFormatter::PERCENT);
+            $formatter = new NumberFormatter(EnvironmentLocale::preferred(), NumberFormatter::PERCENT);
 
             return $formatter->format($number);
         }
