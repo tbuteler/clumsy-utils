@@ -133,7 +133,7 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
 */
 Form::macro('boolean', function($name, $label, $attributes = array())
 {
-    return Form::field($name, $label, 'checkbox');
+    return Form::field($name, $label, 'checkbox', $attributes);
 });
 
 /*
