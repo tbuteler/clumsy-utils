@@ -160,6 +160,14 @@ module.exports = function(grunt) {
                 src : ["src/assets/temp"],
             }
         },
+        shell: {
+            test: {
+                options: {
+                    stdout: true
+                },
+                command: 'vendor/bin/phpunit'
+            }
+        },
         watch: {
             less: {
                 files: ['src/assets/less/**/*.less'],
@@ -171,6 +179,13 @@ module.exports = function(grunt) {
                     '!src/assets/js/**/*.min.js'
                 ],
                 tasks: ['concat', 'uglify:all'],
+            },
+            php: {
+                files: [
+                    'src/**/*.php',
+                    'tests/**/*.php'
+                ],
+                tasks: ['shell:test'],
             }
         }
     });
@@ -182,6 +197,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-watch');
     
     grunt.registerTask('default', function() {
@@ -189,7 +205,8 @@ module.exports = function(grunt) {
             'jshint',
             'concat',
             'uglify:all',
-            'less:all'
+            'less:all',
+            'shell:test'
         ]);
     });
     

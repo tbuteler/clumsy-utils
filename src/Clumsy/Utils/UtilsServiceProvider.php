@@ -37,7 +37,6 @@ class UtilsServiceProvider extends ServiceProvider {
         $assets = Config::get('clumsy/utils::assets');
 		Asset::batchRegister($assets);
 
-		require $this->guessPackagePath().'/helpers.php';
 		require $this->guessPackagePath().'/macros/form.php';
 		require $this->guessPackagePath().'/macros/string.php';
 

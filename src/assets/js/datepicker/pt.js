@@ -1,4 +1,4 @@
-/*!
+;/*!
  * jQuery UI Core 1.11.1
  * http://jqueryui.com
  *
