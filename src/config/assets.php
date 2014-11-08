@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return array(
 
@@ -9,29 +9,53 @@ return array(
 
     'bootstrap' => array(
         'set'   => 'styles',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css',
+        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css',
     ),
-    
+
     'bootstrap.js' => array(
         'set'   => 'footer',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js',
+        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js',
         'req'   => 'jquery',
     ),
 
     'angular' => array(
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js',
     ),
-    
+
     'angular-animate' => array(
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-animate.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-animate.min.js',
+        'req'   => 'angular',
+    ),
+
+    'angular-cookies' => array(
+        'set'   => 'footer',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-cookies.min.js',
+        'req'   => 'angular',
+    ),
+
+    'angular-resource' => array(
+        'set'   => 'footer',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-resource.min.js',
+        'req'   => 'angular',
+    ),
+
+    'angular-route' => array(
+        'set'   => 'footer',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.min.js',
         'req'   => 'angular',
     ),
 
     'angular-sanitize' => array(
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-sanitize.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-sanitize.min.js',
+        'req'   => 'angular',
+    ),
+
+    'angular-touch' => array(
+        'set'   => 'footer',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-touch.min.js',
         'req'   => 'angular',
     ),
 
@@ -56,13 +80,13 @@ return array(
     'jquery-ui.css' => array(
         'set'   => 'styles',
         'path'  => 'packages/clumsy/utils/css/jquery-ui.css',
-        'v'     => '1.11.1',
+        'v'     => '1.11.2',
     ),
 
     'datepicker' => array(
         'set'   => 'footer',
         'path'  => 'packages/clumsy/utils/js/datepicker/'.Config::get('app.locale').'.min.js',
-        'v'     => '1.11.1',
+        'v'     => '1.11.2',
         'req'   => array('jquery', 'jquery-ui.css'),
     ),
 );
