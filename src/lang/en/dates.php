@@ -1,7 +1,10 @@
-<?php 
+<?php
 
 return array(
 
-    'long' => '%e %B %Y', // strftime syntax
+    // strftime syntax
 
+    'long' => '%e %B %Y',
+
+    'long with time' => '%e %B %Y, %k:%M'
 );
