@@ -1,6 +1,6 @@
 {
   "name": "ClumsyUtils",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "license": "MIT",
   "private": true,
   "ignore": [
@@ -12,6 +12,7 @@
   ],
   "dependencies": {
     "jquery-ui": "~1.11.0",
-    "tinymce": "~4.0.28"
+    "tinymce": "~4.0.28",
+    "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.2.0/chosen_v1.2.0.zip"
   }
 }

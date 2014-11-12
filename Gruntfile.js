@@ -74,6 +74,21 @@ module.exports = function(grunt) {
                     dest: 'src/assets/temp/jquery-ui.less',
                 },
                 {
+                    src: 'bower_components/chosen/chosen.jquery.js',
+                    dest: 'src/assets/js/chosen.js',
+                },
+                {
+                    src: 'bower_components/chosen/chosen.css',
+                    dest: 'src/assets/less/chosen.less',
+                },
+                {
+                    expand: true,
+                    src: ['bower_components/chosen/*.png'],
+                    dest: 'public/media/img/chosen/',
+                    filter: 'isFile',
+                    flatten: true
+                },
+                {
                     expand: true,
                     cwd: 'bower_components/tinymce/',
                     src: '**',
@@ -106,6 +121,14 @@ module.exports = function(grunt) {
                 replacements: [{
                     from: 'url(images/',
                     to: 'url(../media/img/jqueryui/'
+                }]
+            },
+            update_chosen: {
+                src: 'src/assets/css/chosen.less',
+                dest: 'src/assets/css/chosen.less',
+                replacements: [{
+                    from: "url('chosen-sprite",
+                    to: "url('../media/img/chosen-sprite"
                 }]
             }
         },
@@ -217,6 +240,7 @@ module.exports = function(grunt) {
             'copy:i18n',
             'concat:i18n',
             'replace:update_jqueryui',
+            'replace:update_chosen',
             'less:update',
             'clean:update'
         ]);

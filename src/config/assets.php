@@ -89,4 +89,20 @@ return array(
         'v'     => '1.11.2',
         'req'   => array('jquery', 'jquery-ui.css'),
     ),
+
+    'chosen.css' => array(
+        'set'   => 'styles',
+        'path'  => 'packages/clumsy/utils/css/chosen.css',
+        'v'     => '1.2.0',
+    ),
+
+    'chosen' => array(
+        'set'   => 'footer',
+        'path'  => 'packages/clumsy/utils/js/chosen.min.js',
+        'v'     => '1.2.0',
+        'req'   => array(
+            'jquery',
+            'chosen.css',
+        ),
+    ),
 );
