@@ -124,11 +124,11 @@ module.exports = function(grunt) {
                 }]
             },
             update_chosen: {
-                src: 'src/assets/css/chosen.less',
-                dest: 'src/assets/css/chosen.less',
+                src: 'src/assets/less/chosen.less',
+                dest: 'src/assets/less/chosen.less',
                 replacements: [{
                     from: "url('chosen-sprite",
-                    to: "url('../media/img/chosen-sprite"
+                    to: "url('../media/img/chosen/chosen-sprite"
                 }]
             }
         },
