@@ -20,6 +20,14 @@ if (!function_exists('set_locale'))
     }
 }
 
+if (!function_exists('get_possible_locales'))
+{
+    function get_possible_locales($locale)
+    {
+        return EnvironmentLocale::getPossibleLocales($locale);
+    }
+}
+
 if (!function_exists('n'))
 {
     function n($number)

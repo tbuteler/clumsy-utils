@@ -29,36 +29,7 @@ class EnvironmentLocale {
     {
         if (!$locales)
         {
-            $bases = (array)App::getLocale();
-            $sets = Config::get('clumsy/utils::locales');
-            
-            foreach ((array)$sets['equivalences'] as $locale_code => $equivalence)
-            {
-                if ($locale_code === head($bases))
-                {
-                    $bases[] = $equivalence;
-                }
-            }
-
-            foreach ($sets['transformations'] as $transformation)
-            {
-                $bases[] = $this->transform($transformation, head($bases));
-            }
-
-            foreach ((array)$sets['append'] as $append)
-            {
-                foreach ($bases as $base)
-                {
-                    $locales[] = $base.$append;
-                }
-            }
-
-            foreach ($bases as $base)
-            {
-                $locales[] = $base;
-            }
-
-            $locales = array_unique(array_filter($locales));
+            $locales = $this->getPossibleLocales(App::getLocale());
         }
 
         foreach ((array)$locales as $locale)
@@ -69,6 +40,40 @@ class EnvironmentLocale {
                 break;
             }
         }
+    }
+
+    public function getPossibleLocales($locale)
+    {
+        $bases = (array)$locale;
+        $sets = Config::get('clumsy/utils::locales');
+        
+        foreach ((array)$sets['equivalences'] as $locale_code => $equivalence)
+        {
+            if ($locale_code === head($bases))
+            {
+                $bases[] = $equivalence;
+            }
+        }
+
+        foreach ($sets['transformations'] as $transformation)
+        {
+            $bases[] = $this->transform($transformation, head($bases));
+        }
+
+        foreach ((array)$sets['append'] as $append)
+        {
+            foreach ($bases as $base)
+            {
+                $locales[] = $base.$append;
+            }
+        }
+
+        foreach ($bases as $base)
+        {
+            $locales[] = $base;
+        }
+
+        return array_unique(array_filter($locales));
     }
 
     public function transform(\Closure $callback, $locale)
