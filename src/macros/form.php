@@ -97,8 +97,9 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     }
     elseif (in_array($type, array('checkbox', 'radio')))
     {
+        if (!$value) $value = 1;
         $label_end = strpos($output, '>', strpos($output, '<label'))+1;
-        $output = substr_replace($output, Form::$type($name, 1, null, $field_attributes), $label_end, 0);
+        $output = substr_replace($output, Form::$type($name, $value, null, $field_attributes), $label_end, 0);
     }
     else
     {
