@@ -1,6 +1,5 @@
 <?php namespace Clumsy\Utils\Library;
 
-use Clumsy\Utils\Facades\EnvironmentLocale;
 use Illuminate\Support\Facades\Lang;
 use Carbon\Carbon;
 

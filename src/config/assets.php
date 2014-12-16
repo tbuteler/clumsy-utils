@@ -9,53 +9,53 @@ return array(
 
     'bootstrap' => array(
         'set'   => 'styles',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css',
+        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css',
     ),
 
     'bootstrap.js' => array(
         'set'   => 'footer',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js',
+        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js',
         'req'   => 'jquery',
     ),
 
     'angular' => array(
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js',
     ),
 
     'angular-animate' => array(
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-animate.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-animate.min.js',
         'req'   => 'angular',
     ),
 
     'angular-cookies' => array(
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-cookies.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-cookies.min.js',
         'req'   => 'angular',
     ),
 
     'angular-resource' => array(
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-resource.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-resource.min.js',
         'req'   => 'angular',
     ),
 
     'angular-route' => array(
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js',
         'req'   => 'angular',
     ),
 
     'angular-sanitize' => array(
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-sanitize.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-sanitize.min.js',
         'req'   => 'angular',
     ),
 
     'angular-touch' => array(
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-touch.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-touch.min.js',
         'req'   => 'angular',
     ),
 

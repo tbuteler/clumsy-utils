@@ -1,7 +1,5 @@
 <?php
 
-use Clumsy\Utils\Facades\EnvironmentLocale;
-
 if (!function_exists('ebr'))
 {
     function ebr($string)
@@ -16,7 +14,7 @@ if (!function_exists('set_locale'))
 {
     function set_locale($category, $locale = false)
     {
-        return EnvironmentLocale::set($category, $locale);
+        return Clumsy\Utils\Facades\EnvironmentLocale::set($category, $locale);
     }
 }
 
@@ -24,7 +22,7 @@ if (!function_exists('get_possible_locales'))
 {
     function get_possible_locales($locale)
     {
-        return EnvironmentLocale::getPossibleLocales($locale);
+        return Clumsy\Utils\Facades\EnvironmentLocale::getPossibleLocales($locale);
     }
 }
 
@@ -34,7 +32,7 @@ if (!function_exists('n'))
     {
         if (class_exists('NumberFormatter'))
         {
-            $formatter = new NumberFormatter(EnvironmentLocale::preferred(), NumberFormatter::DECIMAL);
+            $formatter = new NumberFormatter(Clumsy\Utils\Facades\EnvironmentLocale::preferred(), NumberFormatter::DECIMAL);
 
             return $formatter->format($number);
         }
@@ -49,7 +47,7 @@ if (!function_exists('money'))
     {
         if (class_exists('NumberFormatter'))
         {
-            $formatter = new NumberFormatter(EnvironmentLocale::preferred(), NumberFormatter::CURRENCY);
+            $formatter = new NumberFormatter(Clumsy\Utils\Facades\EnvironmentLocale::preferred(), NumberFormatter::CURRENCY);
 
             return $formatter->formatCurrency((int)$number, $formatter->getTextAttribute(NumberFormatter::CURRENCY_CODE));
         }
@@ -70,7 +68,7 @@ if (!function_exists('pc'))
     {
         if (class_exists('NumberFormatter'))
         {
-            $formatter = new NumberFormatter(EnvironmentLocale::preferred(), NumberFormatter::PERCENT);
+            $formatter = new NumberFormatter(Clumsy\Utils\Facades\EnvironmentLocale::preferred(), NumberFormatter::PERCENT);
 
             return $formatter->format($number);
         }
