@@ -90,6 +90,19 @@ return array(
         'req'   => array('jquery', 'jquery-ui.css'),
     ),
 
+    'timepicker.css' => array(
+        'set'   => 'styles',
+        'path'  => 'packages/clumsy/utils/css/timepicker.css',
+        'v'     => '1.5.0',
+    ),
+
+    'timepicker' => array(
+        'set'   => 'footer',
+        'path'  => 'packages/clumsy/utils/js/timepicker/'.Config::get('app.locale').'.min.js',
+        'v'     => '1.5.0',
+        'req'   => array('datepicker', 'timepicker.css'),
+    ),
+
     'chosen.css' => array(
         'set'   => 'styles',
         'path'  => 'packages/clumsy/utils/css/chosen.css',

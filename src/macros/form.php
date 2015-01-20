@@ -177,3 +177,39 @@ Form::macro('richText', function($name, $label, $attributes = array())
 
     return Form::field($name, $label, 'textarea', $attributes);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Date and timepicker
+|--------------------------------------------------------------------------
+|
+| Shorthand for calling Field macro while enqueuing date and timepicker scripts
+|
+*/
+Form::macro('dateTimePicker', function($name, $label, $type = 'datepicker', $attributes = array())
+{
+    Asset::enqueue($type === 'datepicker' ? 'datepicker' : 'timepicker');
+
+    $defaults = array(
+        'class'    => "form-control $type",
+        'readonly' => 'readonly',
+    );
+    $attributes['field'] = isset($attributes['field']) ? array_merge($defaults, $attributes['field']) : $defaults;
+
+    return Form::field($name, $label, 'text', $attributes);
+});
+
+Form::macro('date', function($name, $label, $attributes = array())
+{
+    return Form::dateTimePicker($name, $label, 'datepicker', $attributes);
+});
+
+Form::macro('datetime', function($name, $label, $attributes = array())
+{
+    return Form::dateTimePicker($name, $label, 'datetimepicker', $attributes);
+});
+
+Form::macro('time', function($name, $label, $attributes = array())
+{
+    return Form::dateTimePicker($name, $label, 'timepicker', $attributes);
+});

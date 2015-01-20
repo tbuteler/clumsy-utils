@@ -7,7 +7,7 @@ module.exports = function(grunt) {
         },
         vars: {
             jqueryUiTheme: 'ui-lightness',
-            datepickerLocales: function(prepend, append){
+            uiLocales: function(prepend, append){
                 return Object.keys(grunt.config.process('<%= locales %>')).map(function(locale) {
                     return prepend+locale+append;
                 });
@@ -39,6 +39,20 @@ module.exports = function(grunt) {
                         'bower_components/jquery-ui/ui/datepicker.js',
                     ],
                     dest : 'src/assets/js/datepicker/en.js'
+                },
+                {
+                    src : [
+                        'bower_components/jquery-ui/themes/<%= vars.jqueryUiTheme %>/jquery-ui.css',
+                        'bower_components/jquery-ui/themes/<%= vars.jqueryUiTheme %>/theme.css',
+                    ],
+                    dest : 'src/assets/temp/jquery-ui.less'
+                },
+                {
+                    src : [
+                        'bower_components/jqueryui-timepicker-addon/src/jquery-ui-timepicker-addon.js',
+                        'bower_components/jqueryui-timepicker-addon/src/jquery-ui-sliderAccess.js',
+                    ],
+                    dest : 'src/assets/js/timepicker/en.js'
                 }
                 ]
             },
@@ -47,9 +61,16 @@ module.exports = function(grunt) {
                 {
                     src  : [
                         'src/assets/js/datepicker/en.js',
-                        '<%= vars.datepickerLocales("src/assets/js/datepicker/", ".js") %>'
+                        '<%= vars.uiLocales("src/assets/js/datepicker/", ".js") %>'
                     ],
-                    dest : '<%= vars.datepickerLocales("src/assets/js/datepicker/", ".js") %>'
+                    dest : '<%= vars.uiLocales("src/assets/js/datepicker/", ".js") %>'
+                },
+                {
+                    src  : [
+                        'src/assets/js/timepicker/en.js',
+                        '<%= vars.uiLocales("src/assets/js/timepicker/", ".js") %>'
+                    ],
+                    dest : '<%= vars.uiLocales("src/assets/js/timepicker/", ".js") %>'
                 }
                 ]
             }
@@ -66,20 +87,24 @@ module.exports = function(grunt) {
                     filter: 'isFile'
                 },
                 {
-                    src: '<%= vars.datepickerLocales("bower_components/jquery-ui/ui/i18n/datepicker-", ".js") %>',
-                    dest: '<%= vars.datepickerLocales("src/assets/temp/", ".js") %>'
+                    src: '<%= vars.uiLocales("bower_components/jquery-ui/ui/i18n/datepicker-", ".js") %>',
+                    dest: '<%= vars.uiLocales("src/assets/temp/datepicker/", ".js") %>'
                 },
                 {
-                    src: 'bower_components/jquery-ui/themes/<%= vars.jqueryUiTheme %>/theme.css',
-                    dest: 'src/assets/temp/jquery-ui.less',
+                    src: '<%= vars.uiLocales("bower_components/jqueryui-timepicker-addon/src/i18n/jquery-ui-timepicker-", ".js") %>',
+                    dest: '<%= vars.uiLocales("src/assets/temp/timepicker/", ".js") %>'
+                },
+                {
+                    src: 'bower_components/jqueryui-timepicker-addon/src/jquery-ui-timepicker-addon.css',
+                    dest: 'src/assets/less/timepicker.less'
                 },
                 {
                     src: 'bower_components/chosen/chosen.jquery.js',
-                    dest: 'src/assets/js/chosen.js',
+                    dest: 'src/assets/js/chosen.js'
                 },
                 {
                     src: 'bower_components/chosen/chosen.css',
-                    dest: 'src/assets/less/chosen.less',
+                    dest: 'src/assets/less/chosen.less'
                 },
                 {
                     expand: true,
@@ -102,8 +127,8 @@ module.exports = function(grunt) {
                 files: [
                 {
                     expand: true,
-                    cwd: 'src/assets/temp',
-                    src: '<%= vars.datepickerLocales("", ".js") %>',
+                    cwd: 'src/assets/temp/datepicker',
+                    src: '<%= vars.uiLocales("", ".js") %>',
                     dest: 'src/assets/js/datepicker',
                     ext: '.js',
                     rename: function(base, src) {
@@ -111,16 +136,27 @@ module.exports = function(grunt) {
                         return base+'/'+grunt.config.process('<%= locales %>')[src]+'.js';
                     }
                 },
+                {
+                    expand: true,
+                    cwd: 'src/assets/temp/timepicker',
+                    src: '<%= vars.uiLocales("", ".js") %>',
+                    dest: 'src/assets/js/timepicker',
+                    ext: '.js',
+                    rename: function(base, src) {
+                        src = src.replace(/\.js/, '');
+                        return base+'/'+grunt.config.process('<%= locales %>')[src]+'.js';
+                    }
+                }
                 ]
             }
         },
         replace: {
             update_jqueryui: {
                 src: 'src/assets/temp/jquery-ui.less',
-                dest: 'src/assets/temp/jquery-ui.less',
+                dest: 'src/assets/less/jquery-ui.less',
                 replacements: [{
-                    from: 'url(images/',
-                    to: 'url(../media/img/jqueryui/'
+                    from: 'url("images/',
+                    to: 'url("../media/img/jqueryui/'
                 }]
             },
             update_chosen: {
@@ -170,11 +206,6 @@ module.exports = function(grunt) {
                     flatten: false,
                     filter: 'isFile'
                 }
-                ]
-            },
-            update: {
-                files: [
-                {src: ['src/assets/temp/jquery-ui.less'], dest: 'src/assets/less/jquery-ui.less'},
                 ]
             }
         },
@@ -226,7 +257,6 @@ module.exports = function(grunt) {
     grunt.registerTask('default', function() {
         grunt.task.run([
             'jshint',
-            'concat',
             'uglify:all',
             'less:all',
             'shell:test'
@@ -241,7 +271,6 @@ module.exports = function(grunt) {
             'concat:i18n',
             'replace:update_jqueryui',
             'replace:update_chosen',
-            'less:update',
             'clean:update'
         ]);
         grunt.task.run('default');
