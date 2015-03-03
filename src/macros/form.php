@@ -35,6 +35,7 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
         'after'        => null,
         'id'           => null,
         'id_prefix'    => null,
+        'checked'      => false,
     );
 
     $attributes = array_merge($defaults, $attributes);
@@ -99,7 +100,7 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     {
         if (!$value) $value = 1;
         $label_end = strpos($output, '>', strpos($output, '<label'))+1;
-        $output = substr_replace($output, Form::$type($name, $value, null, $field_attributes), $label_end, 0);
+        $output = substr_replace($output, Form::$type($name, $value, $checked, $field_attributes), $label_end, 0);
     }
     else
     {
