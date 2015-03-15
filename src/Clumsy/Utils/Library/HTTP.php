@@ -1,7 +1,8 @@
 <?php namespace Clumsy\Utils\Library;
 
-use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Request;
 
 class HTTP {
 
@@ -153,5 +154,59 @@ class HTTP {
     			$url = $base;
         }
         return $url;
+	}
+
+	public function isCrawler()
+	{
+		$crawlers = implode('|', array(
+			'facebookexternalhit',
+			'Bloglines subscriber',
+			'Dumbot',
+			'Sosoimagespider',
+			'QihooBot',
+			'FAST-WebCrawler',
+			'Superdownloads Spiderman',
+			'LinkWalker',
+			'msnbot',
+			'ASPSeek',
+			'WebAlta Crawler',
+			'Lycos',
+			'FeedFetcher-Google',
+			'Yahoo',
+			'YoudaoBot',
+			'AdsBot-Google',
+			'Googlebot',
+			'Scooter',
+			'Gigabot',
+			'Charlotte',
+			'eStyle',
+			'AcioRobot',
+			'GeonaBot',
+			'msnbot-media',
+			'Baidu',
+			'CocoCrawler',
+			'Google',
+			'Charlotte t',
+			'Yahoo! Slurp China',
+			'Sogou web spider',
+			'YodaoBot',
+			'MSRBOT',
+			'AbachoBOT',
+			'Sogou head spider',
+			'AltaVista',
+			'IDBot',
+			'Sosospider',
+			'Yahoo! Slurp',
+			'Java VM',
+			'DotBot',
+			'LiteFinder',
+			'Yeti',
+			'Rambler',
+			'Scrubby',
+			'Baiduspider',
+			'accoona',
+		));
+
+        return preg_match("/$crawlers/i", Request::header('user-agent'));
 	}
 }
