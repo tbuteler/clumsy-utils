@@ -7,6 +7,11 @@ return array(
         'path'  => '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js',
     ),
 
+    'jquery-ui' => array(
+        'set'  => 'footer',
+        'path' => '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js',
+    ),
+
     'bootstrap' => array(
         'set'   => 'styles',
         'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css',
@@ -117,5 +122,18 @@ return array(
             'jquery',
             'chosen.css',
         ),
+    ),
+
+    'colorpicker.css' => array(
+        'set'   => 'styles',
+        'path'  => 'packages/clumsy/utils/css/iris.css',
+        'v'     => '1.0.7',
+    ),
+
+    'colorpicker' => array(
+        'set'   => 'footer',
+        'path'  => 'packages/clumsy/utils/js/iris.min.js',
+        'v'     => '1.0.7',
+        'req'   => array('jquery','jquery-ui','colorpicker.css'),
     ),
 );

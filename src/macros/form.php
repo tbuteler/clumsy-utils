@@ -214,3 +214,23 @@ Form::macro('time', function($name, $label, $attributes = array())
 {
     return Form::dateTimePicker($name, $label, 'timepicker', $attributes);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Colorpicker
+|--------------------------------------------------------------------------
+|
+| Shorthand for calling Field macro while enqueuing iris colorpicker scripts
+|
+*/
+Form::macro('colorpicker', function($name, $label, $type = 'colorpicker', $attributes = array())
+{
+    Asset::enqueue('colorpicker');
+
+    $defaults = array(
+        'class'    => "form-control $type",
+    );
+    $attributes['field'] = isset($attributes['field']) ? array_merge($defaults, $attributes['field']) : $defaults;
+
+    return Form::field($name, $label, 'text', $attributes);
+});

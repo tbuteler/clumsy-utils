@@ -120,7 +120,15 @@ module.exports = function(grunt) {
                     dest: 'public/js/tinymce/',
                     flatten: false,
                     filter: 'isFile',
-                }
+                },
+                {
+                    src: 'bower_components/iris-color-picker/dist/iris.js',
+                    dest: 'src/assets/js/iris.js'
+                },
+                {
+                    src: 'bower_components/iris-color-picker/src/iris.css',
+                    dest: 'src/assets/less/iris.less'
+                },
                 ]
             },
             i18n : {
