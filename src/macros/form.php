@@ -223,7 +223,7 @@ Form::macro('time', function($name, $label, $attributes = array())
 | Shorthand for calling Field macro while enqueuing iris colorpicker scripts
 |
 */
-Form::macro('colorpicker', function($name, $label, $type = 'colorpicker', $attributes = array())
+Form::macro('colorpicker', function($name, $label, 'colorpicker', $attributes = array())
 {
     Asset::enqueue('colorpicker');
 
