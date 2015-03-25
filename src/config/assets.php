@@ -136,4 +136,11 @@ return array(
         'v'     => '1.0.7',
         'req'   => array('jquery','jquery-ui','colorpicker.css'),
     ),
+
+    'youtube' => array(
+        'set'   => 'footer',
+        'path'  => 'packages/clumsy/utils/js/clumsy_youtube.min.js',
+        'v'     => '0.0.1',
+        'req'   => array('jquery'),
+    ),
 );

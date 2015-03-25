@@ -234,3 +234,31 @@ Form::macro('colorpicker', function($name, $label, $attributes = array())
 
     return Form::field($name, $label, 'text', $attributes);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Youtube box
+|--------------------------------------------------------------------------
+|   
+| Shorthand for calling Field macro while enqueuing youtube scripts
+|
+*/
+Form::macro('youtube', function($name, $label, $attributes = array())
+{
+    Asset::enqueue('youtube');
+
+    $defaults = array(
+        'class' => 'form-group youtube-url',
+    );
+
+    $attributes = array_merge($defaults, $attributes);
+
+    $output = "<div class='youtube-wrapper'>";
+
+    $output .= Form::field($name, $label,'text',$attributes);
+
+    $output .= '<div class="preview-box"><div class="placeholders"><div class="idle glyphicon glyphicon-film"></div>
+                <div class="error glyphicon glyphicon-exclamation-sign"></div></div></div></div>';
+
+    return $output;
+});
