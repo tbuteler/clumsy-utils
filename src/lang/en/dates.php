@@ -4,7 +4,11 @@ return array(
 
     // strftime syntax
 
-    'long' => '%e %B %Y',
+	'short'           => '%m/%d/%Y',
 
-    'long with time' => '%e %B %Y, %k:%M'
+	'short with time' => '%m/%d/%Y %k:%M',
+
+	'long'            => '%e %B %Y',
+
+	'long with time'  => '%e %B %Y, %k:%M'
 );
