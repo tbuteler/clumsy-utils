@@ -10,11 +10,24 @@
 	    }
 	}
 
+	function appendVideo(el,id){
+		$el.find('.placeholders .glyphicon').hide();
+		$el.append('<iframe src="https://www.youtube.com/embed/' + 
+			id + '" frameborder="0" allowfullscreen></iframe>');
+	}
+
 	$(window).load(function(){
 		$('.youtube-wrapper input').each(function() {
 			var elem = $(this);
 
 			elem.data('oldVal', elem.val());
+			if (elem.val() != '') {
+				var id = extractVideoID(elem.val());
+				if (id != null) {
+					$el = $(this).parents('.youtube-wrapper').find('.preview-box');
+					appendVideo($el,id);
+				}
+			};
 
 			// Look for changes in the value
 			elem.bind("propertychange change click keyup input paste", function(event){
@@ -34,9 +47,7 @@
 					var id = extractVideoID(elem.val());
 
 					if (id != null) {
-						$el.find('.placeholders .glyphicon').hide();
-						$el.append('<iframe src="https://www.youtube.com/embed/' + 
-							id + '" frameborder="0" allowfullscreen></iframe>');
+						appendVideo($el,id);
 					}
 					else{
 						if (elem.val() != '') {
