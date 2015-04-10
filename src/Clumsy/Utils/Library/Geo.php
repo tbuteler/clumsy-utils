@@ -109,4 +109,53 @@ class Geo {
 
     	return $subregions;
 	}
+
+    /**
+     * 
+     * Gets Information by IP
+     * 
+     * @param  array        $params     Parameters for the function to return (country,coordinates,countryCode)
+     * @param  string       $ip         Ip that you want to fetch the data for. If none, will fetch from the request
+     * @return array|string             Requested data. If no parameters, will return Country name
+     */
+    public function getInfoByIP($params = null, $ip = null)
+    {
+        if($ip == null){
+            $ip = \Request::getClientIp();
+        }
+
+        $geocoder = new \Geocoder\Geocoder();
+        $adapter  = new \Geocoder\HttpAdapter\CurlHttpAdapter();
+
+        $geocoder->registerProviders(array(
+            new \Geocoder\Provider\FreeGeoIpProvider($adapter),
+        ));
+
+        $result = $geocoder->geocode($ip);
+
+        if ($params == null) {
+            return $result->getCountry();
+        }
+
+        $toReturn = array();
+        foreach ($params as $param) {
+            switch ($param) {
+                case 'country':
+                    $toReturn['country'] = $result->getCountry();
+                    break;
+                case 'coordinates':
+                    $toReturn['coordinates']['lat'] = $result->getLatitude();
+                    $toReturn['coordinates']['lng'] = $result->getLongitude();
+                    break;
+                case 'countryCode':
+                    $toReturn['countryCode'] = $result->getCountryCode();
+                    break;
+                default:
+                    $toReturn = $result->getCountry();
+                    break;
+            }
+        }
+
+        return $toReturn;
+    }
 }
