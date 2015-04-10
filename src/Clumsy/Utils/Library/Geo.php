@@ -143,8 +143,8 @@ class Geo {
                     break;
                 case 'coordinates':
                     $toReturn['coordinates'] = array(
-                        'lat' = $result->getLatitude(),
-                        'lng' = $result->getLongitude(),
+                        'lat' => $result->getLatitude(),
+                        'lng' => $result->getLongitude(),
                     );
                     break;
                 case 'countryCode':
