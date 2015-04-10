@@ -151,7 +151,6 @@ class Geo {
                     $toReturn['countryCode'] = $result->getCountryCode();
                     break;
                 default:
-                    $toReturn = $result->getCountry();
                     break;
             }
         }
