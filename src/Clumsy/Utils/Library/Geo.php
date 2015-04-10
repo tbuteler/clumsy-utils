@@ -1,5 +1,9 @@
 <?php namespace Clumsy\Utils\Library;
 
+use Geocoder\Geocoder;
+use Geocoder\HttpAdapter\CurlHttpAdapter;
+use Geocoder\Provider\FreeGeoIpProvider;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
@@ -109,4 +113,46 @@ class Geo {
 
     	return $subregions;
 	}
+
+    /**
+     * 
+     * Gets Information by IP
+     * 
+     * @param  array        $params     Parameters for the function to return (country,coordinates,countryCode)
+     * @param  string       $ip         Ip that you want to fetch the data for. If none, will fetch from the request
+     * @return array|string             Requested data. If no parameters, will return Country name
+     */
+    public function getInfoByIP($params = 'country', $ip = null)
+    {
+        if($ip == null){
+            $ip = Request::getClientIp();
+        }
+
+        $geocoder = new Geocoder();
+        $geocoder->registerProviders(array(
+            new FreeGeoIpProvider(new CurlHttpAdapter()),
+        ));
+
+        $result = $geocoder->geocode($ip);
+
+        $toReturn = array();
+        foreach ((array)$params as $param) {
+            switch ($param) {
+                case 'country':
+                    $toReturn['country'] = $result->getCountry();
+                    break;
+                case 'coordinates':
+                    $toReturn['coordinates'] = array(
+                        'lat' => $result->getLatitude(),
+                        'lng' => $result->getLongitude(),
+                    );
+                    break;
+                case 'countryCode':
+                    $toReturn['countryCode'] = $result->getCountryCode();
+                    break;
+            }
+        }
+
+        return sizeof($toReturn) > 1 ? $toReturn : head($toReturn);
+    }
 }
