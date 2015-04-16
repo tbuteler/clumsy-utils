@@ -6,6 +6,7 @@ use Geocoder\Provider\FreeGeoIpProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Str;
 
 class Geo {
@@ -125,15 +126,20 @@ class Geo {
     public function getInfoByIP($params = 'country', $ip = null)
     {
         if($ip == null){
-            $ip = Request::getClientIp();
+            $ip = RequestFacade::getClientIp();
         }
 
         $geocoder = new Geocoder();
         $geocoder->registerProviders(array(
-            new FreeGeoIpProvider(new CurlHttpAdapter()),
+            new FreeGeoIpProvider(new CurlHttpAdapter(2)),
         ));
 
-        $result = $geocoder->geocode($ip);
+        try {
+            $result = $geocoder->geocode($ip);
+        } catch (\Geocoder\Exception\NoResultException $e) {
+            return null;
+        }
+
 
         $toReturn = array();
         foreach ((array)$params as $param) {
