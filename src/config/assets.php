@@ -14,12 +14,12 @@ return array(
 
     'bootstrap' => array(
         'set'   => 'styles',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css',
+        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css',
     ),
 
     'bootstrap.js' => array(
         'set'   => 'footer',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js',
+        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js',
         'req'   => 'jquery',
     ),
 
@@ -85,13 +85,13 @@ return array(
     'jquery-ui.css' => array(
         'set'   => 'styles',
         'path'  => 'packages/clumsy/utils/css/jquery-ui.css',
-        'v'     => '1.11.2',
+        'v'     => '1.11.4',
     ),
 
     'datepicker' => array(
         'set'   => 'footer',
         'path'  => 'packages/clumsy/utils/js/datepicker/'.App::getLocale().'.min.js',
-        'v'     => '1.11.2',
+        'v'     => '1.11.4',
         'req'   => array('jquery', 'jquery-ui.css'),
     ),
 
@@ -139,8 +139,8 @@ return array(
 
     'youtube' => array(
         'set'   => 'footer',
-        'path'  => 'packages/clumsy/utils/js/clumsy_youtube.min.js',
-        'v'     => '0.0.1',
+        'path'  => 'packages/clumsy/utils/js/youtube.min.js',
+        'v'     => '0.1.0',
         'req'   => array('jquery'),
     ),
 );
