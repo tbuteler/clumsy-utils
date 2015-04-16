@@ -125,15 +125,21 @@ class Geo {
     public function getInfoByIP($params = 'country', $ip = null)
     {
         if($ip == null){
-            $ip = Request::getClientIp();
+            $request = new Request();
+            $ip = $request->getClientIp();
         }
 
         $geocoder = new Geocoder();
         $geocoder->registerProviders(array(
-            new FreeGeoIpProvider(new CurlHttpAdapter()),
+            new FreeGeoIpProvider(new CurlHttpAdapter(2)),
         ));
 
-        $result = $geocoder->geocode($ip);
+        try {
+            $result = $geocoder->geocode($ip);
+        } catch (\Geocoder\Exception\NoResultException $e) {
+            return null;
+        }
+
 
         $toReturn = array();
         foreach ((array)$params as $param) {
