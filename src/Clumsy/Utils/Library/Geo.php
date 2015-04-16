@@ -6,6 +6,7 @@ use Geocoder\Provider\FreeGeoIpProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Str;
 
 class Geo {
@@ -125,8 +126,7 @@ class Geo {
     public function getInfoByIP($params = 'country', $ip = null)
     {
         if($ip == null){
-            $request = new Request();
-            $ip = $request->getClientIp();
+            $ip = RequestFacade::getClientIp();
         }
 
         $geocoder = new Geocoder();
