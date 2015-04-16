@@ -127,6 +127,19 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
 
 /*
 |--------------------------------------------------------------------------
+| Textarea
+|--------------------------------------------------------------------------
+|
+| Shorthand for calling field with type textarea
+|
+*/
+Form::macro('fieldTextarea', function($name, $label, $attributes = array())
+{
+    return Form::field($name, $label, 'textarea', $attributes);
+});
+
+/*
+|--------------------------------------------------------------------------
 | Boolean
 |--------------------------------------------------------------------------
 |
