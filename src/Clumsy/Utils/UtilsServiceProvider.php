@@ -4,7 +4,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Validator;
 use Clumsy\Assets\Facade as Asset;
 
 class UtilsServiceProvider extends ServiceProvider {
@@ -52,6 +51,17 @@ class UtilsServiceProvider extends ServiceProvider {
 		}
 
 		// Extended validation
+
+        $this->app['validator']->extend(
+        	'multiples_of',
+        	'Clumsy\Utils\Validators\MultiplesOf@validate',
+        	Lang::get('clumsy/utils::validation.multiples_of')
+        );
+		$this->app['validator']->replacer('multiples_of', function($message, $attribute, $rule, $parameters)
+		{    		
+    		return str_replace(':multiple', head($parameters), $message);
+		});
+
         $this->app['validator']->extend(
         	'email_advanced',
         	'Clumsy\Utils\Validators\EmailAdvanced@validate',
