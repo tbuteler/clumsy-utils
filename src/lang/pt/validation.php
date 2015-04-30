@@ -2,7 +2,7 @@
 
 return array(
 
-	'multiple of'    => 'O campo :attribute deverá conter um múltiplo de :multiple.',
+	'multiples_of'   => 'O campo :attribute deverá conter um múltiplo de :multiple.',
 
 	'email_advanced' => 'O e-mail fornecido é inválido ou seu domínio não é permitido. Por favor utilize outro endereço.',
 
