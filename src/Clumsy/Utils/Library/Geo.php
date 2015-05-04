@@ -125,21 +125,52 @@ class Geo {
      */
     public function getInfoByIP($params = 'country', $ip = null)
     {
-        if($ip == null){
+        if($ip == null)
+        {
             $ip = RequestFacade::getClientIp();
+        }
+        
+        $path = __DIR__.'/../../../support/GeoLite2-City.mmdb';
+        if (file_exists($path)) {
+            $reader = new Reader($path);
+            $record = $reader->city($ip);   
+
+            $toReturn = array();
+            foreach ((array)$params as $param)
+            {
+                switch ($param)
+                {
+                    case 'country':
+                        $toReturn['country'] = $record->country->names['pt-BR'];
+                        break;
+                    case 'coordinates':
+                        $toReturn['coordinates'] = array(
+                            'lat' => $record->location->latitude,
+                            'lng' => $record->location->longitude,
+                        );
+                        break;
+                    case 'countryCode':
+                        $toReturn['countryCode'] = $record->country->isoCode;
+                        break;
+                }
+            }
+
+            return sizeof($toReturn) > 1 ? $toReturn : head($toReturn);
         }
 
         $geocoder = new Geocoder();
         $geocoder->registerProviders(array(
-            new FreeGeoIpProvider(new CurlHttpAdapter(2)),
+            new FreeGeoIpProvider(new CurlHttpAdapter(4)),
         ));
 
-        try {
+        try
+        {
             $result = $geocoder->geocode($ip);
-        } catch (\Geocoder\Exception\NoResultException $e) {
+        }
+        catch (\Geocoder\Exception\NoResultException $e)
+        {
             return null;
         }
-
 
         $toReturn = array();
         foreach ((array)$params as $param) {
@@ -160,5 +191,6 @@ class Geo {
         }
 
         return sizeof($toReturn) > 1 ? $toReturn : head($toReturn);
+
     }
 }
