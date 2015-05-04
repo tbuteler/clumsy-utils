@@ -173,8 +173,10 @@ class Geo {
         }
 
         $toReturn = array();
-        foreach ((array)$params as $param) {
-            switch ($param) {
+        foreach ((array)$params as $param)
+        {
+            switch ($param)
+            {
                 case 'country':
                     $toReturn['country'] = $result->getCountry();
                     break;
