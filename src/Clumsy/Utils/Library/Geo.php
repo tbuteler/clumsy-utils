@@ -129,6 +129,34 @@ class Geo {
         {
             $ip = RequestFacade::getClientIp();
         }
+        
+        $path = __DIR__.'/../../../support/GeoLite2-City.mmdb';
+        if (file_exists($path)) {
+            $reader = new Reader($path);
+            $record = $reader->city($ip);   
+
+            $toReturn = array();
+            foreach ((array)$params as $param)
+            {
+                switch ($param)
+                {
+                    case 'country':
+                        $toReturn['country'] = $record->country->names['pt-BR'];
+                        break;
+                    case 'coordinates':
+                        $toReturn['coordinates'] = array(
+                            'lat' => $record->location->latitude,
+                            'lng' => $record->location->longitude,
+                        );
+                        break;
+                    case 'countryCode':
+                        $toReturn['countryCode'] = $record->country->isoCode;
+                        break;
+                }
+            }
+
+            return sizeof($toReturn) > 1 ? $toReturn : head($toReturn);
+        }
 
         $geocoder = new Geocoder();
         $geocoder->registerProviders(array(
@@ -165,5 +193,6 @@ class Geo {
         }
 
         return sizeof($toReturn) > 1 ? $toReturn : head($toReturn);
+
     }
 }
