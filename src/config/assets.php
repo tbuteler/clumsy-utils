@@ -4,12 +4,13 @@ return array(
 
     'jquery' => array(
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js',
     ),
 
     'jquery-ui' => array(
         'set'  => 'footer',
-        'path' => '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js',
+        'path' => '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js',
+        'req'  => array('jquery', 'jquery-ui.css'),
     ),
 
     'bootstrap' => array(
@@ -66,13 +67,13 @@ return array(
 
     'masonry' => array(
         'set'   => 'footer',
-        'path'  => 'http://cdnjs.cloudflare.com/ajax/libs/masonry/2.1.08/jquery.masonry.min.js',
+        'path'  => '//cdnjs.cloudflare.com/ajax/libs/masonry/2.1.08/jquery.masonry.min.js',
         'req'   => 'jquery',
     ),
 
     'font-awesome' => array(
         'set'   => 'styles',
-        'path'  => '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css',
+        'path'  => '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
     ),
 
     'tinymce' => array(
