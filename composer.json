@@ -12,7 +12,6 @@
     "require": {
         "php": ">=5.3.0",
         "clumsy/assets": "dev-master",
-        "league/geotools": "~0.4",
         "geoip2/geoip2":"~2.0"
     },
     "require-dev": {
@@ -28,7 +27,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.6.12-dev"
+            "dev-master": "0.6.13-dev"
         }
     },
     "minimum-stability": "dev",

@@ -1,8 +1,5 @@
 <?php namespace Clumsy\Utils\Library;
 
-use Geocoder\Geocoder;
-use Geocoder\HttpAdapter\CurlHttpAdapter;
-use Geocoder\Provider\FreeGeoIpProvider;
 use GeoIp2\Database\Reader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -131,47 +128,8 @@ class Geo {
             $ip = RequestFacade::getClientIp();
         }
         
-        $path = __DIR__.'/../../../support/GeoLite2-City.mmdb';
-        if (file_exists($path)) {
-            $reader = new Reader($path);
-            $record = $reader->city($ip);   
-
-            $toReturn = array();
-            foreach ((array)$params as $param)
-            {
-                switch ($param)
-                {
-                    case 'country':
-                        $toReturn['country'] = $record->country->names['pt-BR'];
-                        break;
-                    case 'coordinates':
-                        $toReturn['coordinates'] = array(
-                            'lat' => $record->location->latitude,
-                            'lng' => $record->location->longitude,
-                        );
-                        break;
-                    case 'countryCode':
-                        $toReturn['countryCode'] = $record->country->isoCode;
-                        break;
-                }
-            }
-
-            return sizeof($toReturn) > 1 ? $toReturn : head($toReturn);
-        }
-
-        $geocoder = new Geocoder();
-        $geocoder->registerProviders(array(
-            new FreeGeoIpProvider(new CurlHttpAdapter(4)),
-        ));
-
-        try
-        {
-            $result = $geocoder->geocode($ip);
-        }
-        catch (\Geocoder\Exception\NoResultException $e)
-        {
-            return null;
-        }
+        $reader = new Reader(__DIR__.'/../../../support/GeoLite2-City.mmdb');
+        $record = $reader->city($ip);
 
         $toReturn = array();
         foreach ((array)$params as $param)
@@ -179,21 +137,20 @@ class Geo {
             switch ($param)
             {
                 case 'country':
-                    $toReturn['country'] = $result->getCountry();
+                    $toReturn['country'] = $record->country->names['pt-BR'];
                     break;
                 case 'coordinates':
                     $toReturn['coordinates'] = array(
-                        'lat' => $result->getLatitude(),
-                        'lng' => $result->getLongitude(),
+                        'lat' => $record->location->latitude,
+                        'lng' => $record->location->longitude,
                     );
                     break;
                 case 'countryCode':
-                    $toReturn['countryCode'] = $result->getCountryCode();
+                    $toReturn['countryCode'] = $record->country->isoCode;
                     break;
             }
         }
 
         return sizeof($toReturn) > 1 ? $toReturn : head($toReturn);
-
     }
 }
