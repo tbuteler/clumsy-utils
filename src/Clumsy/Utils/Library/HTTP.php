@@ -160,6 +160,7 @@ class HTTP {
 	{
 		$crawlers = implode('|', array(
 			'facebookexternalhit',
+            'XML Sitemaps Generator',
 			'Bloglines subscriber',
 			'Dumbot',
 			'Sosoimagespider',
