@@ -10,17 +10,20 @@ return array(
     'jquery-ui' => array(
         'set'  => 'footer',
         'path' => '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js',
-        'req'  => array('jquery', 'jquery-ui.css'),
+        'req'  => array(
+            'jquery',
+            'jquery-ui.css',
+        ),
     ),
 
     'bootstrap' => array(
         'set'   => 'styles',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css',
+        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
     ),
 
     'bootstrap.js' => array(
         'set'   => 'footer',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js',
+        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',
         'req'   => 'jquery',
     ),
 
@@ -79,8 +82,8 @@ return array(
     'tinymce' => array(
         'set'   => 'footer',
         'path'  => 'packages/clumsy/utils/js/tinymce/tinymce.jquery.min.js',
-        'req'   => 'jquery',
         'v'     => '4.0.28',
+        'req'   => 'jquery',
     ),
 
     'jquery-ui.css' => array(
@@ -93,7 +96,10 @@ return array(
         'set'   => 'footer',
         'path'  => 'packages/clumsy/utils/js/datepicker/'.App::getLocale().'.min.js',
         'v'     => '1.11.4',
-        'req'   => array('jquery', 'jquery-ui.css'),
+        'req'   => array(
+            'jquery',
+            'jquery-ui.css',
+        ),
     ),
 
     'timepicker.css' => array(
@@ -106,7 +112,10 @@ return array(
         'set'   => 'footer',
         'path'  => 'packages/clumsy/utils/js/timepicker/'.App::getLocale().'.min.js',
         'v'     => '1.5.0',
-        'req'   => array('datepicker', 'timepicker.css'),
+        'req'   => array(
+            'datepicker',
+            'timepicker.css',
+        ),
     ),
 
     'chosen.css' => array(
@@ -135,13 +144,24 @@ return array(
         'set'   => 'footer',
         'path'  => 'packages/clumsy/utils/js/iris.min.js',
         'v'     => '1.0.7',
-        'req'   => array('jquery','jquery-ui','colorpicker.css'),
+        'req'   => array(
+            'jquery',
+            'jquery-ui',
+            'colorpicker.css',
+        ),
     ),
 
     'youtube' => array(
         'set'   => 'footer',
         'path'  => 'packages/clumsy/utils/js/youtube.min.js',
         'v'     => '0.1.0',
-        'req'   => array('jquery'),
+        'req'   => 'jquery',
+    ),
+
+    'grouped-images-loader' => array(
+        'set'    => 'header',
+        'path'   => 'packages/clumsy/utils/js/grouped-images-loader.min.js',
+        'inline' => true,
+        'req'    => 'jquery',
     ),
 );

@@ -44,13 +44,25 @@ class Geo {
                 
             case 'pt' :
 
+                if (!str_contains($postal, '-'))
+                {
+                    $postal = substr_replace($postal, '-', 4, 0);
+                }
+
                 list($prefix, $suffix) = explode('-', $postal);
 
-                $result = DB::table('utils_geo_pt_address_lookup')
-                            ->where('code_prefix', $prefix)
-                            ->where('code_suffix', $suffix)
-                            ->first();
-    
+                if ($suffix)
+                {
+                    $result = DB::table('utils_geo_pt_address_lookup')
+                                ->where('code_prefix', $prefix)
+                                ->where('code_suffix', $suffix)
+                                ->first();
+                }
+                else
+                {
+                    $result = false;
+                }
+
                 // If address lookup fails with prefix-suffix, attempt to use only prefix as a fallback
                 if (!$result)
                 {

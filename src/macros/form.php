@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\URL;
 | Versatile input macro with auxiliary HTML and error feedback
 |
 */
+
 Form::macro('field', function($name, $label, $type = 'text', $attributes = array())
 {
     $input_group = array_pull($attributes, 'input_group');
@@ -125,6 +126,7 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     return $output;
 });
 
+
 /*
 |--------------------------------------------------------------------------
 | Textarea
@@ -133,10 +135,12 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
 | Shorthand for calling field with type textarea
 |
 */
+
 Form::macro('fieldTextarea', function($name, $label, $attributes = array())
 {
     return Form::field($name, $label, 'textarea', $attributes);
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -146,10 +150,12 @@ Form::macro('fieldTextarea', function($name, $label, $attributes = array())
 | Checkbox with auxiliary HTML
 |
 */
+
 Form::macro('boolean', function($name, $label, $attributes = array())
 {
     return Form::field($name, $label, 'checkbox', $attributes);
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -159,6 +165,7 @@ Form::macro('boolean', function($name, $label, $attributes = array())
 | Select input with auxiliary HTML
 |
 */
+
 Form::macro('dropdown', function($name, $label, $options, $selected = null, $attributes = array())
 {
     $attributes = array_merge(
@@ -172,6 +179,7 @@ Form::macro('dropdown', function($name, $label, $options, $selected = null, $att
     return Form::field($name, $label, 'select', $attributes);
 });
 
+
 /*
 |--------------------------------------------------------------------------
 | Rich Text
@@ -180,6 +188,7 @@ Form::macro('dropdown', function($name, $label, $options, $selected = null, $att
 | Shorthand for calling Field macro while enqueuing RTE scripts
 |
 */
+
 Form::macro('richText', function($name, $label, $attributes = array())
 {
     Asset::enqueue('tinymce');
@@ -192,6 +201,7 @@ Form::macro('richText', function($name, $label, $attributes = array())
     return Form::field($name, $label, 'textarea', $attributes);
 });
 
+
 /*
 |--------------------------------------------------------------------------
 | Date and timepicker
@@ -200,6 +210,7 @@ Form::macro('richText', function($name, $label, $attributes = array())
 | Shorthand for calling Field macro while enqueuing date and timepicker scripts
 |
 */
+
 Form::macro('dateTimePicker', function($name, $label, $type = 'datepicker', $attributes = array())
 {
     Asset::enqueue($type === 'datepicker' ? 'datepicker' : 'timepicker');
@@ -228,6 +239,7 @@ Form::macro('time', function($name, $label, $attributes = array())
     return Form::dateTimePicker($name, $label, 'timepicker', $attributes);
 });
 
+
 /*
 |--------------------------------------------------------------------------
 | Colorpicker
@@ -236,6 +248,7 @@ Form::macro('time', function($name, $label, $attributes = array())
 | Shorthand for calling Field macro while enqueuing iris colorpicker scripts
 |
 */
+
 Form::macro('colorpicker', function($name, $label, $attributes = array())
 {
     Asset::enqueue('colorpicker');
@@ -248,6 +261,7 @@ Form::macro('colorpicker', function($name, $label, $attributes = array())
     return Form::field($name, $label, 'text', $attributes);
 });
 
+
 /*
 |--------------------------------------------------------------------------
 | Youtube box
@@ -256,6 +270,7 @@ Form::macro('colorpicker', function($name, $label, $attributes = array())
 | Shorthand for calling Field macro while enqueuing youtube scripts
 |
 */
+
 Form::macro('youtube', function($name, $label, $attributes = array())
 {
     Asset::enqueue('youtube');
