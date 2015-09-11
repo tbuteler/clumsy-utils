@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
-Form::macro('field', function($name, $label, $type = 'text', $attributes = array())
+Form::macro('field', function($name = null, $label = '', $type = 'text', $attributes = array())
 {
     $input_group = array_pull($attributes, 'input_group');
-    
+
     $label_attributes = array_pull($attributes, 'label');
-    
+
     $field_attributes = array_pull($attributes, 'field');
     $field_attributes = array_merge(
         array(
@@ -54,7 +54,7 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
 
     $class = explode(' ', $class);
 
-    if (Session::has('errors'))
+    if ($name && Session::has('errors'))
     {
         $errors = Session::get('errors');
 
@@ -81,7 +81,7 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     if (sizeof($input_group))
     {
         $output .= '<div class="input-group">';
-        
+
         if (isset($input_group['before']))
         {
             $group_type = strpos($input_group['before'], 'button') ? 'btn' : 'addon';
@@ -105,7 +105,7 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
     }
     else
     {
-        $output .= Form::$type($name, $value, $field_attributes);        
+        $output .= Form::$type($name, $value, $field_attributes);
     }
 
     if (sizeof($input_group))
@@ -115,14 +115,14 @@ Form::macro('field', function($name, $label, $type = 'text', $attributes = array
             $group_type = strpos($input_group['after'], 'button') ? 'btn' : 'addon';
             $output .= '<div class="input-group-'.$group_type.'">'.$input_group['after'].'</div>';
         }
-        
+
         $output .= '</div>';
     }
 
     $output .= $after;
 
     $output .= '</div>';
-    
+
     return $output;
 });
 
@@ -266,7 +266,7 @@ Form::macro('colorpicker', function($name, $label, $attributes = array())
 |--------------------------------------------------------------------------
 | Youtube box
 |--------------------------------------------------------------------------
-|   
+|
 | Shorthand for calling Field macro while enqueuing youtube scripts
 |
 */
