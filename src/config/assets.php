@@ -1,5 +1,7 @@
 <?php
 
+$google_api = Illuminate\Support\Facades\Config::get('clumsy/utils::api-google-maps');
+
 return array(
 
     'jquery' => array(
@@ -94,7 +96,7 @@ return array(
 
     'datepicker' => array(
         'set'   => 'footer',
-        'path'  => 'packages/clumsy/utils/js/datepicker/'.App::getLocale().'.min.js',
+        'path'  => 'packages/clumsy/utils/js/datepicker/{{locale}}.min.js',
         'v'     => '1.11.4',
         'req'   => array(
             'jquery',
@@ -110,7 +112,7 @@ return array(
 
     'timepicker' => array(
         'set'   => 'footer',
-        'path'  => 'packages/clumsy/utils/js/timepicker/'.App::getLocale().'.min.js',
+        'path'  => 'packages/clumsy/utils/js/timepicker/{{locale}}.min.js',
         'v'     => '1.5.0',
         'req'   => array(
             'datepicker',
@@ -151,6 +153,11 @@ return array(
         ),
     ),
 
+    'google-maps' => array(
+        'set'   => 'footer',
+        'path'  => "http://maps.google.com/maps/api/js?key={$google_api}&sensor=true&libraries=places,geometry",
+    ),
+
     'youtube' => array(
         'set'   => 'footer',
         'path'  => 'packages/clumsy/utils/js/youtube.min.js',
@@ -161,7 +168,7 @@ return array(
     'grouped-images-loader' => array(
         'set'    => 'header',
         'path'   => 'packages/clumsy/utils/js/grouped-images-loader.min.js',
-        'inline' => true,
         'req'    => 'jquery',
+        'inline' => true,
     ),
 );

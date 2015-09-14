@@ -32,7 +32,7 @@ class UtilsServiceProvider extends ServiceProvider {
         $path = __DIR__.'/../..';
 
         $this->package('clumsy/utils', 'clumsy/utils', $path);
-        
+
         $assets = Config::get('clumsy/utils::assets');
 		Asset::batchRegister($assets);
 
@@ -59,7 +59,7 @@ class UtilsServiceProvider extends ServiceProvider {
         	Lang::get('clumsy/utils::validation.multiples_of')
         );
 		$this->app['validator']->replacer('multiples_of', function($message, $attribute, $rule, $parameters)
-		{    		
+		{
     		return str_replace(':multiple', head($parameters), $message);
 		});
 
@@ -68,13 +68,13 @@ class UtilsServiceProvider extends ServiceProvider {
         	'Clumsy\Utils\Validators\EmailAdvanced@validate',
         	Lang::get('clumsy/utils::validation.email_advanced')
         );
-		
+
 		$this->app['validator']->extend(
 			'postal',
 			'Clumsy\Utils\Validators\Postal@validate',
 			Lang::get('clumsy/utils::validation.postal')
 		);
-		
+
 		$this->app['validator']->extend(
 			'id',
 			'Clumsy\Utils\Validators\Identities@validate',
@@ -83,7 +83,7 @@ class UtilsServiceProvider extends ServiceProvider {
 		$this->app['validator']->replacer('id', function($message, $attribute, $rule, $parameters)
 		{
 			$id = head($parameters);
-    		
+
     		return str_replace(':id', Lang::get("clumsy/utils::validation.identities.$id"), $message);
 		});
 	}
