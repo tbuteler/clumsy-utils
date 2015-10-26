@@ -1,10 +1,12 @@
-<?php namespace Clumsy\Utils\Library;
+<?php
+namespace Clumsy\Utils\Library;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 
-class EnvironmentLocale {
+class EnvironmentLocale
+{
 
     protected $preferred = false;
 
@@ -15,8 +17,7 @@ class EnvironmentLocale {
 
     public function preferred()
     {
-        if (!$this->preferred && !Config::get('clumsy/utils::locales.passive'))
-        {
+        if (!$this->preferred && !Config::get('clumsy/utils::locales.passive')) {
             $original = setlocale(LC_MESSAGES, 0); // LC_MESSAGES is the most harmless of all categories
             $this->set(LC_MESSAGES);
             setlocale(LC_MESSAGES, $original);
@@ -27,15 +28,12 @@ class EnvironmentLocale {
 
     public function set($category, $locales = false)
     {
-        if (!$locales)
-        {
+        if (!$locales) {
             $locales = $this->getPossibleLocales(App::getLocale());
         }
 
-        foreach ((array)$locales as $locale)
-        {
-            if (setlocale($category, $locale) !== false)
-            {
+        foreach ((array)$locales as $locale) {
+            if (setlocale($category, $locale) !== false) {
                 $this->preferred = $locale;
                 break;
             }
@@ -46,30 +44,24 @@ class EnvironmentLocale {
     {
         $bases = (array)$locale;
         $sets = Config::get('clumsy/utils::locales');
-        
-        foreach ((array)$sets['equivalences'] as $locale_code => $equivalence)
-        {
-            if ($locale_code === head($bases))
-            {
+
+        foreach ((array)$sets['equivalences'] as $locale_code => $equivalence) {
+            if ($locale_code === head($bases)) {
                 $bases[] = $equivalence;
             }
         }
 
-        foreach ($sets['transformations'] as $transformation)
-        {
+        foreach ($sets['transformations'] as $transformation) {
             $bases[] = $this->transform($transformation, head($bases));
         }
 
-        foreach ((array)$sets['append'] as $append)
-        {
-            foreach ($bases as $base)
-            {
+        foreach ((array)$sets['append'] as $append) {
+            foreach ($bases as $base) {
                 $locales[] = $base.$append;
             }
         }
 
-        foreach ($bases as $base)
-        {
+        foreach ($bases as $base) {
             $locales[] = $base;
         }
 

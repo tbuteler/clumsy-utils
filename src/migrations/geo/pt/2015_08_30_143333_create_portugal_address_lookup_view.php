@@ -17,29 +17,30 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
-class CreatePortugalAddressLookupView extends Migration {
-
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
+class CreatePortugalAddressLookupView extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
         DB::unprepared(file_get_contents(__DIR__.'/address_lookup.sql'));
 
-	    App::shutdown(function()
-	    {
-	    	DB::table('migrations')->where('migration', preg_replace('/\.php$/', '', basename(__FILE__)))->delete();
-	    });
-	}
+        App::shutdown(function () {
+
+            DB::table('migrations')->where('migration', preg_replace('/\.php$/', '', basename(__FILE__)))->delete();
+        });
+    }
 
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down() {}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+    }
 }

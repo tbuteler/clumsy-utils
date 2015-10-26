@@ -1,19 +1,19 @@
-<?php namespace Clumsy\Utils\Library;
+<?php
+namespace Clumsy\Utils\Library;
 
 use Illuminate\Support\Facades\Lang;
 use Carbon\Carbon;
 
-class Date {
+class Date
+{
+    public function __construct()
+    {
+        set_locale(LC_TIME);
+    }
 
-	public function __construct()
-	{	
-		set_locale(LC_TIME);
-	}
-    
     public function format($date, $format)
     {
-        if (Lang::has("clumsy/utils::dates.$format"))
-        {
+        if (Lang::has("clumsy/utils::dates.$format")) {
             $format = Lang::get("clumsy/utils::dates.$format");
         }
 

@@ -1,7 +1,8 @@
-<?php namespace Clumsy\Utils\Validators;
+<?php
+namespace Clumsy\Utils\Validators;
 
-class Identities {
-
+class Identities
+{
     public $types = array(
 
         'pt_nif' => 'Clumsy\Utils\Validators\PT\Identities@nif',
@@ -11,8 +12,7 @@ class Identities {
     {
         $type = head($parameters);
 
-        if (!$type)
-        {
+        if (!$type) {
             throw new \Exception('Cannot use "id" validator without specifying parameters (i.e. "id:code")');
         }
 

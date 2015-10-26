@@ -1,18 +1,17 @@
-<?php namespace Clumsy\Utils\Validators\ES;
+<?php
+namespace Clumsy\Utils\Validators\ES;
 
 use Illuminate\Support\Facades\DB;
 
-class Postal {
-
+class Postal
+{
     public function validate($attribute, $value, $parameters)
     {
-        if (strlen((string)$value) !== 5)
-        {
+        if (strlen((string)$value) !== 5) {
             return false;
         }
 
-        if ((int)$value > 52999 || (int)$value < 1000)
-        {
+        if ((int)$value > 52999 || (int)$value < 1000) {
             return false;
         }
 
@@ -21,8 +20,7 @@ class Postal {
                      ->distinct()
                      ->lists('prefix');
 
-        if (!in_array(substr((string)$value, 0, 3), $postals))
-        {
+        if (!in_array(substr((string)$value, 0, 3), $postals)) {
             return false;
         }
 

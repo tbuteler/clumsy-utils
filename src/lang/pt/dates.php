@@ -4,12 +4,12 @@ return array(
 
     // strftime syntax
 
-	'short'           => '%d/%m/%Y',
+    'short'           => '%d/%m/%Y',
 
-	'short with time' => '%d/%m/%Y %k:%M',
+    'short with time' => '%d/%m/%Y %k:%M',
 
-	'long'            => '%e de %B de %Y',
+    'long'            => '%e de %B de %Y',
 
-	'long with time'  => '%e de %B de %Y às %k:%M'
+    'long with time'  => '%e de %B de %Y às %k:%M'
 
 );

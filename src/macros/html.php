@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\HTML;
 |
 */
 
-HTML::macro('groupedImage', function($src, $group = null, $alt = null, $attributes = array(), $secure = null)
-{
+HTML::macro('groupedImage', function ($src, $group = null, $alt = null, $attributes = array(), $secure = null) {
+
     Asset::enqueue('grouped-images-loader');
 
     $attributes = array_merge(
@@ -45,8 +45,8 @@ HTML::macro('groupedImage', function($src, $group = null, $alt = null, $attribut
 |
 */
 
-HTML::macro('lazyLoad', function($src, $alt = null, $attributes = array())
-{
+HTML::macro('lazyLoad', function ($src, $alt = null, $attributes = array()) {
+
     $attributes = HTML::attributes(array_merge(
         array(
             'data-src' => $src,

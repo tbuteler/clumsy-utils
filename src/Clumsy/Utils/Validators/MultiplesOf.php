@@ -1,14 +1,14 @@
-<?php namespace Clumsy\Utils\Validators;
+<?php
+namespace Clumsy\Utils\Validators;
 
-class MultiplesOf {
-
-	public function validate($attribute, $value, $parameters)
-	{
-        if ($value % head($parameters) != 0)
-        {
+class MultiplesOf
+{
+    public function validate($attribute, $value, $parameters)
+    {
+        if ($value % head($parameters) != 0) {
             return false;
         }
 
-		return true;
-	}
+        return true;
+    }
 }

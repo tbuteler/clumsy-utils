@@ -107,13 +107,13 @@ return array(
     'timepicker.css' => array(
         'set'   => 'styles',
         'path'  => 'packages/clumsy/utils/css/timepicker.css',
-        'v'     => '1.5.0',
+        'v'     => '1.5.5',
     ),
 
     'timepicker' => array(
         'set'   => 'footer',
         'path'  => 'packages/clumsy/utils/js/timepicker/{{locale}}.min.js',
-        'v'     => '1.5.0',
+        'v'     => '1.5.5',
         'req'   => array(
             'datepicker',
             'timepicker.css',
@@ -158,9 +158,9 @@ return array(
         'path'  => "http://maps.google.com/maps/api/js?key={$google_api}&sensor=true&libraries=places,geometry",
     ),
 
-    'youtube' => array(
+    'embed-video' => array(
         'set'   => 'footer',
-        'path'  => 'packages/clumsy/utils/js/youtube.min.js',
+        'path'  => 'packages/clumsy/utils/js/embed-video.min.js',
         'v'     => '0.1.0',
         'req'   => 'jquery',
     ),

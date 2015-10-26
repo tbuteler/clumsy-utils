@@ -1,12 +1,15 @@
-<?php namespace Clumsy\Utils\Facades;
+<?php
+namespace Clumsy\Utils\Facades;
 
-class HTTP extends \Illuminate\Support\Facades\Facade {
-
+class HTTP extends \Illuminate\Support\Facades\Facade
+{
     /**
      * Get the registered name of the component.
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return '\Clumsy\Utils\Library\HTTP'; }
-
+    protected static function getFacadeAccessor()
+    {
+        return '\Clumsy\Utils\Library\HTTP';
+    }
 }
