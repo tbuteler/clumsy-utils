@@ -143,6 +143,7 @@ class Field
     public function noLabel()
     {
         $this->setAttribute('label.class', 'sr-only');
+        $this->showLabel = false;
 
         return $this;
     }
@@ -348,7 +349,7 @@ class Field
 
     public function multiple($multiple = true)
     {
-        $this->setBooleanAttribute('multiple', $multiple);
+        $this->setBooleanAttribute('field.multiple', $multiple);
 
         return $this;
     }
