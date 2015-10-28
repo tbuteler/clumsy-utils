@@ -20,6 +20,8 @@ class Field
     protected $defaultGroupClass = 'form-group :type';
     protected $defaultClass = ':form-control';
 
+    protected $showLabel = true;
+
     public function __construct(
         $name = null,
         $label = '',
@@ -57,7 +59,16 @@ class Field
 
     protected function setAttribute($key, $value)
     {
-        return array_set($this->attributes, $key, $value);
+        array_set($this->attributes, $key, $value);
+    }
+
+    protected function setBooleanAttribute($key, $value)
+    {
+        if ($value) {
+            array_set($this->attributes, $key, 'true');
+        } else {
+            array_forget($this->attributes, $key);
+        }
     }
 
     protected function updateGroupAttributes($key, $value, $overwrite = false)
@@ -300,30 +311,44 @@ class Field
         return $this;
     }
 
+    public function cols($cols = 50)
+    {
+        $this->setAttribute('field.cols', $cols);
+
+        return $this;
+    }
+
+    public function rows($rows = 10)
+    {
+        $this->setAttribute('field.rows', $rows);
+
+        return $this;
+    }
+
     public function checked($checked = true)
     {
-        $this->setAttribute('checked', $checked);
+        $this->setBooleanAttribute('checked', $checked);
 
         return $this;
     }
 
     public function disabled($disabled = true)
     {
-        $this->setAttribute('field.disabled', $disabled);
+        $this->setBooleanAttribute('field.disabled', $disabled);
 
         return $this;
     }
 
     public function readonly($readonly = true)
     {
-        $this->setAttribute('field.readonly', $readonly);
+        $this->setBooleanAttribute('field.readonly', $readonly);
 
         return $this;
     }
 
-    public function multiple()
+    public function multiple($multiple = true)
     {
-        $this->setAttribute('multiple', true);
+        $this->setBooleanAttribute('multiple', $multiple);
 
         return $this;
     }
@@ -411,8 +436,13 @@ class Field
             if (!$value) {
                 $value = 1;
             }
-            $label_end = strpos($output, '>', strpos($output, '<label'))+1;
-            $output = substr_replace($output, Form::$type($name, $value, $checked, $field_attributes), $label_end, 0);
+            $field = Form::$type($name, $value, $checked, $field_attributes);
+            if ($this->showLabel) {
+                $label_end = strpos($output, '>', strpos($output, '<label'))+1;
+                $output = substr_replace($output, $field, $label_end, 0);
+            } else {
+                $output .= $field;
+            }
         } else {
             $output .= Form::$type($name, $value, $field_attributes);
         }
