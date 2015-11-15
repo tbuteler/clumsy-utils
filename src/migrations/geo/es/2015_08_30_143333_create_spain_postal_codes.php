@@ -2,13 +2,12 @@
 
 /*
  |--------------------------------------------------------------------------
- | Create PT Address Lookup View
+ | Create Spain Postal Codes
  |--------------------------------------------------------------------------
  |
- | To create, run the following Artisan command (make sure you already have
- | the required tables):
+ | To create, run the following Artisan command:
  |
- | php artisan migrate --path=vendor/clumsy/utils/src/migrations/geo/pt
+ | php artisan migrate --path=vendor/clumsy/utils/src/migrations/geo/es
  |
  */
 
@@ -17,7 +16,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
-class CreatePortugalAddressLookupView extends Migration
+class CreateSpainPostalCodes extends Migration
 {
     /**
      * Run the migrations.
@@ -26,10 +25,9 @@ class CreatePortugalAddressLookupView extends Migration
      */
     public function up()
     {
-        DB::unprepared(file_get_contents(__DIR__.'/address_lookup.sql'));
+        DB::unprepared(file_get_contents('https://raw.githubusercontent.com/tbuteler/postal-sql/master/es/es.sql'));
 
         App::shutdown(function () {
-
             DB::table('migrations')->where('migration', preg_replace('/\.php$/', '', basename(__FILE__)))->delete();
         });
     }
