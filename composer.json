@@ -11,9 +11,9 @@
     ],
     "require": {
         "lib-curl": "*",
-        "laravel/framework": ">=5.1.*",
+        "laravel/framework": "5.1.*",
         "geoip2/geoip2":"~2.0",
-        "clumsy/assets": "@dev"
+        "clumsy/assets": "0.7.*"
     },
     "require-dev": {
         "phpunit/phpunit": "4.0.*"
@@ -23,7 +23,7 @@
             "src/helpers.php"
         ],
         "psr-4": {
-            "Clumsy\\Utils": "src/"
+            "Clumsy\\Utils\\": "src/"
         }
     },
     "extra": {
