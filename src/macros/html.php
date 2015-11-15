@@ -3,7 +3,7 @@
 use Clumsy\Assets\Facade as Asset;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\HTML;
+use Collective\Html\HtmlFacade as HTML;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +22,11 @@ HTML::macro('groupedImage', function ($src, $group = null, $alt = null, $attribu
     Asset::enqueue('grouped-images-loader');
 
     $attributes = array_merge(
-        array(
+        [
             'data-group' => $group,
             'class'      => 'grouped-image',
             'onload'     => 'groupedImageLoaded(this)',
-        ),
+        ],
         $attributes
     );
 

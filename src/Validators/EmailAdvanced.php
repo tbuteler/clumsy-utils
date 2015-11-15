@@ -1,4 +1,5 @@
 <?php
+
 namespace Clumsy\Utils\Validators;
 
 class EmailAdvanced
@@ -28,7 +29,7 @@ class EmailAdvanced
 
     public static function disposable()
     {
-        return array(
+        return [
             '0-mail.com',
             '0815.ru',
             '0815.su',
@@ -779,6 +780,6 @@ class EmailAdvanced
             'zoemail.net',
             'zoemail.org',
             'zomg.info',
-        );
+        ];
     }
 }

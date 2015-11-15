@@ -1,14 +1,16 @@
 <?php
 
-return array(
+use Illuminate\Support\Str;
+
+return [
 
     'passive' => true,
 
-    'equivalences' => array(
+    'equivalences' => [
         'en' => 'en_US',
-    ),
+    ],
 
-    'transformations' => array(
+    'transformations' => [
         function ($locale) {
             return str_replace('_', '-', $locale);
         },
@@ -16,18 +18,18 @@ return array(
             return str_replace('-', '_', $locale);
         },
         function ($locale) {
-            if (!str_contains($locale, array('_', '-'))) {
-                return \Illuminate\Support\Str::lower($locale).'_'.\Illuminate\Support\Str::upper($locale);
+            if (!str_contains($locale, ['_', '-'])) {
+                return Str::lower($locale).'_'.Str::upper($locale);
             }
         },
-    ),
+    ],
 
-    'append' => array(
+    'append' => [
         '.UTF-8',
         '.utf8',
-    ),
+    ],
 
-    'fallbacks' => array(
+    'fallbacks' => [
         'de-AT' => 'de',
         'de-CH' => 'de',
         'de'    => 'de-AT',
@@ -37,5 +39,6 @@ return array(
         'en'    => 'en-GB',
         'pt-BR' => 'pt',
         'pt'    => 'pt-BR',
-    ),
-);
+    ],
+
+];

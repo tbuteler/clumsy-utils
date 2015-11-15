@@ -17,7 +17,9 @@ class Date
             $format = Lang::get("clumsy/utils::dates.$format");
         }
 
-        $date = new Carbon($date);
+        if (!($date instanceof Carbon)) {
+            $date = new Carbon($date);
+        }
 
         return $date->formatLocalized($format);
     }

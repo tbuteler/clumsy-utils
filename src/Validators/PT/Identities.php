@@ -1,4 +1,5 @@
 <?php
+
 namespace Clumsy\Utils\Validators\PT;
 
 class Identities
@@ -11,7 +12,7 @@ class Identities
 
         $array = str_split($value);
 
-        if (!in_array($array[0], array(1, 2, 5, 6, 8, 9))) {
+        if (!in_array($array[0], [1, 2, 5, 6, 8, 9])) {
             return false;
         }
 

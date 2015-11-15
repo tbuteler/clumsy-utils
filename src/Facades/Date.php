@@ -1,7 +1,7 @@
 <?php
 namespace Clumsy\Utils\Facades;
 
-class EnvironmentLocale extends \Illuminate\Support\Facades\Facade
+class Date extends \Illuminate\Support\Facades\Facade
 {
     /**
      * Get the registered name of the component.
@@ -10,6 +10,6 @@ class EnvironmentLocale extends \Illuminate\Support\Facades\Facade
      */
     protected static function getFacadeAccessor()
     {
-        return '\Clumsy\Utils\Library\EnvironmentLocale';
+        return 'Clumsy\Utils\Library\Date';
     }
 }

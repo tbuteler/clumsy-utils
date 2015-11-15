@@ -114,7 +114,7 @@ if (!function_exists('array_is_nested')) {
 
 if (!function_exists('field')) {
 
-    function field($name = null, $label = '', array $attributes = array())
+    function field($name = null, $label = '', array $attributes = [])
     {
         return new Clumsy\Utils\Library\Field($name, $label, $attributes);
     }
@@ -122,7 +122,7 @@ if (!function_exists('field')) {
 
 if (!function_exists('checkbox')) {
 
-    function checkbox($name = null, $label = '', array $attributes = array())
+    function checkbox($name = null, $label = '', array $attributes = [])
     {
         return field($name, $label, $attributes)->type('checkbox');
     }
@@ -130,7 +130,7 @@ if (!function_exists('checkbox')) {
 
 if (!function_exists('dropdown')) {
 
-    function dropdown($name = null, $label = '', array $attributes = array())
+    function dropdown($name = null, $label = '', array $attributes = [])
     {
         return field($name, $label, $attributes)->type('select');
     }
@@ -138,7 +138,7 @@ if (!function_exists('dropdown')) {
 
 if (!function_exists('textarea')) {
 
-    function textarea($name = null, $label = '', array $attributes = array())
+    function textarea($name = null, $label = '', array $attributes = [])
     {
         return field($name, $label, $attributes)->type('textarea');
     }
@@ -146,7 +146,7 @@ if (!function_exists('textarea')) {
 
 if (!function_exists('richText')) {
 
-    function richText($name = null, $label = '', array $attributes = array())
+    function richText($name = null, $label = '', array $attributes = [])
     {
         return textarea($name, $label, $attributes)->enqueue('tinymce')->addClass('rich-text');
     }
@@ -154,7 +154,7 @@ if (!function_exists('richText')) {
 
 if (!function_exists('datepicker')) {
 
-    function datepicker($name = null, $label = '', array $attributes = array())
+    function datepicker($name = null, $label = '', array $attributes = [])
     {
         return field($name, $label, $attributes)
                 ->enqueue('datepicker')
@@ -165,7 +165,7 @@ if (!function_exists('datepicker')) {
 
 if (!function_exists('datetimepicker')) {
 
-    function datetimepicker($name = null, $label = '', array $attributes = array())
+    function datetimepicker($name = null, $label = '', array $attributes = [])
     {
         return field($name, $label, $attributes)
                 ->enqueue('timepicker')
@@ -176,7 +176,7 @@ if (!function_exists('datetimepicker')) {
 
 if (!function_exists('timepicker')) {
 
-    function timepicker($name = null, $label = '', array $attributes = array())
+    function timepicker($name = null, $label = '', array $attributes = [])
     {
         return field($name, $label, $attributes)
                 ->enqueue('timepicker')
@@ -187,7 +187,7 @@ if (!function_exists('timepicker')) {
 
 if (!function_exists('colorpicker')) {
 
-    function colorpicker($name = null, $label = '', array $attributes = array())
+    function colorpicker($name = null, $label = '', array $attributes = [])
     {
         return field($name, $label, $attributes)->enqueue('colorpicker')->addClass('colorpicker');
     }
@@ -195,7 +195,7 @@ if (!function_exists('colorpicker')) {
 
 if (!function_exists('embedVideo')) {
 
-    function embedVideo($name = null, $label = '', array $attributes = array())
+    function embedVideo($name = null, $label = '', array $attributes = [])
     {
         $before = "<div class='embed-video-wrapper'>";
         $after  = '<div class="preview-box"><div class="placeholders"><div class="idle glyphicon glyphicon-film"></div>

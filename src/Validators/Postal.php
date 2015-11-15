@@ -1,8 +1,7 @@
 <?php
+
 namespace Clumsy\Utils\Validators;
 
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 
 class Postal
@@ -10,18 +9,18 @@ class Postal
     public function validate($attribute, $value, $parameters)
     {
         // If no country or method for obtaining country was defined, approve all values
-        if (!sizeof($parameters)) {
+        if (!count($parameters)) {
             return true;
         }
 
         switch (head($parameters)) {
             case 'field':
-                $country = Input::get($parameters[1]);
+                $country = request()->($parameters[1]);
 
                 break;
 
             case 'locale':
-                $country = Config::get('app.locale');
+                $country = config('app.locale');
 
                 break;
 

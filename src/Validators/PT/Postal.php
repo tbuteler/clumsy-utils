@@ -1,4 +1,5 @@
 <?php
+
 namespace Clumsy\Utils\Validators\PT;
 
 use Illuminate\Support\Facades\DB;

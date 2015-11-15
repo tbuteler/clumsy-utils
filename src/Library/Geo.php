@@ -3,8 +3,8 @@ namespace Clumsy\Utils\Library;
 
 use GeoIp2\Database\Reader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Str;
 
@@ -13,7 +13,7 @@ class Geo
     public static function postalToAddress($postal = '', $country = false)
     {
         if (!$country) {
-            $country = Config::get('app.locale');
+            $country = App::getLocale();
         }
 
         switch ($country) {
@@ -26,7 +26,7 @@ class Geo
                             ->first();
 
                 if ($result) {
-                    $address = array();
+                    $address = [];
                     $address['country'] = $country;
                     $address['region'] = $result->region;
                     $address['subregion'] = $result->subregion;
@@ -35,7 +35,7 @@ class Geo
                     // TODO?: Build locations table
 
                     return $address;
-                    }
+                }
 
                 return false;
 
@@ -63,7 +63,7 @@ class Geo
                 }
 
                 if ($result) {
-                    $address = array();
+                    $address = [];
                     $address['country'] = $country;
                     $address['region'] = $result->region;
                     $address['subregion'] = $result->subregion;
@@ -71,7 +71,7 @@ class Geo
                     $address['location'] = $result->location;
 
                     if ($suffix) {
-                        $address['address'] = implode(' ', array_filter(array($result->street_type, $result->street_type_suffix, $result->street_name_prefix_1, $result->street_name_prefix_2, $result->street_name)));
+                        $address['address'] = implode(' ', array_filter([$result->street_type, $result->street_type_suffix, $result->street_name_prefix_1, $result->street_name_prefix_2, $result->street_name]));
                     }
 
                     return $address;
@@ -101,7 +101,7 @@ class Geo
                 break;
         }
 
-        $subregions = array();
+        $subregions = [];
 
         foreach ($results as $result) {
             $subregions[$result->subregion] = $result->region;
@@ -127,17 +127,17 @@ class Geo
         $reader = new Reader(__DIR__.'/../../../support/GeoLite2-City.mmdb');
         $record = $reader->city($ip);
 
-        $toReturn = array();
+        $toReturn = [];
         foreach ((array)$params as $param) {
             switch ($param) {
                 case 'country':
                     $toReturn['country'] = $record->country->names['pt-BR'];
                     break;
                 case 'coordinates':
-                    $toReturn['coordinates'] = array(
+                    $toReturn['coordinates'] = [
                         'lat' => $record->location->latitude,
                         'lng' => $record->location->longitude,
-                    );
+                    ];
                     break;
                 case 'countryCode':
                     $toReturn['countryCode'] = $record->country->isoCode;

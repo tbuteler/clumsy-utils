@@ -1,7 +1,7 @@
 <?php
 namespace Clumsy\Utils\Library;
 
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Request;
 
@@ -27,12 +27,12 @@ class HTTP
         $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        $response = array(
+        $response = [
             'html'      => $html,
             'status'    => $http_status,
-        );
+        ];
 
-        \Illuminate\Support\Facades\Log::info("(GET) URL: $url -- Response: " . print_r($response, true));
+        Log::info("(GET) URL: $url -- Response: " . print_r($response, true));
 
         return $response;
     }
@@ -65,7 +65,7 @@ class HTTP
 
     public function queueGet($url)
     {
-        Queue::push('\Clumsy\Utils\Library\HTTP', array('url' => $url, 'method' => 'get'));
+        Queue::push('\Clumsy\Utils\Library\HTTP', ['url' => $url, 'method' => 'get']);
     }
 
     public function post($url, $data, $charset = 'UTF-8')
@@ -75,9 +75,9 @@ class HTTP
         }
 
         $data = implode('&', preg_replace('/%20/', '+', $data));
-        $headers = array(
+        $headers = [
             'Content-Type: application/x-www-form-urlencoded',
-        );
+        ];
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -92,12 +92,12 @@ class HTTP
         $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        $response = array(
-            'html'      => $html,
-            'status'    => $http_status,
-        );
+        $response = [
+            'html'   => $html,
+            'status' => $http_status,
+        ];
 
-        \Illuminate\Support\Facades\Log::info("(POST) URL: $url -- Response: " . print_r($response, true));
+        Log::info("(POST) URL: $url -- Response: " . print_r($response, true));
 
         return $response;
     }
@@ -111,13 +111,13 @@ class HTTP
         $job->delete();
     }
 
-    public function buildQuery($query, $allow = array())
+    public function buildQuery($query, $allow = [])
     {
-        $map = array(
+        $map = [
             '@' => '%40',
             '/' => '%2F',
             ':' => '%3A',
-        );
+        ];
 
         $replace = array_intersect_key($map, array_fill_keys($allow, ''));
 
@@ -160,7 +160,7 @@ class HTTP
 
     public function isCrawler()
     {
-        $crawlers = implode('|', array(
+        $crawlers = implode('|', [
             'facebookexternalhit',
             'XML Sitemaps Generator',
             'Bloglines subscriber',
@@ -208,7 +208,7 @@ class HTTP
             'Scrubby',
             'Baiduspider',
             'accoona',
-        ));
+        ]);
 
         return preg_match("/$crawlers/i", Request::header('user-agent'));
     }

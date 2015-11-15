@@ -1,4 +1,5 @@
 <?php
+
 namespace Clumsy\Utils\Validators;
 
 class MultiplesOf

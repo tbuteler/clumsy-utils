@@ -1,7 +1,7 @@
 <?php
 namespace Clumsy\Utils\Facades;
 
-class Geo extends \Illuminate\Support\Facades\Facade
+class HTTP extends \Illuminate\Support\Facades\Facade
 {
     /**
      * Get the registered name of the component.
@@ -10,6 +10,6 @@ class Geo extends \Illuminate\Support\Facades\Facade
      */
     protected static function getFacadeAccessor()
     {
-        return '\Clumsy\Utils\Library\Geo';
+        return 'Clumsy\Utils\Library\HTTP';
     }
 }

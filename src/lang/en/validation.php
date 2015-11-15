@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'multiples_of'   => 'The :attribute must be a multiple of :multiple.',
 
@@ -17,8 +17,8 @@ return array(
 	|
 	*/
 
-    'identities' => array(
+    'identities' => [
 
         'pt_nif' => 'NIF',
-    ),
-);
+    ],
+];

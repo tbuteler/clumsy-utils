@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     // strftime syntax
 
@@ -11,4 +11,4 @@ return array(
     'long'            => '%e %B %Y',
 
     'long with time'  => '%e %B %Y, %k:%M'
-);
+];

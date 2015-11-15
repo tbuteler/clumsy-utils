@@ -2,9 +2,8 @@
 namespace Clumsy\Utils\Library;
 
 use Clumsy\Assets\Facade as Asset;
-use Illuminate\Support\Facades\Form;
+use Collective\Html\FormFacade as Form;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
 
 class Field
 {
@@ -25,19 +24,19 @@ class Field
     public function __construct(
         $name = null,
         $label = '',
-        array $attributes = array()
+        array $attributes = []
     ) {
 
         $this->name = $name;
-        $this->label = $label ? $label : Str::title(str_replace('_', ' ', $name));
+        $this->label = $label ? $label : title_case(str_replace('_', ' ', $name));
         $this->attributes = $attributes;
 
         $this->feedback = true;
         $this->type = 'text';
 
-        foreach (array('label', 'field', 'input_group') as $group) {
+        foreach (['label', 'field', 'input_group'] as $group) {
             if (!isset($this->attributes[$group])) {
-                $this->attributes[$group] = array();
+                $this->attributes[$group] = [];
             }
         }
 
@@ -73,7 +72,7 @@ class Field
 
     protected function updateGroupAttributes($key, $value, $overwrite = false)
     {
-        $value = $overwrite ? $value : array_merge(array_get($this->attributes, $key, array()), $value);
+        $value = $overwrite ? $value : array_merge(array_get($this->attributes, $key, []), $value);
         return array_set($this->attributes, $key, $value);
     }
 
@@ -95,7 +94,7 @@ class Field
 
     protected function getDefaultClass()
     {
-        $replace = in_array($this->type, array('checkbox', 'radio')) ? '' : 'form-control';
+        $replace = in_array($this->type, ['checkbox', 'radio']) ? '' : 'form-control';
         $class = str_replace(':form-control', $replace, $this->defaultClass);
 
         return $this->classAttribute($class);
@@ -124,7 +123,7 @@ class Field
         return $this;
     }
 
-    public function input($name = null, $attributes = array(), $overwrite = false)
+    public function input($name = null, $attributes = [], $overwrite = false)
     {
         $this->name = $name;
         $this->updateGroupAttributes('field', $attributes, $overwrite);
@@ -132,7 +131,7 @@ class Field
         return $this;
     }
 
-    public function label($label = null, $attributes = array(), $overwrite = false)
+    public function label($label = null, $attributes = [], $overwrite = false)
     {
         $this->label = $label;
         $this->updateGroupAttributes('label', $attributes, $overwrite);
@@ -305,9 +304,16 @@ class Field
         return $this;
     }
 
-    public function options(array $options = array())
+    public function options(array $options = [])
     {
         $this->setAttribute('options', $options);
+
+        return $this;
+    }
+
+    public function tabindex($tabindex = 1)
+    {
+        $this->setAttribute('field.tabindex', $tabindex);
 
         return $this;
     }
@@ -372,15 +378,15 @@ class Field
             (array)$this->getAttribute('field.class')
         ));
 
-        $defaults = array(
+        $defaults = [
             'value'        => null,
             'before_label' => null,
             'before'       => null,
             'after'        => null,
             'id'           => null,
             'id_prefix'    => null,
-            'checked'      => false,
-        );
+            'checked'      => null,
+        ];
 
         $attributes = array_merge($defaults, $attributes);
         extract($attributes, EXTR_SKIP);
@@ -429,11 +435,11 @@ class Field
             }
         }
 
-        if (in_array($type, array('password', 'file'))) {
+        if (in_array($type, ['password', 'file'])) {
             $output .= Form::$type($name, $field_attributes);
-        } elseif (in_array($type, array('select'))) {
+        } elseif (in_array($type, ['select'])) {
             $output .= Form::$type($name, $options, $value, $field_attributes);
-        } elseif (in_array($type, array('checkbox', 'radio'))) {
+        } elseif (in_array($type, ['checkbox', 'radio'])) {
             if (!$value) {
                 $value = 1;
             }
