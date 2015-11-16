@@ -23,9 +23,9 @@ class UtilsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/config.php', 'clumsy/utils');
-        $this->mergeConfigFrom(__DIR__.'/config/assets.php', 'clumsy/utils/assets');
-        $this->mergeConfigFrom(__DIR__.'/config/locales.php', 'clumsy/utils/locales');
+        $this->mergeConfigFrom(__DIR__.'/config/config.php', 'clumsy.utils');
+        $this->mergeConfigFrom(__DIR__.'/config/assets.php', 'clumsy.assets.utils');
+        $this->mergeConfigFrom(__DIR__.'/config/environment-locale.php', 'clumsy.environment-locale');
 
         $this->app->register('Collective\Html\HtmlServiceProvider');
     }
@@ -39,26 +39,22 @@ class UtilsServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__.'/lang', 'clumsy/utils');
 
-        $assets = $this->app['config']->get('clumsy/utils/assets');
+        $assets = $this->app['config']->get('clumsy.assets.utils');
         Asset::batchRegister($assets);
 
-        require __DIR__.'/helpers.php';
-        require __DIR__.'/macros/string.php';
-        require __DIR__.'/macros/html.php';
-
         // Locale fallbacks
-        if (!$this->app['config']->get('clumsy/utils/locales.passive')) {
+        if (!$this->app['config']->get('clumsy.environment-locale.passive')) {
             $locale = App::getLocale();
-            $fallbacks = $this->app['config']->get('clumsy/utils/locales.fallbacks');
+            $fallbacks = $this->app['config']->get('clumsy.environment-locale.fallbacks');
             if (isset($fallbacks[$locale])) {
                 Lang::setFallback($fallbacks[$locale]);
             }
         }
 
         $this->publishes([
-            __DIR__.'/config/config.php'  => config_path('vendor/clumsy/utils/config.php'),
-            __DIR__.'/config/assets.php'  => config_path('vendor/clumsy/utils/assets.php'),
-            __DIR__.'/config/locales.php' => config_path('vendor/clumsy/utils/locales.php'),
+            __DIR__.'/config/config.php' => config_path('clumsy/utils.php'),
+            __DIR__.'/config/assets.php' => config_path('clumsy/assets/utils.php'),
+            __DIR__.'/config/environment-locale.php' => config_path('clumsy/environment-locale.php'),
         ], 'config');
 
         $this->publishes([
@@ -73,7 +69,7 @@ class UtilsServiceProvider extends ServiceProvider
         $this->app['validator']->extend(
             'multiples_of',
             'Clumsy\Utils\Validators\MultiplesOf@validate',
-            Lang::get('clumsy/utils::validation.multiples_of')
+            trans('clumsy/utils::validation.multiples_of')
         );
         $this->app['validator']->replacer('multiples_of', function ($message, $attribute, $rule, $parameters) {
 
@@ -83,25 +79,25 @@ class UtilsServiceProvider extends ServiceProvider
         $this->app['validator']->extend(
             'email_advanced',
             'Clumsy\Utils\Validators\EmailAdvanced@validate',
-            Lang::get('clumsy/utils::validation.email_advanced')
+            trans('clumsy/utils::validation.email_advanced')
         );
 
         $this->app['validator']->extend(
             'postal',
             'Clumsy\Utils\Validators\Postal@validate',
-            Lang::get('clumsy/utils::validation.postal')
+            trans('clumsy/utils::validation.postal')
         );
 
         $this->app['validator']->extend(
             'id',
             'Clumsy\Utils\Validators\Identities@validate',
-            Lang::get('clumsy/utils::validation.id')
+            trans('clumsy/utils::validation.id')
         );
         $this->app['validator']->replacer('id', function ($message, $attribute, $rule, $parameters) {
 
             $id = head($parameters);
 
-            return str_replace(':id', Lang::get("clumsy/utils::validation.identities.$id"), $message);
+            return str_replace(':id', trans("clumsy/utils::validation.identities.$id"), $message);
         });
     }
 

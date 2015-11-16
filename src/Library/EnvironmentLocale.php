@@ -23,7 +23,7 @@ class EnvironmentLocale
 
     public function preferred()
     {
-        if (!$this->preferred && !config('clumsy/utils/locales.passive')) {
+        if (!$this->preferred && !config('clumsy.utils.locales.passive')) {
             $original = setlocale(LC_MESSAGES, 0); // LC_MESSAGES is the most harmless of all categories
             $this->set(LC_MESSAGES);
             setlocale(LC_MESSAGES, $original);
@@ -49,7 +49,7 @@ class EnvironmentLocale
     public function getPossibleLocales($locale)
     {
         $bases = (array)$locale;
-        $sets = config('clumsy/utils/locales');
+        $sets = config('clumsy.utils.locales');
 
         foreach ((array)$sets['equivalences'] as $locale_code => $equivalence) {
             if ($locale_code === head($bases)) {

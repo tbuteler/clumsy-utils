@@ -208,3 +208,101 @@ if (!function_exists('embedVideo')) {
                     ->afterGroup($after);
     }
 }
+
+/*
+|--------------------------------------------------------------------------
+| String helpers
+|--------------------------------------------------------------------------
+|
+*/
+
+if (!function_exists('parseLinks')) {
+
+    function parseLinks($string)
+    {
+        // Links
+        $string = preg_replace("/([^\w\/])(www\.[a-z0-9\-]+\.[a-z0-9\-]+)/ui", "$1http://$2", $string);
+        $string = preg_replace("/([\w]+:\/\/[\w-_?&;#~%=\.\/\@]+[\w\/])/ui", "<a target=\"_blank\" href=\"$1\">$1</a>", $string);
+
+        // e-mail
+        $string = preg_replace("/([\w-_?&;#~%=\.\/]+\@(\[?)[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,3}|[0-9]{1,3})(\]?))/ui", "<a href=\"mailto:$1\">$1</a>", $string);
+
+        return $string;
+    }
+}
+
+if (!function_exists('parseTweet')) {
+
+    function parseTweet($string)
+    {
+        $string = parseLinks($string);
+
+        // Twitter users
+        $string = preg_replace("/@(\w+)/", "<a target=\"_blank\" href=\"https://twitter.com/$1\">@$1</a>", $string);
+
+        // Twitter hashtags
+        $string = preg_replace("/\s+#(\w+)/", "<a target=\"_blank\" href=\"https://twitter.com/hashtag/$1?src=hash\">#$1</a>", $string);
+
+        return $string;
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Grouped image
+|--------------------------------------------------------------------------
+|
+| Ouput an image which belongs to a group of images. The advantage of this
+| is having variables and events which know when all images of a certain
+| group have been loaded (i.e. when it's safe to load a slider script to
+| cycle through them all).
+|
+*/
+
+if (!function_exists('groupedImage')) {
+
+    function groupedImage($src, $group = null, $alt = null, array $attributes = [], $secure = null)
+    {
+        app('clumsy.assets')->enqueue('grouped-images-loader');
+
+        $attributes = array_merge(
+            [
+                'data-group' => $group,
+                'class'      => 'grouped-image',
+                'onload'     => 'groupedImageLoaded(this)',
+            ],
+            $attributes
+        );
+
+        return app('html')->image($src, $alt, $attributes, $secure);
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Lazy loading image
+|--------------------------------------------------------------------------
+|
+| Output an image tag which will load "lazily", complete with embedded
+| 1x1 pixels transparent GIF
+|
+| Note: actual loading must be done by a script -- this is HTML only
+|
+*/
+
+if (!function_exists('lazyLoad')) {
+
+    function lazyLoad($src, $alt = null, array $attributes = [])
+    {
+        $attributes = app('html')->attributes(array_merge(
+            array(
+                'data-src' => $src,
+                'alt'      => $alt,
+                'class'    => 'lazy-load',
+            ),
+            $attributes
+        ));
+
+        return '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"'.$attributes.'>';
+    }
+}
