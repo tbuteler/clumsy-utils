@@ -82,22 +82,25 @@ return [
     ],
 
     'tinymce' => [
-        'set'   => 'footer',
-        'path'  => 'vendor/clumsy/utils/js/tinymce/tinymce.jquery.min.js',
-        'v'     => '4.0.28',
-        'req'   => 'jquery',
+        'set'    => 'footer',
+        'path'   => 'vendor/clumsy/utils/js/tinymce/tinymce.jquery.min.js',
+        'v'      => '4.0.28',
+        'elixir' => false,
+        'req'    => 'jquery',
     ],
 
     'jquery-ui.css' => [
-        'set'   => 'styles',
-        'path'  => 'vendor/clumsy/utils/css/jquery-ui.css',
-        'v'     => '1.11.4',
+        'set'    => 'styles',
+        'path'   => 'vendor/clumsy/utils/css/jquery-ui.css',
+        'v'      => '1.11.4',
+        'elixir' => false,
     ],
 
     'datepicker' => [
         'set'   => 'footer',
         'path'  => 'vendor/clumsy/utils/js/datepicker/{{locale}}.min.js',
         'v'     => '1.11.4',
+        'elixir' => false,
         'req'   => [
             'jquery',
             'jquery-ui.css',
@@ -105,48 +108,54 @@ return [
     ],
 
     'timepicker.css' => [
-        'set'   => 'styles',
-        'path'  => 'vendor/clumsy/utils/css/timepicker.css',
-        'v'     => '1.5.5',
+        'set'    => 'styles',
+        'path'   => 'vendor/clumsy/utils/css/timepicker.css',
+        'v'      => '1.5.5',
+        'elixir' => false,
     ],
 
     'timepicker' => [
-        'set'   => 'footer',
-        'path'  => 'vendor/clumsy/utils/js/timepicker/{{locale}}.min.js',
-        'v'     => '1.5.5',
-        'req'   => [
+        'set'    => 'footer',
+        'path'   => 'vendor/clumsy/utils/js/timepicker/{{locale}}.min.js',
+        'v'      => '1.5.5',
+        'elixir' => false,
+        'req'    => [
             'datepicker',
             'timepicker.css',
         ],
     ],
 
     'chosen.css' => [
-        'set'   => 'styles',
-        'path'  => 'vendor/clumsy/utils/css/chosen.css',
-        'v'     => '1.2.0',
+        'set'    => 'styles',
+        'path'   => 'vendor/clumsy/utils/css/chosen.css',
+        'v'      => '1.2.0',
+        'elixir' => false,
     ],
 
     'chosen' => [
-        'set'   => 'footer',
-        'path'  => 'vendor/clumsy/utils/js/chosen.min.js',
-        'v'     => '1.2.0',
-        'req'   => [
+        'set'    => 'footer',
+        'path'   => 'vendor/clumsy/utils/js/chosen.min.js',
+        'v'      => '1.2.0',
+        'elixir' => false,
+        'req'    => [
             'jquery',
             'chosen.css',
         ],
     ],
 
     'colorpicker.css' => [
-        'set'   => 'styles',
-        'path'  => 'vendor/clumsy/utils/css/iris.css',
-        'v'     => '1.0.7',
+        'set'    => 'styles',
+        'path'   => 'vendor/clumsy/utils/css/iris.css',
+        'v'      => '1.0.7',
+        'elixir' => false,
     ],
 
     'colorpicker' => [
-        'set'   => 'footer',
-        'path'  => 'vendor/clumsy/utils/js/iris.min.js',
-        'v'     => '1.0.7',
-        'req'   => [
+        'set'    => 'footer',
+        'path'   => 'vendor/clumsy/utils/js/iris.min.js',
+        'v'      => '1.0.7',
+        'elixir' => false,
+        'req'    => [
             'jquery',
             'jquery-ui',
             'colorpicker.css',
@@ -154,20 +163,22 @@ return [
     ],
 
     'google-maps' => [
-        'set'   => 'footer',
-        'path'  => "http://maps.google.com/maps/api/js?key={$google_api}&sensor=true&libraries=places,geometry",
+        'set'  => 'footer',
+        'path' => "https://maps.google.com/maps/api/js?key={$google_api}&sensor=true&libraries=places,geometry",
     ],
 
     'embed-video' => [
-        'set'   => 'footer',
-        'path'  => 'vendor/clumsy/utils/js/embed-video.min.js',
-        'v'     => '0.1.0',
-        'req'   => 'jquery',
+        'set'    => 'footer',
+        'path'   => 'vendor/clumsy/utils/js/embed-video.min.js',
+        'v'      => '0.1.0',
+        'elixir' => false,
+        'req'    => 'jquery',
     ],
 
     'grouped-images-loader' => [
         'set'    => 'header',
         'path'   => 'vendor/clumsy/utils/js/grouped-images-loader.min.js',
+        'elixir' => false,
         'req'    => 'jquery',
         'inline' => true,
     ],
