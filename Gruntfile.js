@@ -114,14 +114,6 @@ module.exports = function(grunt) {
                     flatten: true
                 },
                 {
-                    expand: true,
-                    cwd: 'bower_components/tinymce/',
-                    src: '**',
-                    dest: 'public/js/tinymce/',
-                    flatten: false,
-                    filter: 'isFile',
-                },
-                {
                     src: 'bower_components/iris-color-picker/dist/iris.js',
                     dest: 'src/assets/js/iris.js'
                 },
@@ -262,7 +254,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    
+
     grunt.registerTask('default', function() {
         grunt.task.run([
             'jshint',
@@ -271,7 +263,7 @@ module.exports = function(grunt) {
             'shell:test'
         ]);
     });
-    
+
     grunt.registerTask('update', 'Task to run after updating components with Bower', function() {
         grunt.task.run([
             'concat:update',
