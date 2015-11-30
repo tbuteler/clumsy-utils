@@ -3,8 +3,8 @@ namespace Clumsy\Utils\Library;
 
 use GeoIp2\Database\Reader;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Str;
 
