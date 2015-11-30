@@ -4,6 +4,11 @@ $google_api = config('clumsy.utils.api-google-maps');
 
 return [
 
+    'google-maps' => [
+        'set'  => 'footer',
+        'path' => "https://maps.google.com/maps/api/js?key={$google_api}&sensor=true&libraries=places,geometry",
+    ],
+
     'jquery' => [
         'set'   => 'footer',
         'path'  => '//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js',
@@ -20,12 +25,12 @@ return [
 
     'bootstrap' => [
         'set'   => 'styles',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
     ],
 
     'bootstrap.js' => [
         'set'   => 'footer',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',
+        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',
         'req'   => 'jquery',
     ],
 
@@ -78,15 +83,14 @@ return [
 
     'font-awesome' => [
         'set'   => 'styles',
-        'path'  => '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',
+        'path'  => '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
     ],
 
     'tinymce' => [
-        'set'    => 'footer',
-        'path'   => 'vendor/clumsy/utils/js/tinymce/tinymce.jquery.min.js',
-        'v'      => '4.0.28',
-        'elixir' => false,
-        'req'    => 'jquery',
+        'set'  => 'footer',
+        'path' => '//cdn.tinymce.com/4/tinymce.min.js',
+        'v'    => '4.3.1',
+        'req'  => 'jquery',
     ],
 
     'jquery-ui.css' => [
@@ -160,11 +164,6 @@ return [
             'jquery-ui',
             'colorpicker.css',
         ],
-    ],
-
-    'google-maps' => [
-        'set'  => 'footer',
-        'path' => "https://maps.google.com/maps/api/js?key={$google_api}&sensor=true&libraries=places,geometry",
     ],
 
     'embed-video' => [

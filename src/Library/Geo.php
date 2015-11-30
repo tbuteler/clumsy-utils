@@ -131,7 +131,13 @@ class Geo
         foreach ((array)$params as $param) {
             switch ($param) {
                 case 'country':
-                    $toReturn['country'] = $record->country->names['pt-BR'];
+                    $locale = App::getLocale();
+                    if (isset($record->country->names[$locale])) {
+                        $country = $record->country->names[$locale];
+                    } else {
+                        $country = $record->country->names['en'];
+                    }
+                    $toReturn['country'] = $country;
                     break;
                 case 'coordinates':
                     $toReturn['coordinates'] = [
