@@ -28,7 +28,7 @@ class Field
     ) {
 
         $this->name = $name;
-        $this->label = $label ? $label : title_case(str_replace('_', ' ', $name));
+        $this->label = $label ? $label : $this->labelFromName();
         $this->attributes = $attributes;
 
         $this->feedback = true;
@@ -49,6 +49,11 @@ class Field
         if (!is_null($class)) {
             $this->setClass($class);
         }
+    }
+
+    protected function labelFromName()
+    {
+        return title_case(str_replace('_', ' ', $this->name));
     }
 
     protected function getAttribute($key, $default = null)
@@ -98,6 +103,18 @@ class Field
         $class = str_replace(':form-control', $replace, $this->defaultClass);
 
         return $this->classAttribute($class);
+    }
+
+    public function name($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function attribute($key, $value)
