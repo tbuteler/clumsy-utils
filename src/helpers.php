@@ -26,6 +26,22 @@ if (!function_exists('get_possible_locales')) {
     }
 }
 
+if (!function_exists('floatAsInt')) {
+
+    function floatAsInt($number, $scale = 100)
+    {
+        return round(bcmul($number, $scale));
+    }
+}
+
+if (!function_exists('inCents')) {
+
+    function inCents($number)
+    {
+        return floatAsInt($number, 100);
+    }
+}
+
 if (!function_exists('n')) {
 
     function n($number)
