@@ -220,7 +220,7 @@ module.exports = function(grunt) {
                 options: {
                     stdout: true
                 },
-                command: 'vendor/bin/phpunit'
+                command: 'phpunit'
             }
         },
         watch: {
