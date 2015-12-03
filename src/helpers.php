@@ -30,7 +30,7 @@ if (!function_exists('floatAsInt')) {
 
     function floatAsInt($number, $scale = 100)
     {
-        return round(bcmul($number, $scale));
+        return (int) round(bcmul($number, $scale, 2));
     }
 }
 
