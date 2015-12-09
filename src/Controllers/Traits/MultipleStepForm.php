@@ -43,6 +43,11 @@ trait MultipleStepForm
         return isset($steps[$step-1]) ? $steps[$step-1] : head($steps);
     }
 
+    protected function isLastStep($step)
+    {
+        return last($this->getRequiredSteps()) == $step;
+    }
+
     protected function getIgnoreFields()
     {
         $fields = property_exists($this, 'ignoreFields') ? (array)$this->ignoreFields : [];
@@ -91,7 +96,11 @@ trait MultipleStepForm
     {
         $stepSlug = $this->getStepSlug($step);
 
-        $beforeMethod = 'postValidateStep'.studly_case($stepSlug);
+        if (method_exists($this, 'beforeAllSteps')) {
+            $this->beforeAllSteps($step);
+        }
+
+        $beforeMethod = 'beforeStep'.studly_case($stepSlug);
         if (method_exists($this, $beforeMethod)) {
             $this->$beforeMethod();
         }
@@ -113,12 +122,7 @@ trait MultipleStepForm
 
     protected function setData($key, $value)
     {
-        $this->storeData(array_merge(
-            $this->getData(),
-            [
-                $key => $value
-            ]
-        ));
+        $this->storeData(array_merge($this->getData(), [$key => $value]));
     }
 
     protected function pushStep($step)
@@ -210,7 +214,7 @@ trait MultipleStepForm
             $data
         ));
 
-        if ($this->getStepSlug($step) === 'confirmar') {
+        if ($this->isLastStep($step)) {
 
             $data = array_except($this->getData(), $this->getIgnoreFields());
 
