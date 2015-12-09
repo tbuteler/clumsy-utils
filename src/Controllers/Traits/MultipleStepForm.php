@@ -219,10 +219,15 @@ trait MultipleStepForm
             $data = array_except($this->getData(), $this->getIgnoreFields());
 
             try {
+
                 $processed = $this->handleLastStep($data);
-            }
-            catch (\Exception $e) {
-                return back()->withErrors(['general' => 'An error occurred while attempting to process your booking. Please contact us.']);
+
+            } catch (\Exception $e) {
+                $error = $this->generalErrorMessage();
+                if (!is_null($error)) {
+                    return back()->withErrors(['general' => $this->generalErrorMessage()]);
+                }
+                return back();
             }
 
             Session::forget($this->sessionSlug);
@@ -235,7 +240,12 @@ trait MultipleStepForm
         return redirect($this->mainPath(['step' => $step]));
     }
 
-    protected function handleLastStep(array $data = [])
+    public function generalErrorMessage()
+    {
+        return property_exists($this, 'generalErrorMessage') ? $this->generalErrorMessage : null;
+    }
+
+    public function handleLastStep(array $data = [])
     {
     }
 
