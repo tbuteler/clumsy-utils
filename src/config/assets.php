@@ -147,6 +147,22 @@ return [
         ],
     ],
 
+    'select2.css' => [
+        'set'    => 'styles',
+        'path'   => 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css',
+        'elixir' => false,
+    ],
+
+    'select2' => [
+        'set'    => 'footer',
+        'path'   => 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js',
+        'elixir' => false,
+        'req'    => [
+            'jquery',
+            'select2.css',
+        ],
+    ],
+
     'colorpicker.css' => [
         'set'    => 'styles',
         'path'   => 'vendor/clumsy/utils/css/iris.css',

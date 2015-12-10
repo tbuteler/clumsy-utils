@@ -99,11 +99,11 @@ module.exports = function(grunt) {
                     dest: 'src/assets/less/timepicker.less'
                 },
                 {
-                    src: 'bower_components/chosen/chosen.jquery.js',
+                    src: 'bower_components/chosen/chosen.jquery.min.js',
                     dest: 'src/assets/js/chosen.js'
                 },
                 {
-                    src: 'bower_components/chosen/chosen.css',
+                    src: 'bower_components/chosen/chosen.min.css',
                     dest: 'src/assets/less/chosen.less'
                 },
                 {

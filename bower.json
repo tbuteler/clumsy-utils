@@ -12,7 +12,7 @@
   ],
   "dependencies": {
     "jquery-ui": "~1.11.0",
-    "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.2.0/chosen_v1.2.0.zip",
+    "chosen": "~1.4.0",
     "jqueryui-timepicker-addon": "~1.5.0",
     "iris-color-picker": "~1.0.7"
   }
