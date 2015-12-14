@@ -50,9 +50,4 @@ class FakerUtils extends Base
 
         return $text;
     }
-
-    public static function randomFromArray(array $array = [])
-    {
-        return array_get(array_keys($array), rand(0, (count($array)-1)));
-    }
 }
