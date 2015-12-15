@@ -160,6 +160,14 @@ if (!function_exists('textarea')) {
     }
 }
 
+if (!function_exists('hidden')) {
+
+    function hidden($name, $value = '', array $attributes = [])
+    {
+        return Collective\Html\FormFacade::hidden($name, $value, $attributes);
+    }
+}
+
 if (!function_exists('richText')) {
 
     function richText($name = null, $label = '', array $attributes = [])
