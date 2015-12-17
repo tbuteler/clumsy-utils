@@ -6,7 +6,7 @@ return [
 
     'google-maps' => [
         'set'  => 'footer',
-        'path' => "https://maps.google.com/maps/api/js?key={$google_api}&sensor=true&libraries=places,geometry",
+        'path' => "https://maps.google.com/maps/api/js?key={$google_api}&libraries=places,geometry",
     ],
 
     'jquery' => [
