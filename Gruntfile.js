@@ -163,8 +163,8 @@ module.exports = function(grunt) {
                 src: 'src/assets/less/chosen.less',
                 dest: 'src/assets/less/chosen.less',
                 replacements: [{
-                    from: "url('chosen-sprite",
-                    to: "url('../media/img/chosen/chosen-sprite"
+                    from: "url(chosen-sprite",
+                    to: "url(../media/img/chosen/chosen-sprite"
                 }]
             }
         },
