@@ -12,7 +12,6 @@
  */
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -39,15 +38,13 @@ class CreatePortugalPostalCodes extends Migration
         try {
 
             DB::unprepared($tables);
+            DB::unprepared(file_get_contents(__DIR__.'/address_lookup.sql'));
 
         } catch (\Exception $e) {
 
             $console = new ConsoleOutput();
             $console->writeln('<error>There was an error running the main tables query. Make sure your MySQL configuration accepts large (25MB+) packets. You can increase the limit by running `SET GLOBAL max_allowed_packet=524288000;`.</error>');
-            exit;
         }
-
-        DB::unprepared(file_get_contents(__DIR__.'/address_lookup.sql'));
 
         register_shutdown_function(function () {
             DB::table('migrations')->where('migration', preg_replace('/\.php$/', '', basename(__FILE__)))->delete();

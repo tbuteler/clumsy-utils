@@ -1,6 +1,7 @@
 <?php
 namespace Clumsy\Utils\Library;
 
+use Illuminate\Queue\Jobs\Job;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Request;
@@ -102,7 +103,7 @@ class HTTP
         return $response;
     }
 
-    public function fire($job, $data)
+    public function fire(Job $job, $data)
     {
         $method = $data['method'];
 
