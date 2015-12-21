@@ -1,4 +1,4 @@
-create algorithm=undefined sql security definer view `utils_geo_pt_address_lookup`
+create or replace algorithm=undefined sql security definer view `utils_geo_pt_address_lookup`
 as select
    `cp`.`CP4` as `code_prefix`,
    `cp`.`CP3` as `code_suffix`,

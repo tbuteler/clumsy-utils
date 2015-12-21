@@ -3,7 +3,6 @@ namespace Clumsy\Utils\Library;
 
 use Closure;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Request;
 
 class EnvironmentLocale
 {

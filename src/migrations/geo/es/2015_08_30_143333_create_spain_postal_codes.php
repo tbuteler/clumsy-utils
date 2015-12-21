@@ -11,7 +11,6 @@
  |
  */
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;

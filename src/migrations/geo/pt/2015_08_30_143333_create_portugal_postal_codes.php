@@ -11,7 +11,6 @@
  |
  */
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -50,7 +49,7 @@ class CreatePortugalPostalCodes extends Migration
 
         DB::unprepared(file_get_contents(__DIR__.'/address_lookup.sql'));
 
-        App::shutdown(function () {
+        register_shutdown_function(function () {
             DB::table('migrations')->where('migration', preg_replace('/\.php$/', '', basename(__FILE__)))->delete();
         });
     }

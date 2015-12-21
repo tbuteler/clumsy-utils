@@ -15,7 +15,7 @@ class Postal
 
         switch (head($parameters)) {
             case 'field':
-                $country = request()->($parameters[1]);
+                $country = request($parameters[1]);
 
                 break;
 
