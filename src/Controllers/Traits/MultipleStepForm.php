@@ -128,8 +128,14 @@ trait MultipleStepForm
     protected function pushStep($step)
     {
         $steps = $this->getData('steps');
+
         $steps[] = $step;
+        $steps = array_unique($steps);
+        sort($steps);
+
         $this->setData('steps', $steps);
+
+        return $steps;
     }
 
     protected function getRules()
@@ -161,8 +167,10 @@ trait MultipleStepForm
         return $data;
     }
 
-    public function show($step = null)
+    public function show()
     {
+        $step = request()->route()->getParameter('step');
+
         if (!is_array($this->getData('steps'))) {
             $this->storeData(['steps' => []]);
         }
@@ -191,8 +199,10 @@ trait MultipleStepForm
         return property_exists($this, 'view') ? view($this->view) : view($stepSlug);
     }
 
-    public function processStep($step)
+    public function processStep()
     {
+        $step = request()->route()->getParameter('step');
+
         $data = request()->only($this->getFields($step));
 
         $validator = Validator::make($data, $this->getStepRules($step));
@@ -203,16 +213,8 @@ trait MultipleStepForm
         }
 
         $data = $this->postValidateStep($step, $data);
-
-        $steps = $this->getData('steps');
-        $steps[] = $step;
-        $steps = array_unique($steps);
-        sort($steps);
-
-        $this->storeData(array_merge(
-            compact('steps'),
-            $data
-        ));
+        $this->storeData($data);
+        $this->pushStep($step);
 
         if ($this->isLastStep($step)) {
 
