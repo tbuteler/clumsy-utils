@@ -13,7 +13,8 @@
   "dependencies": {
     "jquery-ui": "~1.11.0",
     "chosen": "~1.4.0",
-    "jqueryui-timepicker-addon": "~1.5.0",
-    "iris-color-picker": "~1.0.7"
+    "jqueryui-timepicker-addon": "~1.6.0",
+    "iris-color-picker": "~1.0.7",
+    "vue": "~1.0.13"
   }
 }

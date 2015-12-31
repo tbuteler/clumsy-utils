@@ -121,6 +121,15 @@ module.exports = function(grunt) {
                     src: 'bower_components/iris-color-picker/src/iris.css',
                     dest: 'src/assets/less/iris.less'
                 },
+                {
+                    src: 'bower_components/vue/dist/vue.js',
+                    dest: 'src/assets/js/vue.js'
+                },
+                {
+                    // Add a non-minified version of Vue for local development
+                    src: 'bower_components/vue/dist/vue.js',
+                    dest: 'public/js/vue.js'
+                }
                 ]
             },
             i18n : {
