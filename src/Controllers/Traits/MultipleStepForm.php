@@ -182,16 +182,19 @@ trait MultipleStepForm
 
         if (!$this->checkStep($step)) {
             $step = (int)$this->lastCompletedStep()+1;
-            return redirect($this->mainPath(['step' => $step]));
+            return redirect($this->mainPath(compact('step')));
         }
 
         $this->prepareStep($step);
 
         $stepSlug = $this->getStepSlug($step);
 
+        $previousStep = $step-1;
+
         view()->share([
             'step'              => $step,
             'stepSlug'          => $stepSlug,
+            'previousStep'      => $previousStep === 0 ? false : $previousStep,
             'requiredSteps'     => $this->getRequiredSteps(),
             'lastCompletedStep' => $this->lastCompletedStep(),
         ]);
