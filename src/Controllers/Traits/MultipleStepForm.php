@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Validator;
 
 trait MultipleStepForm
 {
+    protected function sessionSlug()
+    {
+        return property_exists($this, 'sessionSlug') ? $this->sessionSlug : 'clumsy.utils.multiple-step-form';
+    }
+
     protected function getSteps()
     {
         return property_exists($this, 'steps') ? (array)$this->steps : [];
@@ -108,7 +113,7 @@ trait MultipleStepForm
 
     protected function storeData(array $data = [])
     {
-        Session::put($this->sessionSlug, array_merge($this->getData(), $data));
+        Session::put($this->sessionSlug(), array_merge($this->getData(), $data));
     }
 
     protected function getData($key = null, $default = null)
@@ -117,7 +122,7 @@ trait MultipleStepForm
             return array_get($this->getData(), $key, $default);
         }
 
-        return Session::get($this->sessionSlug, []);
+        return Session::get($this->sessionSlug(), []);
     }
 
     protected function setData($key, $value)
@@ -232,7 +237,7 @@ trait MultipleStepForm
                 return back();
             }
 
-            Session::forget($this->sessionSlug);
+            Session::forget($this->sessionSlug());
 
             return redirect($this->redirectAfter($data, $processed));
         }
