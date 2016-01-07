@@ -105,7 +105,7 @@ trait MultipleStepForm
             $this->beforeAllSteps($step);
         }
 
-        $beforeMethod = 'beforeStep'.studly_case($stepSlug);
+        $beforeMethod = 'before'.studly_case($stepSlug).'Step';
         if (method_exists($this, $beforeMethod)) {
             $this->$beforeMethod();
         }
