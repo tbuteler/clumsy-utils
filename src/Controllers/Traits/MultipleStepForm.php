@@ -164,7 +164,7 @@ trait MultipleStepForm
     {
         $stepSlug = $this->getStepSlug($step);
 
-        $postMethod = 'postValidateStep'.studly_case($stepSlug);
+        $postMethod = 'postValidate'.studly_case($stepSlug).'Step';
         if (method_exists($this, $postMethod)) {
             $data = $this->$postMethod($data);
         }
