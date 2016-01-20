@@ -363,6 +363,13 @@ class Field
         return $this;
     }
 
+    public function required($required = true)
+    {
+        $this->setBooleanAttribute('field.required', $required);
+
+        return $this;
+    }
+
     public function readonly($readonly = true)
     {
         $this->setBooleanAttribute('field.readonly', $readonly);
