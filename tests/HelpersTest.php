@@ -2,7 +2,6 @@
 
 class HelpersTest extends PHPUnit_Framework_TestCase
 {
-
     public function testArrayIsAssociative()
     {
         $not_array = 'value';

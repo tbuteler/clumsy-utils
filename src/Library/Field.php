@@ -464,7 +464,7 @@ class Field
         } elseif (in_array($type, ['select'])) {
             $output .= Form::$type($name, $options, $value, $field_attributes);
         } elseif (in_array($type, ['checkbox', 'radio'])) {
-            if (!$value) {
+            if (is_null($value) || $value === false) {
                 $value = 1;
             }
             $field = Form::$type($name, $value, $checked, $field_attributes);

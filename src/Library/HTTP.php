@@ -130,7 +130,7 @@ class HTTP
         $url = preg_replace('/(.*)(\?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
         $url = substr($url, 0, -1);
 
-        $value = $value ? "=".urlencode($value) : '';
+        $value = (is_null($value) || $value === false) ? '' : "=".urlencode($value);
 
         if (strpos($url, '?') === false) {
             return ($url . '?' . $key . $value);
