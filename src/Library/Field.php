@@ -51,6 +51,23 @@ class Field
         }
     }
 
+    /**
+     * Transform key from array to dot syntax.
+     *
+     * @param  string $key
+     *
+     * @return mixed
+     */
+    protected function transformKey($key)
+    {
+        return str_replace(['.', '[]', '[', ']'], ['_', '', '.', ''], $key);
+    }
+
+    protected function nameForValidation()
+    {
+        return $this->transformKey($this->name);
+    }
+
     protected function labelFromName()
     {
         return title_case(str_replace('_', ' ', $this->name));
@@ -428,13 +445,13 @@ class Field
         if ($feedback && $name && Session::has('errors')) {
             $errors = Session::get('errors');
 
-            if ($errors->has($name)) {
+            if ($errors->has($this->nameForValidation())) {
                 $groupClass[] = 'has-error';
                 $groupClass[] = 'has-feedback';
 
                 $after .= '<span class="glyphicon glyphicon-remove form-control-feedback"></span>';
                 if ($feedback !== 'silent') {
-                    $after .= '<p class="help-block">' . $errors->first($name) . '</p>';
+                    $after .= '<p class="help-block">'.$errors->first($this->nameForValidation()).'</p>';
                 }
             }
         }
