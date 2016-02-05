@@ -34,27 +34,23 @@ trait TriggersMessage
         return request()->method() === 'POST';
     }
 
-    public function getRecipients($method)
+    public function getRecipients($type)
     {
-        $dynamic_method = 'getRecipients'.studly_case($method);
-        if (method_exists($this, $dynamic_method)) {
-            return (array)$this->{$dynamic_method}();
+        if (app()->environment() !== 'production') {
+            return $type === 'to' ? (array)$this->getDevelopmentRecipient() : [];
         }
-        return (array)$this->{$method};
+
+        $dynamicMethod = 'getRecipients'.studly_case($type);
+        if (method_exists($this, $dynamicMethod)) {
+            return (array)$this->{$dynamicMethod}();
+        }
+
+        return property_exists($this, $type) ? (array)$this->{$type} : [];
     }
 
     public function getDevelopmentRecipient()
     {
         return property_exists($this, 'developmentRecipient') ? $this->developmentRecipient : null;
-    }
-
-    public function getRecipientsTo()
-    {
-        if (app()->environment() !== 'production') {
-            return $this->getDevelopmentRecipient();
-        }
-
-        return property_exists($this, 'to') ? $this->to : null;
     }
 
     public function getViewSlug()
