@@ -1,9 +1,11 @@
 <?php
+
 namespace Clumsy\Utils\Library;
 
+use InvalidArgumentException;
 use Clumsy\Assets\Facade as Asset;
 use Collective\Html\FormFacade as Form;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Contracts\Support\Arrayable;
 
 class Field
 {
@@ -338,8 +340,16 @@ class Field
         return $this;
     }
 
-    public function options(array $options = [])
+    public function options($options = [])
     {
+        if (!is_array($options)) {
+            if (!is_object($options) || !($options instanceof Arrayable)) {
+                throw new InvalidArgumentException('Field options must be an array or an arrayable object.');
+            }
+
+            $options = $options->toArray();
+        }
+
         $this->setAttribute('options', $options);
 
         return $this;
@@ -442,8 +452,8 @@ class Field
 
         $groupClass = array_merge($this->getDefaultGroupClass(), (array)$this->getAttribute('class'));
 
-        if ($feedback && $name && Session::has('errors')) {
-            $errors = Session::get('errors');
+        if ($feedback && $name && session()->has('errors')) {
+            $errors = session('errors');
 
             if ($errors->has($this->nameForValidation())) {
                 $groupClass[] = 'has-error';
