@@ -14,7 +14,7 @@ class Date
     public function format($date, $format)
     {
         if (Lang::has("clumsy/utils::dates.$format")) {
-            $format = Lang::get("clumsy/utils::dates.$format");
+            $format = trans("clumsy/utils::dates.$format");
         }
 
         if (!($date instanceof Carbon)) {

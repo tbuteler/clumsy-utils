@@ -21,7 +21,8 @@
     },
     "autoload": {
         "files": [
-            "src/helpers.php"
+            "src/helpers.php",
+            "src/deprecated.php"
         ],
         "psr-4": {
             "Clumsy\\Utils\\": "src/"

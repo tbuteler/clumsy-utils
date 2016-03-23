@@ -2,6 +2,7 @@
 
 namespace Clumsy\Utils\Library;
 
+use BadMethodCallException;
 use InvalidArgumentException;
 use Clumsy\Assets\Facade as Asset;
 use Collective\Html\FormFacade as Form;
@@ -12,8 +13,13 @@ class Field
     protected $name;
     protected $label;
     protected $type;
-    protected $attributes;
     protected $feedback;
+
+    protected $attributes = [
+        'label'      => [],
+        'field'      => [],
+        'inputGroup' => [],
+    ];
 
     protected $beforeGroup = null;
     protected $afterGroup = null;
@@ -21,35 +27,34 @@ class Field
     protected $defaultGroupClass = 'form-group :type';
     protected $defaultClass = ':form-control';
 
-    protected $showLabel = true;
+    protected $noLabel = false;
+    protected $hideLabel = false;
 
-    public function __construct(
-        $name = null,
-        $label = '',
-        array $attributes = []
-    ) {
+    public function __construct($name = null, $label = '', $options = '') {
 
         $this->name = $name;
-        $this->label = $label ? $label : $this->labelFromName();
-        $this->attributes = $attributes;
+        $this->label = $label ?: $this->labelFromName();
+
+        if (is_null($this->name)) {
+            $this->noLabel();
+        }
 
         $this->feedback = true;
         $this->type = 'text';
 
-        foreach (['label', 'field', 'input_group'] as $group) {
-            if (!isset($this->attributes[$group])) {
-                $this->attributes[$group] = [];
+        $options = is_array($options) ? $options : explode('|', $options);
+        foreach (array_filter($options) as $key => $option) {
+            if (!is_numeric($key)) {
+                $this->{$key}($option);
+                continue;
             }
-        }
+            elseif (str_contains($option, ':')) {
+                list($option, $value) = explode(':', $option);
+                $this->{$option}($value);
+                continue;
+            }
 
-        $groupClass = $this->getAttribute('class');
-        if (!is_null($groupClass)) {
-            $this->setGroupClass($groupClass);
-        }
-
-        $class = $this->getAttribute('field.class');
-        if (!is_null($class)) {
-            $this->setClass($class);
+            $this->{$option}();
         }
     }
 
@@ -124,6 +129,33 @@ class Field
         return $this->classAttribute($class);
     }
 
+    protected function showFeedback()
+    {
+        return $this->feedback;
+    }
+
+    protected function silentFeedback()
+    {
+        return $this->feedback === 'silent';
+    }
+
+    protected function hasErrors()
+    {
+        return session()->has('errors') && session('errors')->has($this->nameForValidation());
+    }
+
+    protected function errorMessage()
+    {
+        return session('errors')->first($this->nameForValidation());
+    }
+
+    public function view($view)
+    {
+        $this->setAttribute('view', $view);
+
+        return $this;
+    }
+
     public function name($name)
     {
         $this->name = $name;
@@ -139,6 +171,13 @@ class Field
     public function attribute($key, $value)
     {
         $this->setAttribute($key, $value);
+
+        return $this;
+    }
+
+    public function form($form = null)
+    {
+        $this->setAttribute('field.form', $form);
 
         return $this;
     }
@@ -178,7 +217,16 @@ class Field
     public function noLabel()
     {
         $this->setAttribute('label.class', 'sr-only');
-        $this->showLabel = false;
+        $this->noLabel = true;
+        $this->hideLabel = true;
+
+        return $this;
+    }
+
+    public function hideLabel()
+    {
+        $this->setAttribute('label.class', 'sr-only');
+        $this->hideLabel = true;
 
         return $this;
     }
@@ -190,13 +238,14 @@ class Field
         }
 
         $this->setAttribute('field.placeholder', $placeholder);
+        $this->data('placeholder', $placeholder);
 
         return $this;
     }
 
     public function onlyPlaceholder()
     {
-        $this->noLabel()->placeholder();
+        $this->hideLabel()->placeholder();
 
         return $this;
     }
@@ -215,9 +264,9 @@ class Field
         return $this;
     }
 
-    public function help($text)
+    public function help($text = null)
     {
-        $this->after("<small class=\"help-block\">{$text}</small>");
+        $this->after(view('clumsy/utils::help', compact('text')));
 
         return $this;
     }
@@ -225,6 +274,15 @@ class Field
     public function data($key, $value)
     {
         $this->setAttribute("field.data-{$key}", $value);
+
+        return $this;
+    }
+
+    public function dynamicData($method, $value)
+    {
+        $key = str_replace(['data_', '_'], ['', '-'], snake_case($method));
+
+        $this->data($key, $value);
 
         return $this;
     }
@@ -238,7 +296,7 @@ class Field
 
     public function beforeLabel($content = null)
     {
-        $this->setAttribute('before_label', $content);
+        $this->setAttribute('beforeLabel', $content);
 
         return $this;
     }
@@ -266,14 +324,14 @@ class Field
 
     public function prepend($content = null)
     {
-        $this->setAttribute('input_group.before', $content);
+        $this->setAttribute('inputGroup.before', $content);
 
         return $this;
     }
 
     public function append($content = null)
     {
-        $this->setAttribute('input_group.after', $content);
+        $this->setAttribute('inputGroup.after', $content);
 
         return $this;
     }
@@ -299,9 +357,16 @@ class Field
         return $this;
     }
 
-    public function idPrefix($id_prefix = null)
+    public function idPrefix($idPrefix = null)
     {
-        $this->setAttribute('id_prefix', $id_prefix);
+        $this->setAttribute('idPrefix', $idPrefix);
+
+        return $this;
+    }
+
+    public function title($title = null)
+    {
+        $this->setAttribute('field.title', $title);
 
         return $this;
     }
@@ -362,6 +427,84 @@ class Field
         return $this;
     }
 
+    public function accesskey($accesskey)
+    {
+        $this->setAttribute('field.accesskey', $accesskey);
+
+        return $this;
+    }
+
+    public function pattern($pattern)
+    {
+        $this->setAttribute('field.pattern', $pattern);
+
+        return $this;
+    }
+
+    public function autofocus($autofocus = true)
+    {
+        $this->setBooleanAttribute('field.autofocus', $autofocus);
+
+        return $this;
+    }
+
+    public function autocomplete($autocomplete)
+    {
+        if (is_bool($autocomplete)) {
+            $autocomplete = $autocomplete ? 'on' : 'off';
+        }
+
+        $this->setAttribute('field.autocomplete', $autocomplete);
+
+        return $this;
+    }
+
+    public function autocapitalize($autocapitalize)
+    {
+        if (is_bool($autocapitalize)) {
+            $autocapitalize = $autocapitalize ? 'on' : 'off';
+        }
+
+        $this->setAttribute('field.autocapitalize', $autocapitalize);
+
+        return $this;
+    }
+
+    public function autocorrect($autocorrect = true)
+    {
+        $this->setBooleanAttribute('field.autocorrect', $autocorrect);
+
+        return $this;
+    }
+
+    public function spellcheck($spellcheck = true)
+    {
+        $this->setBooleanAttribute('field.spellcheck', $spellcheck);
+
+        return $this;
+    }
+
+    public function style($style)
+    {
+        $this->setAttribute('field.style', $style);
+
+        return $this;
+    }
+
+    public function lang($lang)
+    {
+        $this->setAttribute('field.lang', $lang);
+
+        return $this;
+    }
+
+    public function dir($dir)
+    {
+        $this->setAttribute('field.dir', $dir);
+
+        return $this;
+    }
+
     public function cols($cols = 50)
     {
         $this->setAttribute('field.cols', $cols);
@@ -404,6 +547,13 @@ class Field
         return $this;
     }
 
+    public function novalidate($novalidate = true)
+    {
+        $this->setBooleanAttribute('field.novalidate', $novalidate);
+
+        return $this;
+    }
+
     public function multiple($multiple = true)
     {
         $this->setBooleanAttribute('field.multiple', $multiple);
@@ -411,120 +561,178 @@ class Field
         return $this;
     }
 
-    public function toHTML()
+    public function digits()
     {
-        $name = $this->name;
-        $label = $this->label;
+        $this->pattern('\d*');
+
+        return $this;
+    }
+
+    public function min($min = true)
+    {
+        $this->setAttribute('field.min', $min);
+
+        return $this;
+    }
+
+    public function max($max = true)
+    {
+        $this->setAttribute('field.max', $max);
+
+        return $this;
+    }
+
+    public function step($step = true)
+    {
+        $this->setAttribute('field.step', $step);
+
+        return $this;
+    }
+
+    public function size($size = true)
+    {
+        $this->setAttribute('field.size', $size);
+
+        return $this;
+    }
+
+    public function maxlength($maxlength = true)
+    {
+        $this->setAttribute('field.maxlength', $maxlength);
+
+        return $this;
+    }
+
+    public function render()
+    {
         $type = $this->type;
         $attributes = $this->attributes;
-        $feedback = $this->feedback;
 
-        $input_group = array_pull($attributes, 'input_group');
+        $inputGroup = array_pull($attributes, 'inputGroup');
 
-        $label_attributes = array_pull($attributes, 'label');
+        $labelAttributes = array_pull($attributes, 'label');
 
-        $field_attributes = array_pull($attributes, 'field');
-        $field_attributes['class'] = implode(' ', array_merge(
+        $fieldAttributes = array_pull($attributes, 'field');
+        $fieldAttributes['class'] = implode(' ', array_merge(
             $this->getDefaultClass(),
             (array)$this->getAttribute('field.class')
         ));
 
         $defaults = [
-            'value'        => null,
-            'before_label' => null,
-            'before'       => null,
-            'after'        => null,
-            'id'           => null,
-            'id_prefix'    => null,
-            'checked'      => null,
+            'view'        => 'clumsy/utils::field',
+            'value'       => null,
+            'beforeLabel' => null,
+            'before'      => null,
+            'after'       => null,
+            'id'          => null,
+            'idPrefix'    => null,
+            'checked'     => null,
         ];
 
         $attributes = array_merge($defaults, $attributes);
         extract($attributes, EXTR_SKIP);
 
         if (!$id) {
-            $id = $id_prefix.$name;
+            $id = $idPrefix.$this->name;
         }
 
-        if (!isset($field_attributes['id'])) {
-            $field_attributes['id'] = $id;
+        if (!isset($fieldAttributes['id'])) {
+            $fieldAttributes['id'] = $id;
+        }
+
+        // Disable autocorrect unless it has been already set
+        // Note: autocorrect is set to true by default on textareas as rich text fields
+        if (!$this->getAttribute('field.autocorrect')) {
+            $this->autocorrect(false);
         }
 
         $groupClass = array_merge($this->getDefaultGroupClass(), (array)$this->getAttribute('class'));
 
-        if ($feedback && $name && session()->has('errors')) {
-            $errors = session('errors');
+        $label = $this->noLabel ? '' : Form::label(array_get($labelAttributes, 'for', $id), $this->label, $labelAttributes);
 
-            if ($errors->has($this->nameForValidation())) {
-                $groupClass[] = 'has-error';
-                $groupClass[] = 'has-feedback';
+        if ($this->showFeedback() && $this->name && $this->hasErrors()) {
+            $groupClass[] = 'has-error';
+            $groupClass[] = 'has-feedback';
 
-                $after .= '<span class="glyphicon glyphicon-remove form-control-feedback"></span>';
-                if ($feedback !== 'silent') {
-                    $after .= '<p class="help-block">'.$errors->first($this->nameForValidation()).'</p>';
-                }
+            $after .= view('clumsy/utils::error-icon')->render();
+            if (!$this->silentFeedback()) {
+                $after .= view('clumsy/utils::error-message', ['message' => $this->errorMessage()]);
             }
         }
 
-        $groupClass = implode(' ', $groupClass);
+        $input = '';
 
-        $output = $this->beforeGroup;
-
-        $output .= "<div class=\"$groupClass\">";
-
-        $output .= $before_label;
-
-        $output .= Form::label((isset($label_attributes['for']) ? $label_attributes['for'] : $id), $label, $label_attributes);
-
-        $output .= $before;
-
-        if (sizeof($input_group)) {
-            $output .= '<div class="input-group">';
-            if (isset($input_group['before'])) {
-                $group_type = strpos($input_group['before'], 'button') ? 'btn' : 'addon';
-                $output .= '<div class="input-group-'.$group_type.'">'.$input_group['before'].'</div>';
+        if (count($inputGroup)) {
+            $input .= '<div class="input-group">';
+            if (isset($inputGroup['before'])) {
+                $groupType = strpos($inputGroup['before'], 'button') ? 'btn' : 'addon';
+                $input .= '<div class="input-group-'.$groupType.'">'.$inputGroup['before'].'</div>';
             }
         }
 
         if (in_array($type, ['password', 'file'])) {
-            $output .= Form::$type($name, $field_attributes);
+
+            $input .= Form::$type($this->name, $fieldAttributes);
+
         } elseif (in_array($type, ['select'])) {
-            $output .= Form::$type($name, $options, $value, $field_attributes);
+
+            $input .= Form::$type($this->name, isset($options) ? $options : [], $value, $fieldAttributes);
+
         } elseif (in_array($type, ['checkbox', 'radio'])) {
+
             if (is_null($value) || $value === false) {
                 $value = 1;
             }
-            $field = Form::$type($name, $value, $checked, $field_attributes);
-            if ($this->showLabel) {
-                $label_end = strpos($output, '>', strpos($output, '<label'))+1;
-                $output = substr_replace($output, $field, $label_end, 0);
+
+            $field = Form::$type($this->name, $value, $checked, $fieldAttributes);
+
+            if (!$this->hideLabel) {
+
+                $labelEnd = strpos($input, '>', strpos($input, '<label'))+1;
+                $input = substr_replace($input, $field, $labelEnd, 0);
+
             } else {
-                $output .= $field;
+
+                $input .= $field;
             }
+
         } else {
-            $output .= Form::$type($name, $value, $field_attributes);
+
+            $input .= Form::$type($this->name, $value, $fieldAttributes);
         }
 
-        if (sizeof($input_group)) {
-            if (isset($input_group['after'])) {
-                $group_type = strpos($input_group['after'], 'button') ? 'btn' : 'addon';
-                $output .= '<div class="input-group-'.$group_type.'">'.$input_group['after'].'</div>';
+        if (count($inputGroup)) {
+            if (isset($inputGroup['after'])) {
+                $groupType = strpos($inputGroup['after'], 'button') ? 'btn' : 'addon';
+                $input .= '<div class="input-group-'.$groupType.'">'.$inputGroup['after'].'</div>';
             }
 
-            $output .= '</div>';
+            $input .= '</div>';
         }
 
-        $output .= $after;
+        return view($view, [
+            'beforeGroup' => $this->beforeGroup,
+            'groupClass'  => implode(' ', $groupClass),
+            'beforeLabel' => $beforeLabel,
+            'label'       => $label,
+            'before'      => $before,
+            'input'       => $input,
+            'after'       => $after,
+            'afterGroup'  => $this->afterGroup,
+        ])->render();
+    }
 
-        $output .= '</div>';
+    public function __call($method, $parameters)
+    {
+        if (starts_with($method, 'data')) {
+            return $this->dynamicData($method, head($parameters));
+        }
 
-        $output .= $this->afterGroup;
-
-        return $output;
+        throw new BadMethodCallException("Call to undefined method Field::{$method}()");
     }
 
     public function __toString()
     {
-        return $this->toHTML();
+        return $this->render();
     }
 }

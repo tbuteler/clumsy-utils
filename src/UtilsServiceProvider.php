@@ -3,8 +3,7 @@
 namespace Clumsy\Utils;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Blade;
 use Clumsy\Assets\Facade as Asset;
 
 class UtilsServiceProvider extends ServiceProvider
@@ -28,6 +27,10 @@ class UtilsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config/environment-locale.php', 'clumsy.environment-locale');
 
         $this->app->register('Collective\Html\HtmlServiceProvider');
+
+        $this->app->bind('clumsy.field', function () {
+            return new Library\FieldFactory;
+        });
     }
 
     /**
@@ -44,13 +47,24 @@ class UtilsServiceProvider extends ServiceProvider
 
         // Locale fallbacks
         if (!$this->app['config']->get('clumsy.environment-locale.passive')) {
-            $locale = App::getLocale();
+            $locale = app()->getLocale();
             $fallbacks = $this->app['config']->get('clumsy.environment-locale.fallbacks');
             if (isset($fallbacks[$locale])) {
-                Lang::setFallback($fallbacks[$locale]);
+                $this->app['translator']->setFallback($fallbacks[$locale]);
             }
         }
 
+        $this->loadViewsFrom(__DIR__.'/views', 'clumsy/utils');
+
+        $this->registerPublishers();
+
+        $this->registerValidators();
+
+        $this->registerBladeDirectives();
+    }
+
+    protected function registerPublishers()
+    {
         $this->publishes([
             __DIR__.'/config/config.php' => config_path('clumsy/utils.php'),
             __DIR__.'/config/assets.php' => config_path('clumsy/assets/utils.php'),
@@ -58,10 +72,16 @@ class UtilsServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
+            __DIR__.'/lang' => resource_path('lang/vendor/clumsy/utils'),
+        ], 'translations');
+
+        $this->publishes([
+            __DIR__.'/views' => resource_path('views/vendor/clumsy/utils'),
+        ], 'views');
+
+        $this->publishes([
             __DIR__.'/../public' => public_path('vendor/clumsy/utils'),
         ], 'public');
-
-        $this->registerValidators();
     }
 
     protected function registerValidators()
@@ -99,6 +119,57 @@ class UtilsServiceProvider extends ServiceProvider
 
             return str_replace(':id', trans("clumsy/utils::validation.identities.$id"), $message);
         });
+    }
+
+    protected function registerBladeDirectives()
+    {
+        Blade::directive('form', function ($expression) {
+
+            if (!$expression) {
+                $expression = '()';
+            }
+
+            return "<?php echo Collective\Html\FormFacade::open{$expression}; ?>";
+        });
+
+        Blade::directive('formModel', function ($expression) {
+
+            return "<?php echo Collective\Html\FormFacade::model{$expression}; ?>";
+        });
+
+        Blade::directive('endform', function ($expression) {
+
+            if (!$expression) {
+                $expression = '()';
+            }
+
+            return "<?php echo Collective\Html\FormFacade::close{$expression}; ?>";
+        });
+
+        Blade::directive('field', function ($expression) {
+            return "<?php echo app('clumsy.field')->make{$expression}; ?>";
+        });
+
+        $directives = [
+            'checkbox',
+            'dropdown',
+            'password',
+            'textarea',
+            'richText',
+            'datepicker',
+            'datetimepicker',
+            'timepicker',
+            'colorpicker',
+            'embedVideo',
+            'hidden',
+        ];
+
+        foreach ($directives as $directive) {
+
+            Blade::directive($directive, function ($expression) use ($directive) {
+                return "<?php echo app('clumsy.field')->{$directive}{$expression}; ?>";
+            });
+        }
     }
 
     /**

@@ -27,6 +27,14 @@ return [
         'inline' => true,
     ],
 
+    'password-toggle' => [
+        'set'    => 'header',
+        'path'   => 'vendor/clumsy/utils/js/password-toggle.min.js',
+        'elixir' => false,
+        'req'    => 'jquery',
+        'inline' => true,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Google Maps
@@ -167,7 +175,7 @@ return [
         'set'   => 'footer',
         'path'  => [
             'default'    => 'vendor/clumsy/utils/js/vue.js',
-            'production' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.13/vue.min.js',
+            'production' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js',
         ],
     ],
 
@@ -247,7 +255,7 @@ return [
     'tinymce' => [
         'set'  => 'footer',
         'path' => '//cdn.tinymce.com/4/tinymce.min.js',
-        'v'    => '4.3.2',
+        'v'    => '4.3.8',
         'req'  => 'jquery',
     ],
 
