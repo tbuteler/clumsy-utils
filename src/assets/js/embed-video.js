@@ -55,25 +55,25 @@
             var elem = $(this);
 
             elem.data('oldVal', elem.val());
-            if (elem.val() != '') {
+            if (elem.val() !== '') {
                 var id = extractVideoID(elem.val());
-                if (id != null) {
+                if (id !== null) {
                     $el = $(this).parents('.embed-video-wrapper').find('.preview-box');
                     appendVideo($el,id);
                 }
-            };
+            }
 
             // Look for changes in the value
-            elem.bind("propertychange change click keyup input paste", function(event){
+            elem.on('propertychange change click keyup input paste', function(event){
 
                 // If value has changed...
-                if (elem.data('oldVal') != elem.val()) {
+                if (elem.data('oldVal') !== elem.val()) {
                     $el = $(this).parents('.embed-video-wrapper').find('.preview-box');
 
                     $(this).parents('.embed-video-wrapper').find('iframe').remove();
                     $el.find('.placeholders .glyphicon').show();
                     $el.find('.placeholders .error').hide();
-                    $(elem).removeClass('has-error');
+                    elem.removeClass('has-error');
 
                     // Updated stored value
                     elem.data('oldVal', elem.val());
@@ -83,10 +83,10 @@
                     if (Object.keys(id).length) {
                         appendVideo($el,id);
                     }
-                    else if (elem.val() != '') {
+                    else if (elem.val() !== '') {
                         $el.find('.placeholders .idle').hide();
                         $el.find('.placeholders .error').show();
-                        $(elem).addClass('has-error');
+                        elem.addClass('has-error');
                     }
                 }
             });

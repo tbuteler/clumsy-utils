@@ -15,7 +15,11 @@ module.exports = function(grunt) {
         },
         jshint: {
             files: [
-                'Gruntfile.js'
+                'Gruntfile.js',
+                'src/assets/js/*.js',
+                '!src/assets/js/chosen.js',
+                '!src/assets/js/iris.js',
+                '!src/assets/js/vue.js'
             ],
             options: {
                 loopfunc: true,

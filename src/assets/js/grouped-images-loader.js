@@ -15,5 +15,5 @@ function slideLoaded(img){
     } else {
         // TRACK PROGRESS
         percentLoaded = loaded/total * 100;
-    };
-};
+    }
+}

@@ -13,5 +13,10 @@
     "grunt-contrib-less": "*",
     "grunt-shell": "*",
     "grunt-contrib-watch": "*"
+  },
+  "eslintConfig": {
+    "globals": {
+        "$": false
+    }
   }
 }
