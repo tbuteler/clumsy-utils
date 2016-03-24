@@ -10,7 +10,7 @@
     function extractYoutubeID(url){
         var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/i;
         var match = url.match(regExp);
-        if (match && match[7].length == 11) {
+        if (match && match[7].length === 11) {
             return match[7];
         } else{
             return null;
@@ -58,13 +58,13 @@
             if (elem.val() !== '') {
                 var id = extractVideoID(elem.val());
                 if (id !== null) {
-                    $el = $(this).parents('.embed-video-wrapper').find('.preview-box');
+                    var $el = $(this).parents('.embed-video-wrapper').find('.preview-box');
                     appendVideo($el,id);
                 }
             }
 
             // Look for changes in the value
-            elem.on('propertychange change click keyup input paste', function(event){
+            elem.on('propertychange change click keyup input paste', function(){
 
                 // If value has changed...
                 if (elem.data('oldVal') !== elem.val()) {

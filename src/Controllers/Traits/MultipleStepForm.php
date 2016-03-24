@@ -2,7 +2,6 @@
 
 namespace Clumsy\Utils\Controllers\Traits;
 
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 trait MultipleStepForm
@@ -113,7 +112,7 @@ trait MultipleStepForm
 
     protected function storeData(array $data = [])
     {
-        Session::put($this->sessionSlug(), array_merge($this->getData(), $data));
+        session([$this->sessionSlug() => array_merge($this->getData(), $data)]);
     }
 
     protected function getData($key = null, $default = null)
@@ -122,7 +121,7 @@ trait MultipleStepForm
             return array_get($this->getData(), $key, $default);
         }
 
-        return Session::get($this->sessionSlug(), []);
+        return session($this->sessionSlug(), []);
     }
 
     protected function setData($key, $value)
@@ -240,7 +239,7 @@ trait MultipleStepForm
                 return back();
             }
 
-            Session::forget($this->sessionSlug());
+            session()->forget($this->sessionSlug());
 
             return redirect($this->redirectAfter($data, $processed));
         }

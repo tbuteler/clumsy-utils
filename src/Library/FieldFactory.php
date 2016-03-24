@@ -27,7 +27,7 @@ class FieldFactory
     {
         return $this->make($name, $label, $options)
                     ->type('password')
-                    ->enqueue('password-toggle')
+                    ->load('password-toggle')
                     ->addClass('password-toggle')
                     ->append('<label class="password-toggle-label"><input type="checkbox" tabindex="-1" />'.trans('clumsy/utils::fields.show-password').'</label>');
     }
@@ -43,14 +43,14 @@ class FieldFactory
     public function richText($name = null, $label = '', $options = '')
     {
         return $this->textarea($name, $label, $options)
-                    ->enqueue('tinymce')
+                    ->load('tinymce')
                     ->addClass('rich-text');
     }
 
     public function datepicker($name = null, $label = '', $options = '')
     {
         return $this->make($name, $label, $options)
-                    ->enqueue('datepicker')
+                    ->load('datepicker')
                     ->addClass('datepicker')
                     ->readonly();
     }
@@ -58,7 +58,7 @@ class FieldFactory
     public function datetimepicker($name = null, $label = '', $options = '')
     {
         return $this->make($name, $label, $options)
-                    ->enqueue('timepicker')
+                    ->load('timepicker')
                     ->addClass('datetimepicker')
                     ->readonly();
     }
@@ -66,7 +66,7 @@ class FieldFactory
     public function timepicker($name = null, $label = '', $options = '')
     {
         return $this->make($name, $label, $options)
-                    ->enqueue('timepicker')
+                    ->load('timepicker')
                     ->addClass('timepicker')
                     ->readonly();
     }
@@ -74,7 +74,7 @@ class FieldFactory
     public function colorpicker($name = null, $label = '', $options = '')
     {
         return $this->make($name, $label, $options)
-                    ->enqueue('colorpicker')
+                    ->load('colorpicker')
                     ->addClass('colorpicker');
     }
 
@@ -82,7 +82,7 @@ class FieldFactory
     {
         return $this->make($name, $label, $options)
                     ->view('clumsy/utils::embed-video')
-                    ->enqueue('embed-video')
+                    ->load('embed-video')
                     ->addClass('embed-video');
     }
 

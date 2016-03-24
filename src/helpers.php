@@ -1,7 +1,6 @@
 <?php
 
 if (!function_exists('ebr')) {
-
     function ebr($string)
     {
         $string = e(preg_replace('#<br\s*/?>#', "\n", $string));
@@ -11,7 +10,6 @@ if (!function_exists('ebr')) {
 }
 
 if (!function_exists('set_locale')) {
-
     function set_locale($category, $locale = false)
     {
         return Clumsy\Utils\Facades\EnvironmentLocale::set($category, $locale);
@@ -19,7 +17,6 @@ if (!function_exists('set_locale')) {
 }
 
 if (!function_exists('get_possible_locales')) {
-
     function get_possible_locales($locale)
     {
         return Clumsy\Utils\Facades\EnvironmentLocale::getPossibleLocales($locale);
@@ -27,7 +24,6 @@ if (!function_exists('get_possible_locales')) {
 }
 
 if (!function_exists('floatAsInt')) {
-
     function floatAsInt($number, $scale = 100)
     {
         return (int) round(bcmul($number, $scale, 2));
@@ -35,7 +31,6 @@ if (!function_exists('floatAsInt')) {
 }
 
 if (!function_exists('inCents')) {
-
     function inCents($number)
     {
         return floatAsInt($number, 100);
@@ -43,7 +38,6 @@ if (!function_exists('inCents')) {
 }
 
 if (!function_exists('n')) {
-
     function n($number)
     {
         if (class_exists('NumberFormatter')) {
@@ -57,7 +51,6 @@ if (!function_exists('n')) {
 }
 
 if (!function_exists('money')) {
-
     function money($number)
     {
         if (class_exists('NumberFormatter')) {
@@ -77,7 +70,6 @@ if (!function_exists('money')) {
 }
 
 if (!function_exists('pc')) {
-
     function pc($number)
     {
         if (class_exists('NumberFormatter')) {
@@ -91,7 +83,6 @@ if (!function_exists('pc')) {
 }
 
 if (!function_exists('display_date')) {
-
     function display_date($date, $format)
     {
         return Clumsy\Utils\Facades\Date::format($date, $format);
@@ -106,7 +97,6 @@ if (!function_exists('display_date')) {
 */
 
 if (!function_exists('array_is_associative')) {
-
     function array_is_associative($array)
     {
         return (bool)count(array_filter(array_keys((array)$array), 'is_string'));
@@ -114,7 +104,6 @@ if (!function_exists('array_is_associative')) {
 }
 
 if (!function_exists('array_is_nested')) {
-
     function array_is_nested($array)
     {
         return (bool)is_array($array) && is_array(current($array));
@@ -129,7 +118,6 @@ if (!function_exists('array_is_nested')) {
 */
 
 if (!function_exists('parseLinks')) {
-
     function parseLinks($string)
     {
         // Links
@@ -144,7 +132,6 @@ if (!function_exists('parseLinks')) {
 }
 
 if (!function_exists('parseTweet')) {
-
     function parseTweet($string)
     {
         $string = parseLinks($string);
@@ -172,7 +159,6 @@ if (!function_exists('parseTweet')) {
 */
 
 if (!function_exists('groupedImage')) {
-
     function groupedImage($src, $group = null, $alt = null, array $attributes = [], $secure = null)
     {
         app('clumsy.assets')->enqueue('grouped-images-loader');
@@ -203,7 +189,6 @@ if (!function_exists('groupedImage')) {
 */
 
 if (!function_exists('lazyLoad')) {
-
     function lazyLoad($src, $alt = null, array $attributes = [])
     {
         $attributes = app('html')->attributes(array_merge(

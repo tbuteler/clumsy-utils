@@ -2,7 +2,6 @@
 namespace Clumsy\Utils\Library;
 
 use GeoIp2\Database\Reader;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -11,7 +10,7 @@ class Geo
     public static function postalToAddress($postal = '', $country = false)
     {
         if (!$country) {
-            $country = App::getLocale();
+            $country = app()->getLocale();
         }
 
         switch ($country) {
@@ -129,7 +128,7 @@ class Geo
         foreach ((array)$params as $param) {
             switch ($param) {
                 case 'country':
-                    $locale = App::getLocale();
+                    $locale = app()->getLocale();
                     if (isset($record->country->names[$locale])) {
                         $country = $record->country->names[$locale];
                     } else {

@@ -2,9 +2,7 @@
 
 namespace Clumsy\Utils\Library;
 
-use BadMethodCallException;
 use InvalidArgumentException;
-use Clumsy\Assets\Facade as Asset;
 use Collective\Html\FormFacade as Form;
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -47,8 +45,7 @@ class Field
             if (!is_numeric($key)) {
                 $this->{$key}($option);
                 continue;
-            }
-            elseif (str_contains($option, ':')) {
+            } elseif (str_contains($option, ':')) {
                 list($option, $value) = explode(':', $option);
                 $this->{$option}($value);
                 continue;
@@ -88,15 +85,21 @@ class Field
     protected function setAttribute($key, $value)
     {
         array_set($this->attributes, $key, $value);
+
+        return $this;
     }
 
     protected function setBooleanAttribute($key, $value)
     {
         if ($value) {
             array_set($this->attributes, $key, 'true');
-        } else {
-            array_forget($this->attributes, $key);
+
+            return $this;
         }
+
+        array_forget($this->attributes, $key);
+
+        return $this;
     }
 
     protected function updateGroupAttributes($key, $value, $overwrite = false)
@@ -182,10 +185,10 @@ class Field
         return $this;
     }
 
-    public function enqueue()
+    public function load()
     {
         foreach (func_get_args() as $script) {
-            Asset::enqueue($script);
+            app('clumsy.assets')->load($script);
         }
 
         return $this;
@@ -364,13 +367,6 @@ class Field
         return $this;
     }
 
-    public function title($title = null)
-    {
-        $this->setAttribute('field.title', $title);
-
-        return $this;
-    }
-
     public function setGroupClass($class = null)
     {
         $this->defaultGroupClass = null;
@@ -427,20 +423,6 @@ class Field
         return $this;
     }
 
-    public function accesskey($accesskey)
-    {
-        $this->setAttribute('field.accesskey', $accesskey);
-
-        return $this;
-    }
-
-    public function pattern($pattern)
-    {
-        $this->setAttribute('field.pattern', $pattern);
-
-        return $this;
-    }
-
     public function autofocus($autofocus = true)
     {
         $this->setBooleanAttribute('field.autofocus', $autofocus);
@@ -480,27 +462,6 @@ class Field
     public function spellcheck($spellcheck = true)
     {
         $this->setBooleanAttribute('field.spellcheck', $spellcheck);
-
-        return $this;
-    }
-
-    public function style($style)
-    {
-        $this->setAttribute('field.style', $style);
-
-        return $this;
-    }
-
-    public function lang($lang)
-    {
-        $this->setAttribute('field.lang', $lang);
-
-        return $this;
-    }
-
-    public function dir($dir)
-    {
-        $this->setAttribute('field.dir', $dir);
 
         return $this;
     }
@@ -564,41 +525,6 @@ class Field
     public function digits()
     {
         $this->pattern('\d*');
-
-        return $this;
-    }
-
-    public function min($min = true)
-    {
-        $this->setAttribute('field.min', $min);
-
-        return $this;
-    }
-
-    public function max($max = true)
-    {
-        $this->setAttribute('field.max', $max);
-
-        return $this;
-    }
-
-    public function step($step = true)
-    {
-        $this->setAttribute('field.step', $step);
-
-        return $this;
-    }
-
-    public function size($size = true)
-    {
-        $this->setAttribute('field.size', $size);
-
-        return $this;
-    }
-
-    public function maxlength($maxlength = true)
-    {
-        $this->setAttribute('field.maxlength', $maxlength);
 
         return $this;
     }
@@ -688,8 +614,9 @@ class Field
 
             if (!$this->hideLabel) {
 
-                $labelEnd = strpos($input, '>', strpos($input, '<label'))+1;
-                $input = substr_replace($input, $field, $labelEnd, 0);
+                $labelEnd = strpos($label, '>', strpos($label, '<label'))+1;
+                $input = substr_replace("{$label}{$input}", $field, $labelEnd, 0);
+                $label = '';
 
             } else {
 
@@ -728,7 +655,7 @@ class Field
             return $this->dynamicData($method, head($parameters));
         }
 
-        throw new BadMethodCallException("Call to undefined method Field::{$method}()");
+        return $this->setAttribute("field.{$method}", head($parameters));
     }
 
     public function __toString()
