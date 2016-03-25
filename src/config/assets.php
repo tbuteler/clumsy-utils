@@ -99,6 +99,7 @@ return [
         'elixir' => false,
         'req'   => [
             'jquery',
+            'jquery-ui',
             'jquery-ui.css',
         ],
     ],

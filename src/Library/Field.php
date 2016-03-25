@@ -28,7 +28,7 @@ class Field
     protected $noLabel = false;
     protected $hideLabel = false;
 
-    public function __construct($name = null, $label = '', $options = '') {
+    public function __construct($name = null, $label = '', array $options = []) {
 
         $this->name = $name;
         $this->label = $label ?: $this->labelFromName();
@@ -40,18 +40,13 @@ class Field
         $this->feedback = true;
         $this->type = 'text';
 
-        $options = is_array($options) ? $options : explode('|', $options);
-        foreach (array_filter($options) as $key => $option) {
-            if (!is_numeric($key)) {
-                $this->{$key}($option);
-                continue;
-            } elseif (str_contains($option, ':')) {
-                list($option, $value) = explode(':', $option);
-                $this->{$option}($value);
+        foreach ($options as $option => $value) {
+            if (is_numeric($option)) {
+                $this->{$value}();
                 continue;
             }
 
-            $this->{$option}();
+            $this->{$option}($value);
         }
     }
 
@@ -444,7 +439,7 @@ class Field
     public function autocapitalize($autocapitalize)
     {
         if (is_bool($autocapitalize)) {
-            $autocapitalize = $autocapitalize ? 'on' : 'off';
+            $autocapitalize = $autocapitalize ? 'words' : 'off';
         }
 
         $this->setAttribute('field.autocapitalize', $autocapitalize);
@@ -454,7 +449,11 @@ class Field
 
     public function autocorrect($autocorrect = true)
     {
-        $this->setBooleanAttribute('field.autocorrect', $autocorrect);
+        if (is_bool($autocorrect)) {
+            $autocorrect = $autocorrect ? 'on' : 'off';
+        }
+
+        $this->setAttribute('field.autocorrect', $autocorrect);
 
         return $this;
     }
@@ -564,12 +563,6 @@ class Field
 
         if (!isset($fieldAttributes['id'])) {
             $fieldAttributes['id'] = $id;
-        }
-
-        // Disable autocorrect unless it has been already set
-        // Note: autocorrect is set to true by default on textareas as rich text fields
-        if (!$this->getAttribute('field.autocorrect')) {
-            $this->autocorrect(false);
         }
 
         $groupClass = array_merge($this->getDefaultGroupClass(), (array)$this->getAttribute('class'));

@@ -23,6 +23,7 @@ class UtilsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'clumsy.utils');
+        $this->mergeConfigFrom(__DIR__.'/config/field.php', 'clumsy.field');
         $this->mergeConfigFrom(__DIR__.'/config/assets.php', 'clumsy.assets.utils');
         $this->mergeConfigFrom(__DIR__.'/config/environment-locale.php', 'clumsy.environment-locale');
 
@@ -67,6 +68,7 @@ class UtilsServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/config/config.php' => config_path('clumsy/utils.php'),
+            __DIR__.'/config/field.php' => config_path('clumsy/field.php'),
             __DIR__.'/config/assets.php' => config_path('clumsy/assets/utils.php'),
             __DIR__.'/config/environment-locale.php' => config_path('clumsy/environment-locale.php'),
         ], 'config');
@@ -86,6 +88,10 @@ class UtilsServiceProvider extends ServiceProvider
 
     protected function registerValidators()
     {
+        if (!$this->app['config']->get('clumsy.utils.enable-validators')) {
+            return;
+        }
+
         $this->app['validator']->extend(
             'multiples_of',
             'Clumsy\Utils\Validators\MultiplesOf@validate',
@@ -123,6 +129,10 @@ class UtilsServiceProvider extends ServiceProvider
 
     protected function registerBladeDirectives()
     {
+        if (!$this->app['config']->get('clumsy.utils.enable-blade-directives')) {
+            return;
+        }
+
         Blade::directive('form', function ($expression) {
 
             if (!$expression) {
@@ -179,6 +189,8 @@ class UtilsServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return [
+            'clumsy.field',
+        ];
     }
 }
