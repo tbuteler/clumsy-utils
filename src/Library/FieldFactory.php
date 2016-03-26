@@ -67,20 +67,17 @@ class FieldFactory
 
     public function checkbox($name = null, $label = '', $options = '')
     {
-        return $this->make($name, $label, $options)
-                    ->type('checkbox');
+        return $this->make($name, $label, $this->mergeOptions('type:checkbox', $options));
     }
 
     public function dropdown($name = null, $label = '', $options = '')
     {
-        return $this->make($name, $label, $options)
-                    ->type('select');
+        return $this->make($name, $label, $this->mergeOptions('type:select', $options));
     }
 
     public function password($name = null, $label = '', $options = '')
     {
-        return $this->make($name, $label, $options)
-                    ->type('password')
+        return $this->make($name, $label, $this->mergeOptions('type:password', $options))
                     ->load('password-toggle')
                     ->addClass('password-toggle')
                     ->append('<label class="password-toggle-label"><input type="checkbox" tabindex="-1" />'.trans('clumsy/utils::fields.show-password').'</label>');
