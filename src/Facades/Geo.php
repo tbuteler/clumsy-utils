@@ -1,4 +1,5 @@
 <?php
+
 namespace Clumsy\Utils\Facades;
 
 class Geo extends \Illuminate\Support\Facades\Facade

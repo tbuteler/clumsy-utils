@@ -1,117 +1,11 @@
 <?php
+
 namespace Clumsy\Utils\Library;
 
-use Illuminate\Queue\Jobs\Job;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Request;
 
 class HTTP
 {
-    public function async($url)
-    {
-        $cmd = "curl -X GET '" . $url . "'";
-        $cmd .= " > /dev/null 2>&1 &";
-        exec($cmd, $output, $exit);
-        return $exit == 0;
-    }
-
-    public function get($url, $charset = 'UTF-8')
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_ENCODING, $charset);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'cURL');
-        $html = curl_exec($ch);
-        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        $response = [
-            'html'      => $html,
-            'status'    => $http_status,
-        ];
-
-        Log::info("(GET) URL: $url -- Response: " . print_r($response, true));
-
-        return $response;
-    }
-
-    public function getJSON($url, $charset = 'UTF-8')
-    {
-        $response = $this->get($url, $charset);
-
-        $response['json'] = json_decode($response['html']);
-
-        $response['raw'] = $response['html'];
-        unset($response['html']);
-
-        return $response;
-    }
-
-    public function getXML($url, $charset = 'UTF-8')
-    {
-        $response = $this->get($url, $charset);
-
-        $xml = simplexml_load_string($response['html']);
-        $xml = json_decode(json_encode($xml), true);
-        $response['xml'] = $xml;
-
-        $response['raw'] = $response['html'];
-        unset($response['html']);
-
-        return $response;
-    }
-
-    public function queueGet($url)
-    {
-        Queue::push('\Clumsy\Utils\Library\HTTP', ['url' => $url, 'method' => 'get']);
-    }
-
-    public function post($url, $data, $charset = 'UTF-8')
-    {
-        foreach ($data as $key => $value) {
-            $data[$key] = rawurlencode($key) . '=' . rawurlencode($value);
-        }
-
-        $data = implode('&', preg_replace('/%20/', '+', $data));
-        $headers = [
-            'Content-Type: application/x-www-form-urlencoded',
-        ];
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-        curl_setopt($ch, CURLOPT_ENCODING, $charset);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'cURL');
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        $html = curl_exec($ch);
-        $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        $response = [
-            'html'   => $html,
-            'status' => $http_status,
-        ];
-
-        Log::info("(POST) URL: $url -- Response: " . print_r($response, true));
-
-        return $response;
-    }
-
-    public function fire(Job $job, $data)
-    {
-        $method = $data['method'];
-
-        $this->$method($data['url']);
-
-        $job->delete();
-    }
-
     public function buildQuery($query, $allow = [])
     {
         $map = [
@@ -125,18 +19,22 @@ class HTTP
         return str_replace(array_values($replace), array_keys($replace), http_build_query($query));
     }
 
-    public function queryStringAdd($url, $key, $value = '')
+    public function queryStringAdd($url, $keys, $value = null)
     {
-        $url = preg_replace('/(.*)(\?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
+        if (is_array($keys)) {
+            foreach ($keys as $key => $value) {
+                $url = $this->queryStringAdd($url, $key, $value);
+            }
+
+            return $url;
+        }
+
+        $url = preg_replace('/(.*)(\?|&)'.$keys.'=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
         $url = substr($url, 0, -1);
 
         $value = (is_null($value) || $value === false) ? '' : "=".urlencode($value);
 
-        if (strpos($url, '?') === false) {
-            return ($url . '?' . $key . $value);
-        } else {
-            return ($url . '&' . $key . $value);
-        }
+        return $url.(strpos($url, '?') === false ? '?' : '&').$keys.$value;
     }
 
     public function queryStringRemove($url, $keys)
@@ -150,67 +48,15 @@ class HTTP
             unset($qsParts[$key]);
             $newQs = rtrim(http_build_query($qsParts), '=');
 
-            if ($newQs) {
-                $url = $base.'?'.$newQs;
-            } else {
-                $url = $base;
-            }
+            $url = $base.($newQs ? '?'.$newQs : '');
         }
         return $url;
     }
 
     public function isCrawler()
     {
-        $crawlers = implode('|', [
-            'facebookexternalhit',
-            'XML Sitemaps Generator',
-            'Bloglines subscriber',
-            'Dumbot',
-            'Sosoimagespider',
-            'QihooBot',
-            'FAST-WebCrawler',
-            'Superdownloads Spiderman',
-            'LinkWalker',
-            'msnbot',
-            'ASPSeek',
-            'WebAlta Crawler',
-            'Lycos',
-            'FeedFetcher-Google',
-            'Yahoo',
-            'YoudaoBot',
-            'AdsBot-Google',
-            'Googlebot',
-            'Scooter',
-            'Gigabot',
-            'Charlotte',
-            'eStyle',
-            'AcioRobot',
-            'GeonaBot',
-            'msnbot-media',
-            'Baidu',
-            'CocoCrawler',
-            'Google',
-            'Charlotte t',
-            'Yahoo! Slurp China',
-            'Sogou web spider',
-            'YodaoBot',
-            'MSRBOT',
-            'AbachoBOT',
-            'Sogou head spider',
-            'AltaVista',
-            'IDBot',
-            'Sosospider',
-            'Yahoo! Slurp',
-            'Java VM',
-            'DotBot',
-            'LiteFinder',
-            'Yeti',
-            'Rambler',
-            'Scrubby',
-            'Baiduspider',
-            'accoona',
-        ]);
+        $crawlers = file(__DIR__.'/../support/crawlers.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-        return preg_match("/$crawlers/i", Request::header('user-agent'));
+        return in_array(request()->header('user-agent'), $crawlers);
     }
 }

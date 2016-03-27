@@ -1,4 +1,5 @@
 <?php
+
 namespace Clumsy\Utils\Facades;
 
 class HTTP extends \Illuminate\Support\Facades\Facade
@@ -10,6 +11,6 @@ class HTTP extends \Illuminate\Support\Facades\Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'Clumsy\Utils\Library\HTTP';
+        return 'clumsy.http';
     }
 }

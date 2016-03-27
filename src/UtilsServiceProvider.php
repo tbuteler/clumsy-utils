@@ -29,6 +29,10 @@ class UtilsServiceProvider extends ServiceProvider
 
         $this->app->register('Collective\Html\HtmlServiceProvider');
 
+        $this->app->bind('clumsy.http', function () {
+            return new Library\HTTP;
+        });
+
         $this->app->bind('clumsy.field', function () {
             return new Library\FieldFactory;
         });
@@ -190,6 +194,7 @@ class UtilsServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
+            'clumsy.http',
             'clumsy.field',
         ];
     }

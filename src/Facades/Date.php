@@ -1,4 +1,5 @@
 <?php
+
 namespace Clumsy\Utils\Facades;
 
 class Date extends \Illuminate\Support\Facades\Facade
