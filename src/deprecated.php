@@ -54,7 +54,7 @@ if (!function_exists('richText')) {
 
     function richText($name = null, $label = '', $options = '')
     {
-        return textarea($name, $label, $options)->enqueue('tinymce')->addClass('rich-text');
+        return textarea($name, $label, $options)->load('tinymce')->addClass('rich-text');
     }
 }
 
@@ -63,7 +63,7 @@ if (!function_exists('datepicker')) {
     function datepicker($name = null, $label = '', $options = '')
     {
         return app('clumsy.field')->make($name, $label, $options)
-                    ->enqueue('datepicker')
+                    ->load('datepicker')
                     ->addClass('datepicker')
                     ->readonly();
     }
@@ -74,7 +74,7 @@ if (!function_exists('datetimepicker')) {
     function datetimepicker($name = null, $label = '', $options = '')
     {
         return app('clumsy.field')->make($name, $label, $options)
-                    ->enqueue('timepicker')
+                    ->load('timepicker')
                     ->addClass('datetimepicker')
                     ->readonly();
     }
@@ -85,7 +85,7 @@ if (!function_exists('timepicker')) {
     function timepicker($name = null, $label = '', $options = '')
     {
         return app('clumsy.field')->make($name, $label, $options)
-                    ->enqueue('timepicker')
+                    ->load('timepicker')
                     ->addClass('timepicker')
                     ->readonly();
     }
@@ -95,7 +95,7 @@ if (!function_exists('colorpicker')) {
 
     function colorpicker($name = null, $label = '', $options = '')
     {
-        return app('clumsy.field')->make($name, $label, $options)->enqueue('colorpicker')->addClass('colorpicker');
+        return app('clumsy.field')->make($name, $label, $options)->load('colorpicker')->addClass('colorpicker');
     }
 }
 
@@ -108,7 +108,7 @@ if (!function_exists('embedVideo')) {
                     <div class="error glyphicon glyphicon-exclamation-sign"></div></div></div></div>';
 
         return app('clumsy.field')->make($name, $label, $options)
-                    ->enqueue('embed-video')
+                    ->load('embed-video')
                     ->addClass('embed-video')
                     ->beforeGroup($before)
                     ->afterGroup($after);
