@@ -9,9 +9,24 @@ class HTTP
     public function buildQuery($query, $allow = [])
     {
         $map = [
-            '@' => '%40',
-            '/' => '%2F',
-            ':' => '%3A',
+            '!'  => '%21',
+            '#'  => '%23',
+            '$'  => '%24',
+            '&'  => '%26',
+            '\'' => '%27',
+            '('  => '%28',
+            ')'  => '%29',
+            '*'  => '%2A',
+            '+'  => '%2B',
+            ','  => '%2C',
+            '/'  => '%2F',
+            ':'  => '%3A',
+            ';'  => '%3B',
+            '='  => '%3D',
+            '?'  => '%3F',
+            '@'  => '%40',
+            '['  => '%5B',
+            ']'  => '%5D',
         ];
 
         $replace = array_intersect_key($map, array_fill_keys($allow, ''));
@@ -53,10 +68,14 @@ class HTTP
         return $url;
     }
 
-    public function isCrawler()
+    public function isCrawler($agent = null)
     {
+        if (is_null($agent)) {
+            $agent = request()->header('user-agent');
+        }
+
         $crawlers = file(__DIR__.'/../support/crawlers.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-        return in_array(request()->header('user-agent'), $crawlers);
+        return in_array($agent, $crawlers);
     }
 }
