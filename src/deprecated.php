@@ -44,9 +44,9 @@ if (!function_exists('textarea')) {
 
 if (!function_exists('hidden')) {
 
-    function hidden($name, $value = '', $options = '')
+    function hidden($name, $value = null, $attributes = [])
     {
-        return Collective\Html\FormFacade::hidden($name, $value, $options);
+        return Collective\Html\FormFacade::hidden($name, $value, $attributes);
     }
 }
 

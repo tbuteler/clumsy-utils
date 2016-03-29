@@ -134,7 +134,7 @@ class FieldFactory
                     ->addClass('embed-video');
     }
 
-    public function hidden($name, $value = '', $attributes = [])
+    public function hidden($name, $value = null, $attributes = [])
     {
         return Form::hidden($name, $value, $attributes);
     }
