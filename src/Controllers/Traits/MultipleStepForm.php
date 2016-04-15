@@ -171,9 +171,14 @@ trait MultipleStepForm
         return $data;
     }
 
+    public function getCurrentStep()
+    {
+        return request()->route()->getParameter('step');
+    }
+
     public function show()
     {
-        $step = request()->route()->getParameter('step');
+        $step = $this->getCurrentStep();
 
         if (!is_array($this->getData('steps'))) {
             $this->storeData(['steps' => []]);
@@ -208,7 +213,7 @@ trait MultipleStepForm
 
     public function processStep()
     {
-        $step = request()->route()->getParameter('step');
+        $step = $this->getCurrentStep();
 
         $data = request()->only($this->getFields($step));
 
