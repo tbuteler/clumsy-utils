@@ -129,6 +129,11 @@ trait MultipleStepForm
         $this->storeData(array_merge($this->getData(), [$key => $value]));
     }
 
+    protected function clearData()
+    {
+        session()->forget($this->sessionSlug());
+    }
+
     protected function pushStep($step)
     {
         $steps = $this->getData('steps');
@@ -244,7 +249,7 @@ trait MultipleStepForm
                 return back();
             }
 
-            session()->forget($this->sessionSlug());
+            $this->clearData();
 
             return redirect($this->redirectAfter($data, $processed));
         }

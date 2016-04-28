@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Str;
-
 return [
 
     'passive' => true,
@@ -11,17 +9,9 @@ return [
     ],
 
     'transformations' => [
-        function ($locale) {
-            return str_replace('_', '-', $locale);
-        },
-        function ($locale) {
-            return str_replace('-', '_', $locale);
-        },
-        function ($locale) {
-            if (!str_contains($locale, ['_', '-'])) {
-                return Str::lower($locale).'_'.Str::upper($locale);
-            }
-        },
+        'Clumsy\Utils\Library\EnvironmentLocale@replaceUnderscoreTransformation',
+        'Clumsy\Utils\Library\EnvironmentLocale@replaceDashTransformation',
+        'Clumsy\Utils\Library\EnvironmentLocale@duplicateLocaleTransformation',
     ],
 
     'append' => [

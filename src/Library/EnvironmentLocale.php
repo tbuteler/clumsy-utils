@@ -3,6 +3,7 @@ namespace Clumsy\Utils\Library;
 
 use Closure;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Str;
 
 class EnvironmentLocale
 {
@@ -73,8 +74,31 @@ class EnvironmentLocale
         return array_unique(array_filter($locales));
     }
 
-    public function transform(Closure $callback, $locale)
+    public function transform($callback, $locale)
     {
+        if (!($callback instanceof Closure) && str_contains($callback, '@')) {
+            $callback = explode('@', $callback, 2);
+        }
+
         return call_user_func_array($callback, (array)$locale);
+    }
+
+    public static function replaceUnderscoreTransformation($locale)
+    {
+        return str_replace('_', '-', $locale);
+    }
+
+    public static function replaceDashTransformation($locale)
+    {
+        return str_replace('-', '_', $locale);
+    }
+
+    public function duplicateLocaleTransformation($locale)
+    {
+        if (!str_contains($locale, ['_', '-'])) {
+            return Str::lower($locale).'_'.Str::upper($locale);
+        }
+
+        return $locale;
     }
 }
