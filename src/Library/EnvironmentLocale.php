@@ -32,11 +32,11 @@ class EnvironmentLocale
         return $this->preferred ? $this->preferred : $this->app->getLocale();
     }
 
-    public function set($category, $locales = false)
+    public function set($category, $locale = false)
     {
-        if (!$locales) {
-            $locales = $this->getPossibleLocales($this->app->getLocale());
-        }
+        $locale = $locale ?: $this->app->getLocale();
+
+        $locales = $this->getPossibleLocales($locale);
 
         foreach ((array)$locales as $locale) {
             if (setlocale($category, $locale) !== false) {
