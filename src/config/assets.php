@@ -99,7 +99,6 @@ return [
         'elixir' => false,
         'req'   => [
             'jquery',
-            'jquery-ui',
             'jquery-ui.css',
         ],
     ],
@@ -128,14 +127,14 @@ return [
     'timepicker.css' => [
         'set'    => 'styles',
         'path'   => 'vendor/clumsy/utils/css/timepicker.css',
-        'v'      => '1.6.1',
+        'v'      => '1.6.3',
         'elixir' => false,
     ],
 
     'timepicker' => [
         'set'    => 'footer',
         'path'   => 'vendor/clumsy/utils/js/timepicker/{{locale}}.min.js',
-        'v'      => '1.6.1',
+        'v'      => '1.6.3',
         'elixir' => false,
         'req'    => [
             'datepicker',
@@ -176,7 +175,7 @@ return [
         'set'   => 'footer',
         'path'  => [
             'default'    => 'vendor/clumsy/utils/js/vue.js',
-            'production' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js',
+            'production' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js',
         ],
     ],
 
@@ -256,7 +255,7 @@ return [
     'tinymce' => [
         'set'  => 'footer',
         'path' => '//cdn.tinymce.com/4/tinymce.min.js',
-        'v'    => '4.3.8',
+        'v'    => '4.3.12',
         'req'  => 'jquery',
     ],
 
@@ -272,14 +271,14 @@ return [
     'chosen.css' => [
         'set'    => 'styles',
         'path'   => 'vendor/clumsy/utils/css/chosen.css',
-        'v'      => '1.4.2',
+        'v'      => '1.5.1',
         'elixir' => false,
     ],
 
     'chosen' => [
         'set'    => 'footer',
         'path'   => 'vendor/clumsy/utils/js/chosen.min.js',
-        'v'      => '1.4.2',
+        'v'      => '1.5.1',
         'elixir' => false,
         'req'    => [
             'jquery',
