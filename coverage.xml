@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1465294161">
-  <project timestamp="1465294161">
+<coverage generated="1465494853">
+  <project timestamp="1465494853">
     <file name="/Users/tomasbuteler/.composer/vendor/hamcrest/hamcrest-php/hamcrest/Hamcrest.php">
       <line num="25" type="stmt" count="0"/>
       <line num="26" type="stmt" count="0"/>

@@ -53,8 +53,8 @@ module.exports = function(grunt) {
                 },
                 {
                     src : [
-                        'bower_components/jqueryui-timepicker-addon/src/jquery-ui-timepicker-addon.js',
-                        'bower_components/jqueryui-timepicker-addon/src/jquery-ui-sliderAccess.js',
+                        'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.js',
+                        'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-sliderAccess.js',
                     ],
                     dest : 'src/assets/js/timepicker/en.js'
                 }

@@ -62,6 +62,16 @@ class Field
         return str_replace(['.', '[]', '[', ']'], ['_', '', '.', ''], $key);
     }
 
+    /**
+     * Generate safe id attribute using the input's name.
+     *
+     * @return mixed
+     */
+    protected function generateIdFromName()
+    {
+        return str_replace(['[]', '[', ']'], ['', '-', ''], $this->name);
+    }
+
     protected function nameForValidation()
     {
         return $this->transformKey($this->name);
@@ -558,7 +568,7 @@ class Field
         extract($attributes, EXTR_SKIP);
 
         if (!$id) {
-            $id = $idPrefix.$this->name;
+            $id = $idPrefix.$this->generateIdFromName();
         }
 
         if (!isset($fieldAttributes['id'])) {
