@@ -10,3 +10,4 @@ pipelines:
           - phpunit --version
           - composer self-update
           - composer install --prefer-source --no-interaction --dev
+          - phpunit
