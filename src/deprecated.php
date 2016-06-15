@@ -2,10 +2,18 @@
 
 /*
 |--------------------------------------------------------------------------
+| Deprecated helpers
+|--------------------------------------------------------------------------
+|
+| These functions have been deprecated and will be removed in a future release.
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
 | Legacy Form field helpers
 |--------------------------------------------------------------------------
 |
-| These have been deprecated and will be removed in a future release.
 | Use blade directives or the factory instead.
 |
 */
@@ -112,5 +120,21 @@ if (!function_exists('embedVideo')) {
                     ->addClass('embed-video')
                     ->beforeGroup($before)
                     ->afterGroup($after);
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Array helpers
+|--------------------------------------------------------------------------
+|
+| Use Laravel's Arr::isAssoc() directly instead
+|
+*/
+
+if (!function_exists('array_is_associative')) {
+    function array_is_associative($array)
+    {
+        return Illuminate\Support\Arr::isAssoc($array);
     }
 }

@@ -2,18 +2,6 @@
 
 class HelpersTest extends PHPUnit_Framework_TestCase
 {
-    public function testArrayIsAssociative()
-    {
-        $not_array = 'value';
-        $not_associative = ['value'];
-        $associative = ['key' => 'value'];
-        $multi_associative = ['key' => ['key' => 'value']];
-        $this->assertFalse(array_is_associative($not_array));
-        $this->assertFalse(array_is_associative($not_associative));
-        $this->assertTrue(array_is_associative($associative));
-        $this->assertTrue(array_is_associative($multi_associative));
-    }
-
     public function testArrayIsNested()
     {
         $not_array = 'value';

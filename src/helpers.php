@@ -96,13 +96,6 @@ if (!function_exists('display_date')) {
 |
 */
 
-if (!function_exists('array_is_associative')) {
-    function array_is_associative($array)
-    {
-        return (bool)count(array_filter(array_keys((array)$array), 'is_string'));
-    }
-}
-
 if (!function_exists('array_is_nested')) {
     function array_is_nested($array)
     {
