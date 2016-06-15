@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "ext-bcmath": "*",
         "lib-curl": "*",
         "laravel/framework": ">=5.1",
         "laravelcollective/html": ">=5.1",
