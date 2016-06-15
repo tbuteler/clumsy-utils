@@ -6,8 +6,9 @@ pipelines:
   default:
     - step:
         script: # Modify the commands below to build your repository.
+          - docker-php-ext-install bcmath
           - composer --version
           - phpunit --version
           - composer self-update
-          - composer install --prefer-source --no-interaction --dev
+          - composer install --prefer-source --no-interaction
           - phpunit
