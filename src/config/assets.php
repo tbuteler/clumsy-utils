@@ -175,7 +175,7 @@ return [
         'set'   => 'footer',
         'path'  => [
             'default'    => 'vendor/clumsy/utils/js/vue.js',
-            'production' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js',
+            'production' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.min.js',
         ],
     ],
 
