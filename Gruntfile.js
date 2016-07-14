@@ -19,7 +19,8 @@ module.exports = function(grunt) {
                 'src/assets/js/*.js',
                 '!src/assets/js/chosen.js',
                 '!src/assets/js/iris.js',
-                '!src/assets/js/vue.js'
+                '!src/assets/js/vue.js',
+                '!src/assets/js/sweetalert.js'
             ],
             options: {
                 loopfunc: true,
@@ -133,6 +134,14 @@ module.exports = function(grunt) {
                     // Add a non-minified version of Vue for local development
                     src: 'bower_components/vue/dist/vue.js',
                     dest: 'public/js/vue.js'
+                },
+                {
+                    src: 'node_modules/sweetalert/dist/sweetalert.css',
+                    dest: 'public/css/sweetalert.css'
+                },
+                {
+                    src: 'node_modules/sweetalert/dist/sweetalert-dev.js',
+                    dest: 'src/assets/js/sweetalert.js'
                 }
                 ]
             },

@@ -175,7 +175,7 @@ return [
         'set'   => 'footer',
         'path'  => [
             'default'    => 'vendor/clumsy/utils/js/vue.js',
-            'production' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.min.js',
+            'production' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js',
         ],
     ],
 
@@ -283,6 +283,32 @@ return [
         'req'    => [
             'jquery',
             'chosen.css',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sweet Alert
+    |--------------------------------------------------------------------------
+    |
+    | http://t4t5.github.io/sweetalert/
+    |
+    */
+
+    'sweetalert.css' => [
+        'set'    => 'styles',
+        'path'   => 'vendor/clumsy/utils/css/sweetalert.css',
+        'v'      => '1.1.3',
+        'elixir' => false,
+    ],
+
+    'sweetalert' => [
+        'set'    => 'footer',
+        'path'   => 'vendor/clumsy/utils/js/sweetalert.min.js',
+        'v'      => '1.1.3',
+        'elixir' => false,
+        'req'    => [
+            'sweetalert.css',
         ],
     ],
 

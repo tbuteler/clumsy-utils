@@ -12,11 +12,12 @@
     "grunt-contrib-clean": "*",
     "grunt-contrib-less": "*",
     "grunt-shell": "*",
-    "grunt-contrib-watch": "*"
+    "grunt-contrib-watch": "*",
+    "sweetalert": "^1.1.3"
   },
   "eslintConfig": {
     "globals": {
-        "$": false
+      "$": false
     }
   }
 }
