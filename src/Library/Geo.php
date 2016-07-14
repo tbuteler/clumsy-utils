@@ -121,7 +121,11 @@ class Geo
             $ip = request()->ip();
         }
 
-        $reader = new Reader(__DIR__.'/../../../support/GeoLite2-City.mmdb');
+        if ($ip == '127.0.0.1') {
+            return "";
+        }
+
+        $reader = new Reader(__DIR__.'/../support/GeoLite2-City.mmdb');
         $record = $reader->city($ip);
 
         $toReturn = [];
