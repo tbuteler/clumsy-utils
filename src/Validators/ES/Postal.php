@@ -19,7 +19,7 @@ class Postal
         $postals = DB::table('utils_geo_es_cities')
                      ->select(DB::raw('substr(postal,1,3) as prefix'))
                      ->distinct()
-                     ->lists('prefix');
+                     ->pluck('prefix');
 
         if (!in_array(substr((string)$value, 0, 3), $postals)) {
             return false;

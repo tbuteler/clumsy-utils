@@ -138,30 +138,19 @@ class UtilsServiceProvider extends ServiceProvider
         }
 
         Blade::directive('form', function ($expression) {
-
-            if (!$expression) {
-                $expression = '()';
-            }
-
-            return "<?php echo Collective\Html\FormFacade::open{$expression}; ?>";
+            return "<?php echo Collective\Html\FormFacade::open({$expression}); ?>";
         });
 
         Blade::directive('formModel', function ($expression) {
-
-            return "<?php echo Collective\Html\FormFacade::model{$expression}; ?>";
+            return "<?php echo Collective\Html\FormFacade::model({$expression}); ?>";
         });
 
         Blade::directive('endform', function ($expression) {
-
-            if (!$expression) {
-                $expression = '()';
-            }
-
-            return "<?php echo Collective\Html\FormFacade::close{$expression}; ?>";
+            return "<?php echo Collective\Html\FormFacade::close({$expression}); ?>";
         });
 
         Blade::directive('field', function ($expression) {
-            return "<?php echo app('clumsy.field')->make{$expression}; ?>";
+            return "<?php echo app('clumsy.field')->make({$expression}); ?>";
         });
 
         $directives = [
@@ -181,7 +170,7 @@ class UtilsServiceProvider extends ServiceProvider
         foreach ($directives as $directive) {
 
             Blade::directive($directive, function ($expression) use ($directive) {
-                return "<?php echo app('clumsy.field')->{$directive}{$expression}; ?>";
+                return "<?php echo app('clumsy.field')->{$directive}({$expression}); ?>";
             });
         }
     }
