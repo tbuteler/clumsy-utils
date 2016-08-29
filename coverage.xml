@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1468419358">
-  <project timestamp="1468419358">
+<coverage generated="1472222041">
+  <project timestamp="1472222041">
     <package name="Clumsy\Utils\Controllers\Traits">
       <file name="/Users/tomasbuteler/Sites/workbench/packages/clumsy/utils/src/Controllers/Traits/MultipleStepForm.php">
         <class name="MultipleStepForm" namespace="Clumsy\Utils\Controllers\Traits">
@@ -949,7 +949,7 @@
       </file>
       <file name="/Users/tomasbuteler/Sites/workbench/packages/clumsy/utils/src/Library/Geo.php">
         <class name="Geo" namespace="Clumsy\Utils\Library">
-          <metrics complexity="22" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="105" coveredstatements="0" elements="108" coveredelements="0"/>
+          <metrics complexity="23" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="108" coveredstatements="0" elements="111" coveredelements="0"/>
         </class>
         <line num="10" type="method" name="postalToAddress" visibility="public" complexity="10" crap="110" count="0"/>
         <line num="11" type="stmt" count="0"/>
@@ -1027,17 +1027,16 @@
         <line num="105" type="stmt" count="0"/>
         <line num="107" type="stmt" count="0"/>
         <line num="108" type="stmt" count="0"/>
-        <line num="118" type="method" name="getInfoByIP" visibility="public" complexity="8" crap="72" count="0"/>
+        <line num="118" type="method" name="getInfoByIP" visibility="public" complexity="9" crap="90" count="0"/>
         <line num="119" type="stmt" count="0"/>
         <line num="120" type="stmt" count="0"/>
         <line num="121" type="stmt" count="0"/>
         <line num="122" type="stmt" count="0"/>
         <line num="124" type="stmt" count="0"/>
         <line num="125" type="stmt" count="0"/>
-        <line num="127" type="stmt" count="0"/>
+        <line num="126" type="stmt" count="0"/>
         <line num="128" type="stmt" count="0"/>
         <line num="129" type="stmt" count="0"/>
-        <line num="130" type="stmt" count="0"/>
         <line num="131" type="stmt" count="0"/>
         <line num="132" type="stmt" count="0"/>
         <line num="133" type="stmt" count="0"/>
@@ -1057,9 +1056,13 @@
         <line num="147" type="stmt" count="0"/>
         <line num="148" type="stmt" count="0"/>
         <line num="149" type="stmt" count="0"/>
+        <line num="150" type="stmt" count="0"/>
         <line num="151" type="stmt" count="0"/>
         <line num="152" type="stmt" count="0"/>
-        <metrics loc="153" ncloc="141" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="105" coveredstatements="0" elements="108" coveredelements="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <line num="155" type="stmt" count="0"/>
+        <line num="156" type="stmt" count="0"/>
+        <metrics loc="157" ncloc="145" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="108" coveredstatements="0" elements="111" coveredelements="0"/>
       </file>
       <file name="/Users/tomasbuteler/Sites/workbench/packages/clumsy/utils/src/Library/HTTP.php">
         <class name="HTTP" namespace="Clumsy\Utils\Library">
@@ -1236,7 +1239,7 @@
     <package name="Clumsy\Utils">
       <file name="/Users/tomasbuteler/Sites/workbench/packages/clumsy/utils/src/UtilsServiceProvider.php">
         <class name="UtilsServiceProvider" namespace="Clumsy\Utils">
-          <metrics complexity="14" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="114" coveredstatements="0" elements="121" coveredelements="0"/>
+          <metrics complexity="12" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="108" coveredstatements="0" elements="115" coveredelements="0"/>
         </class>
         <line num="23" type="method" name="register" visibility="public" complexity="1" crap="2" count="0"/>
         <line num="24" type="stmt" count="0"/>
@@ -1316,52 +1319,46 @@
         <line num="130" type="stmt" count="0"/>
         <line num="131" type="stmt" count="0"/>
         <line num="132" type="stmt" count="0"/>
-        <line num="134" type="method" name="registerBladeDirectives" visibility="protected" complexity="5" crap="30" count="0"/>
+        <line num="134" type="method" name="registerBladeDirectives" visibility="protected" complexity="3" crap="12" count="0"/>
         <line num="135" type="stmt" count="0"/>
         <line num="136" type="stmt" count="0"/>
         <line num="137" type="stmt" count="0"/>
         <line num="138" type="stmt" count="0"/>
+        <line num="141" type="stmt" count="0"/>
         <line num="142" type="stmt" count="0"/>
-        <line num="143" type="stmt" count="0"/>
-        <line num="144" type="stmt" count="0"/>
+        <line num="145" type="stmt" count="0"/>
         <line num="146" type="stmt" count="0"/>
-        <line num="147" type="stmt" count="0"/>
-        <line num="151" type="stmt" count="0"/>
-        <line num="152" type="stmt" count="0"/>
+        <line num="149" type="stmt" count="0"/>
+        <line num="150" type="stmt" count="0"/>
+        <line num="153" type="stmt" count="0"/>
+        <line num="154" type="stmt" count="0"/>
         <line num="156" type="stmt" count="0"/>
         <line num="157" type="stmt" count="0"/>
         <line num="158" type="stmt" count="0"/>
+        <line num="159" type="stmt" count="0"/>
         <line num="160" type="stmt" count="0"/>
         <line num="161" type="stmt" count="0"/>
+        <line num="162" type="stmt" count="0"/>
+        <line num="163" type="stmt" count="0"/>
         <line num="164" type="stmt" count="0"/>
         <line num="165" type="stmt" count="0"/>
+        <line num="166" type="stmt" count="0"/>
         <line num="167" type="stmt" count="0"/>
         <line num="168" type="stmt" count="0"/>
-        <line num="169" type="stmt" count="0"/>
         <line num="170" type="stmt" count="0"/>
-        <line num="171" type="stmt" count="0"/>
-        <line num="172" type="stmt" count="0"/>
+        <line num="172" type="method" name="anonymous function" complexity="1" crap="2" count="0"/>
         <line num="173" type="stmt" count="0"/>
         <line num="174" type="stmt" count="0"/>
         <line num="175" type="stmt" count="0"/>
         <line num="176" type="stmt" count="0"/>
-        <line num="177" type="stmt" count="0"/>
-        <line num="178" type="stmt" count="0"/>
-        <line num="179" type="stmt" count="0"/>
-        <line num="181" type="stmt" count="0"/>
-        <line num="183" type="method" name="anonymous function" complexity="1" crap="2" count="0"/>
+        <line num="183" type="method" name="provides" visibility="public" complexity="1" crap="2" count="0"/>
         <line num="184" type="stmt" count="0"/>
         <line num="185" type="stmt" count="0"/>
         <line num="186" type="stmt" count="0"/>
         <line num="187" type="stmt" count="0"/>
-        <line num="194" type="method" name="provides" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="195" type="stmt" count="0"/>
-        <line num="196" type="stmt" count="0"/>
-        <line num="197" type="stmt" count="0"/>
-        <line num="198" type="stmt" count="0"/>
-        <line num="199" type="stmt" count="0"/>
-        <line num="200" type="stmt" count="0"/>
-        <metrics loc="201" ncloc="179" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="116" coveredstatements="0" elements="123" coveredelements="0"/>
+        <line num="188" type="stmt" count="0"/>
+        <line num="189" type="stmt" count="0"/>
+        <metrics loc="190" ncloc="168" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="110" coveredstatements="0" elements="117" coveredelements="0"/>
       </file>
     </package>
     <package name="Clumsy\Utils\Validators\ES">
@@ -1691,13 +1688,13 @@
       <line num="311" type="stmt" count="0"/>
       <line num="312" type="stmt" count="0"/>
       <line num="313" type="stmt" count="0"/>
-      <line num="314" type="stmt" count="0"/>
-      <line num="315" type="stmt" count="0"/>
+      <line num="324" type="stmt" count="0"/>
+      <line num="325" type="stmt" count="0"/>
       <line num="326" type="stmt" count="0"/>
       <line num="327" type="stmt" count="0"/>
       <line num="328" type="stmt" count="0"/>
       <line num="329" type="stmt" count="0"/>
-      <line num="330" type="stmt" count="0"/>
+      <line num="331" type="stmt" count="0"/>
       <line num="332" type="stmt" count="0"/>
       <line num="333" type="stmt" count="0"/>
       <line num="334" type="stmt" count="0"/>
@@ -1707,13 +1704,28 @@
       <line num="338" type="stmt" count="0"/>
       <line num="339" type="stmt" count="0"/>
       <line num="340" type="stmt" count="0"/>
-      <line num="351" type="stmt" count="0"/>
+      <line num="341" type="stmt" count="0"/>
       <line num="352" type="stmt" count="0"/>
       <line num="353" type="stmt" count="0"/>
       <line num="354" type="stmt" count="0"/>
       <line num="355" type="stmt" count="0"/>
       <line num="356" type="stmt" count="0"/>
-      <metrics loc="356" ncloc="243" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="194" coveredstatements="0" elements="194" coveredelements="0"/>
+      <line num="358" type="stmt" count="0"/>
+      <line num="359" type="stmt" count="0"/>
+      <line num="360" type="stmt" count="0"/>
+      <line num="361" type="stmt" count="0"/>
+      <line num="362" type="stmt" count="0"/>
+      <line num="363" type="stmt" count="0"/>
+      <line num="364" type="stmt" count="0"/>
+      <line num="365" type="stmt" count="0"/>
+      <line num="366" type="stmt" count="0"/>
+      <line num="377" type="stmt" count="0"/>
+      <line num="378" type="stmt" count="0"/>
+      <line num="379" type="stmt" count="0"/>
+      <line num="380" type="stmt" count="0"/>
+      <line num="381" type="stmt" count="0"/>
+      <line num="382" type="stmt" count="0"/>
+      <metrics loc="382" ncloc="261" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="209" coveredstatements="0" elements="209" coveredelements="0"/>
     </file>
     <file name="/Users/tomasbuteler/Sites/workbench/packages/clumsy/utils/src/config/config.php">
       <line num="11" type="stmt" count="0"/>
@@ -2031,6 +2043,6 @@
       <line num="1" type="stmt" count="0"/>
       <metrics loc="1" ncloc="1" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="1" coveredelements="0"/>
     </file>
-    <metrics files="46" loc="3249" ncloc="2850" classes="26" methods="178" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="1618" coveredstatements="45" elements="1796" coveredelements="48"/>
+    <metrics files="46" loc="3268" ncloc="2861" classes="26" methods="178" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="1630" coveredstatements="45" elements="1808" coveredelements="48"/>
   </project>
 </coverage>
