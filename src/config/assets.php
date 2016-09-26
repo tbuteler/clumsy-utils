@@ -137,7 +137,7 @@ return [
         'v'      => '1.6.3',
         'elixir' => false,
         'req'    => [
-            'datepicker',
+            'jquery-ui',
             'timepicker.css',
         ],
     ],
