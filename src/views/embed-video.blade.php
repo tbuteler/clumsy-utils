@@ -2,8 +2,8 @@
     @include('clumsy/utils::field')
     <div class="preview-box thumbnail">
         <div class="placeholders">
-            <div class="idle glyphicon glyphicon-film"></div>
-            <div class="error glyphicon glyphicon-exclamation-sign"></div>
+            <i class="idle material-icons">&#xE02C;</i>
+            <i class="error material-icons">&#xE000;</i>
         </div>
     </div>
 </div>

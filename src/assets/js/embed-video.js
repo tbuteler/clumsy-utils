@@ -45,7 +45,7 @@
                 return false;
         }
 
-        $(element).find('.placeholders .glyphicon').hide();
+        $(element).find('.placeholders i').hide();
         $(element).append($videoIframe);
 
     }

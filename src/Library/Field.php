@@ -526,7 +526,8 @@ class Field
 
     public function multiple($multiple = true)
     {
-        $this->setBooleanAttribute('field.multiple', $multiple);
+        $this->setBooleanAttribute('field.multiple', $multiple)
+             ->addGroupClass('select-multiple');
 
         return $this;
     }

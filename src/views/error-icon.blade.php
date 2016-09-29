@@ -1,1 +1,1 @@
-<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+<span class="form-control-feedback">&times;</span>

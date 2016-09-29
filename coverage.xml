@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1472222041">
-  <project timestamp="1472222041">
+<coverage generated="1475083247">
+  <project timestamp="1475083247">
     <package name="Clumsy\Utils\Controllers\Traits">
       <file name="/Users/tomasbuteler/Sites/workbench/packages/clumsy/utils/src/Controllers/Traits/MultipleStepForm.php">
         <class name="MultipleStepForm" namespace="Clumsy\Utils\Controllers\Traits">
