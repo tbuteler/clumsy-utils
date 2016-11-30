@@ -1,12 +1,10 @@
 
 $(window).load(function(){
-    console.log('xô');
     videoManager.init();
 });
 
 var EmbededVideoManager = function() {
     this.init = function() {
-        console.log('yo yo');
         var self = this;
         $('.embed-video-wrapper input').each(function() {
             var elem = $(this);
@@ -23,34 +21,8 @@ var EmbededVideoManager = function() {
             }
 
             // Look for changes in the value
-            elem.on('propertychange change click keyup input paste', function(){
+            self.bindEvents(elem);
 
-                // If value has changed...
-                if (elem.data('oldVal') !== elem.val()) {
-                    $el = $(this).parents('.embed-video-wrapper').find('.preview-box');
-
-                    $(this).parents('.embed-video-wrapper').find('iframe').remove();
-                    $el.find('.placeholders .glyphicon').show();
-                    $el.find('.placeholders .error').hide();
-                    elem.removeClass('has-error');
-
-                    // Updated stored value
-                    elem.data('oldVal', elem.val());
-
-                    var id = self.extractVideoID(elem.val());
-
-                    if (Object.keys(id).length) {
-
-                        $el.find('.placeholders .idle').hide();
-                        self.appendVideo($el,id);
-                    }
-                    else if (elem.val() !== '') {
-                        $el.find('.placeholders .idle').hide();
-                        $el.find('.placeholders .error').show();
-                        elem.addClass('has-error');
-                    }
-                }
-            });
         });
     };
 
@@ -63,33 +35,41 @@ var EmbededVideoManager = function() {
             elem.data('oldVal', elem.val());
 
             // Look for changes in the value
-            elem.on('propertychange change click keyup input paste', function(){
+            self.bindEvents(elem);
+        });
+    };
 
-                // If value has changed...
-                if (elem.data('oldVal') !== elem.val()) {
-                    $el = $(this).parents('.embed-video-wrapper').find('.preview-box');
+    this.bindEvents = function(elem) {
+        var self = this;
 
-                    $(this).parents('.embed-video-wrapper').find('iframe').remove();
-                    $el.find('.placeholders .glyphicon').show();
-                    $el.find('.placeholders .error').hide();
-                    elem.removeClass('has-error');
+        elem.on('propertychange change click keyup input paste', function(){
 
-                    // Updated stored value
-                    elem.data('oldVal', elem.val());
+            // If value has changed...
+            if (elem.data('oldVal') !== elem.val()) {
+                $el = $(this).parents('.embed-video-wrapper').find('.preview-box');
 
-                    var id = self.extractVideoID(elem.val());
+                $(this).parents('.embed-video-wrapper').find('iframe').remove();
+                $el.find('.placeholders .error').hide();
+                elem.removeClass('has-error');
 
-                    if (Object.keys(id).length) {
-                        $el.find('.placeholders .idle').hide();
-                        self.appendVideo($el,id);
-                    }
-                    else if (elem.val() !== '') {
-                        $el.find('.placeholders .idle').hide();
-                        $el.find('.placeholders .error').show();
-                        elem.addClass('has-error');
-                    }
+                // Updated stored value
+                elem.data('oldVal', elem.val());
+
+                var id = self.extractVideoID(elem.val());
+
+                if (Object.keys(id).length) {
+
+                    $el.find('.placeholders .idle').hide();
+                    self.appendVideo($el,id);
                 }
-            });
+                else if (elem.val() !== '') {
+                    $el.find('.placeholders .idle').hide();
+                    $el.find('.placeholders .error').show();
+                    elem.addClass('has-error');
+                } else {
+                    $el.find('.placeholders .idle').show();
+                }
+            }
         });
     };
 
