@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1475083247">
-  <project timestamp="1475083247">
+<coverage generated="1480580896">
+  <project timestamp="1480580896">
     <package name="Clumsy\Utils\Controllers\Traits">
       <file name="/Users/tomasbuteler/Sites/workbench/packages/clumsy/utils/src/Controllers/Traits/MultipleStepForm.php">
         <class name="MultipleStepForm" namespace="Clumsy\Utils\Controllers\Traits">
@@ -403,7 +403,7 @@
       </file>
       <file name="/Users/tomasbuteler/Sites/workbench/packages/clumsy/utils/src/Library/Field.php">
         <class name="Field" namespace="Clumsy\Utils\Library">
-          <metrics complexity="109" methods="68" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="393" coveredstatements="0" elements="461" coveredelements="0"/>
+          <metrics complexity="109" methods="68" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="394" coveredstatements="0" elements="462" coveredelements="0"/>
         </class>
         <line num="31" type="method" name="__construct" visibility="public" complexity="5" crap="30" count="0"/>
         <line num="33" type="stmt" count="0"/>
@@ -764,25 +764,25 @@
         <line num="527" type="method" name="multiple" visibility="public" complexity="1" crap="2" count="0"/>
         <line num="528" type="stmt" count="0"/>
         <line num="529" type="stmt" count="0"/>
-        <line num="531" type="stmt" count="0"/>
+        <line num="530" type="stmt" count="0"/>
         <line num="532" type="stmt" count="0"/>
-        <line num="534" type="method" name="digits" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="535" type="stmt" count="0"/>
+        <line num="533" type="stmt" count="0"/>
+        <line num="535" type="method" name="digits" visibility="public" complexity="1" crap="2" count="0"/>
         <line num="536" type="stmt" count="0"/>
-        <line num="538" type="stmt" count="0"/>
+        <line num="537" type="stmt" count="0"/>
         <line num="539" type="stmt" count="0"/>
-        <line num="541" type="method" name="render" visibility="public" complexity="21" crap="462" count="0"/>
-        <line num="542" type="stmt" count="0"/>
+        <line num="540" type="stmt" count="0"/>
+        <line num="542" type="method" name="render" visibility="public" complexity="21" crap="462" count="0"/>
         <line num="543" type="stmt" count="0"/>
         <line num="544" type="stmt" count="0"/>
-        <line num="546" type="stmt" count="0"/>
-        <line num="548" type="stmt" count="0"/>
-        <line num="550" type="stmt" count="0"/>
+        <line num="545" type="stmt" count="0"/>
+        <line num="547" type="stmt" count="0"/>
+        <line num="549" type="stmt" count="0"/>
         <line num="551" type="stmt" count="0"/>
         <line num="552" type="stmt" count="0"/>
         <line num="553" type="stmt" count="0"/>
         <line num="554" type="stmt" count="0"/>
-        <line num="556" type="stmt" count="0"/>
+        <line num="555" type="stmt" count="0"/>
         <line num="557" type="stmt" count="0"/>
         <line num="558" type="stmt" count="0"/>
         <line num="559" type="stmt" count="0"/>
@@ -792,59 +792,59 @@
         <line num="563" type="stmt" count="0"/>
         <line num="564" type="stmt" count="0"/>
         <line num="565" type="stmt" count="0"/>
-        <line num="567" type="stmt" count="0"/>
+        <line num="566" type="stmt" count="0"/>
         <line num="568" type="stmt" count="0"/>
-        <line num="570" type="stmt" count="0"/>
+        <line num="569" type="stmt" count="0"/>
         <line num="571" type="stmt" count="0"/>
         <line num="572" type="stmt" count="0"/>
-        <line num="574" type="stmt" count="0"/>
+        <line num="573" type="stmt" count="0"/>
         <line num="575" type="stmt" count="0"/>
         <line num="576" type="stmt" count="0"/>
-        <line num="578" type="stmt" count="0"/>
-        <line num="580" type="stmt" count="0"/>
-        <line num="582" type="stmt" count="0"/>
+        <line num="577" type="stmt" count="0"/>
+        <line num="579" type="stmt" count="0"/>
+        <line num="581" type="stmt" count="0"/>
         <line num="583" type="stmt" count="0"/>
         <line num="584" type="stmt" count="0"/>
-        <line num="586" type="stmt" count="0"/>
+        <line num="585" type="stmt" count="0"/>
         <line num="587" type="stmt" count="0"/>
         <line num="588" type="stmt" count="0"/>
         <line num="589" type="stmt" count="0"/>
         <line num="590" type="stmt" count="0"/>
-        <line num="592" type="stmt" count="0"/>
-        <line num="594" type="stmt" count="0"/>
+        <line num="591" type="stmt" count="0"/>
+        <line num="593" type="stmt" count="0"/>
         <line num="595" type="stmt" count="0"/>
         <line num="596" type="stmt" count="0"/>
         <line num="597" type="stmt" count="0"/>
         <line num="598" type="stmt" count="0"/>
         <line num="599" type="stmt" count="0"/>
         <line num="600" type="stmt" count="0"/>
-        <line num="602" type="stmt" count="0"/>
-        <line num="604" type="stmt" count="0"/>
-        <line num="606" type="stmt" count="0"/>
-        <line num="608" type="stmt" count="0"/>
-        <line num="610" type="stmt" count="0"/>
-        <line num="612" type="stmt" count="0"/>
+        <line num="601" type="stmt" count="0"/>
+        <line num="603" type="stmt" count="0"/>
+        <line num="605" type="stmt" count="0"/>
+        <line num="607" type="stmt" count="0"/>
+        <line num="609" type="stmt" count="0"/>
+        <line num="611" type="stmt" count="0"/>
         <line num="613" type="stmt" count="0"/>
         <line num="614" type="stmt" count="0"/>
-        <line num="616" type="stmt" count="0"/>
-        <line num="618" type="stmt" count="0"/>
-        <line num="620" type="stmt" count="0"/>
+        <line num="615" type="stmt" count="0"/>
+        <line num="617" type="stmt" count="0"/>
+        <line num="619" type="stmt" count="0"/>
         <line num="621" type="stmt" count="0"/>
         <line num="622" type="stmt" count="0"/>
-        <line num="624" type="stmt" count="0"/>
-        <line num="626" type="stmt" count="0"/>
+        <line num="623" type="stmt" count="0"/>
+        <line num="625" type="stmt" count="0"/>
         <line num="627" type="stmt" count="0"/>
-        <line num="629" type="stmt" count="0"/>
-        <line num="631" type="stmt" count="0"/>
+        <line num="628" type="stmt" count="0"/>
+        <line num="630" type="stmt" count="0"/>
         <line num="632" type="stmt" count="0"/>
-        <line num="634" type="stmt" count="0"/>
+        <line num="633" type="stmt" count="0"/>
         <line num="635" type="stmt" count="0"/>
         <line num="636" type="stmt" count="0"/>
         <line num="637" type="stmt" count="0"/>
         <line num="638" type="stmt" count="0"/>
-        <line num="640" type="stmt" count="0"/>
+        <line num="639" type="stmt" count="0"/>
         <line num="641" type="stmt" count="0"/>
-        <line num="643" type="stmt" count="0"/>
+        <line num="642" type="stmt" count="0"/>
         <line num="644" type="stmt" count="0"/>
         <line num="645" type="stmt" count="0"/>
         <line num="646" type="stmt" count="0"/>
@@ -855,18 +855,19 @@
         <line num="651" type="stmt" count="0"/>
         <line num="652" type="stmt" count="0"/>
         <line num="653" type="stmt" count="0"/>
-        <line num="655" type="method" name="__call" visibility="public" complexity="2" crap="6" count="0"/>
-        <line num="656" type="stmt" count="0"/>
+        <line num="654" type="stmt" count="0"/>
+        <line num="656" type="method" name="__call" visibility="public" complexity="2" crap="6" count="0"/>
         <line num="657" type="stmt" count="0"/>
         <line num="658" type="stmt" count="0"/>
         <line num="659" type="stmt" count="0"/>
-        <line num="661" type="stmt" count="0"/>
+        <line num="660" type="stmt" count="0"/>
         <line num="662" type="stmt" count="0"/>
-        <line num="664" type="method" name="__toString" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="665" type="stmt" count="0"/>
+        <line num="663" type="stmt" count="0"/>
+        <line num="665" type="method" name="__toString" visibility="public" complexity="1" crap="2" count="0"/>
         <line num="666" type="stmt" count="0"/>
         <line num="667" type="stmt" count="0"/>
-        <metrics loc="668" ncloc="656" classes="1" methods="68" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="393" coveredstatements="0" elements="461" coveredelements="0"/>
+        <line num="668" type="stmt" count="0"/>
+        <metrics loc="669" ncloc="657" classes="1" methods="68" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="394" coveredstatements="0" elements="462" coveredelements="0"/>
       </file>
       <file name="/Users/tomasbuteler/Sites/workbench/packages/clumsy/utils/src/Library/FieldFactory.php">
         <class name="FieldFactory" namespace="Clumsy\Utils\Library">
@@ -2043,6 +2044,6 @@
       <line num="1" type="stmt" count="0"/>
       <metrics loc="1" ncloc="1" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="1" coveredelements="0"/>
     </file>
-    <metrics files="46" loc="3268" ncloc="2861" classes="26" methods="178" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="1630" coveredstatements="45" elements="1808" coveredelements="48"/>
+    <metrics files="46" loc="3269" ncloc="2862" classes="26" methods="178" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="1631" coveredstatements="45" elements="1809" coveredelements="48"/>
   </project>
 </coverage>
