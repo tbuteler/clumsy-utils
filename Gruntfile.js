@@ -281,7 +281,8 @@ module.exports = function(grunt) {
         grunt.task.run([
             'jshint',
             'uglify:all',
-            'less:all'
+            'less:all',
+            'shell:test'
         ]);
     });
 
