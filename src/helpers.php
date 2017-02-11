@@ -154,7 +154,7 @@ if (!function_exists('parseTweet')) {
 if (!function_exists('groupedImage')) {
     function groupedImage($src, $group = null, $alt = null, array $attributes = [], $secure = null)
     {
-        app('clumsy.assets')->enqueue('grouped-images-loader');
+        app('clumsy.assets')->load('grouped-images-loader');
 
         $attributes = array_merge(
             [

@@ -12,27 +12,27 @@ return [
     */
 
     'embed-video' => [
-        'set'    => 'footer',
-        'path'   => 'vendor/clumsy/utils/js/embed-video.min.js',
-        'v'      => '0.1.0',
-        'elixir' => false,
-        'req'    => 'jquery',
+        'set'      => 'footer',
+        'path'     => 'vendor/clumsy/utils/js/embed-video.min.js',
+        'hash'     => false,
+        'version'  => '0.1.0',
+        'requires' => 'jquery',
     ],
 
     'grouped-images-loader' => [
-        'set'    => 'header',
-        'path'   => 'vendor/clumsy/utils/js/grouped-images-loader.min.js',
-        'elixir' => false,
-        'req'    => 'jquery',
-        'inline' => true,
+        'set'      => 'header',
+        'path'     => 'vendor/clumsy/utils/js/grouped-images-loader.min.js',
+        'hash'     => false,
+        'requires' => 'jquery',
+        'inline'   => true,
     ],
 
     'password-toggle' => [
-        'set'    => 'header',
-        'path'   => 'vendor/clumsy/utils/js/password-toggle.min.js',
-        'elixir' => false,
-        'req'    => 'jquery',
-        'inline' => true,
+        'set'      => 'header',
+        'path'     => 'vendor/clumsy/utils/js/password-toggle.min.js',
+        'hash'     => false,
+        'requires' => 'jquery',
+        'inline'   => true,
     ],
 
     /*
@@ -59,8 +59,9 @@ return [
     */
 
     'jquery' => [
-        'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js',
+        'set'     => 'footer',
+        'path'    => '//ajax.googleapis.com/ajax/libs/jquery/{{version}}/jquery.min.js',
+        'version' => '3.1.1',
     ],
 
     /*
@@ -73,19 +74,20 @@ return [
     */
 
     'jquery-ui' => [
-        'set'  => 'footer',
-        'path' => '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js',
-        'req'  => [
+        'set'      => 'footer',
+        'path'     => '//ajax.googleapis.com/ajax/libs/jqueryui/{{version}}/jquery-ui.min.js',
+        'version'  => '1.11.4',
+        'requires' => [
             'jquery',
             'jquery-ui.css',
         ],
     ],
 
     'jquery-ui.css' => [
-        'set'    => 'styles',
-        'path'   => 'vendor/clumsy/utils/css/jquery-ui.css',
-        'v'      => '1.11.4',
-        'elixir' => false,
+        'set'     => 'styles',
+        'path'    => 'vendor/clumsy/utils/css/jquery-ui.css',
+        'version' => '1.11.4',
+        'hash'    => false,
     ],
 
     /**
@@ -93,11 +95,11 @@ return [
      */
 
     'datepicker' => [
-        'set'   => 'footer',
-        'path'  => 'vendor/clumsy/utils/js/datepicker/{{locale}}.min.js',
-        'v'     => '1.11.4',
-        'elixir' => false,
-        'req'   => [
+        'set'      => 'footer',
+        'path'     => 'vendor/clumsy/utils/js/datepicker/{{locale}}.min.js',
+        'hash'     => false,
+        'version'  => '1.11.4',
+        'requires' => [
             'jquery',
             'jquery-ui.css',
         ],
@@ -109,13 +111,13 @@ return [
      */
 
     'autocomplete-html' => [
-        'set'    => 'styles',
-        'path'   => 'vendor/clumsy/utils/js/autocomplete/html-extension.min.js',
-        'v'      => '1.11.4',
-        'elixir' => false,
-        'req'   => [
+        'set'      => 'styles',
+        'path'     => 'vendor/clumsy/utils/js/autocomplete/html-extension.min.js',
+        'version'  => '1.11.4',
+        'hash'     => false,
+        'requires' => [
             'jquery',
-            'jquery-ui'
+            'jquery-ui',
         ],
     ],
 
@@ -125,18 +127,18 @@ return [
      */
 
     'timepicker.css' => [
-        'set'    => 'styles',
-        'path'   => 'vendor/clumsy/utils/css/timepicker.css',
-        'v'      => '1.6.3',
-        'elixir' => false,
+        'set'     => 'styles',
+        'path'    => 'vendor/clumsy/utils/css/timepicker.css',
+        'version' => '1.6.3',
+        'hash'    => false,
     ],
 
     'timepicker' => [
-        'set'    => 'footer',
-        'path'   => 'vendor/clumsy/utils/js/timepicker/{{locale}}.min.js',
-        'v'      => '1.6.3',
-        'elixir' => false,
-        'req'    => [
+        'set'      => 'footer',
+        'path'     => 'vendor/clumsy/utils/js/timepicker/{{locale}}.min.js',
+        'version'  => '1.6.3',
+        'hash'     => false,
+        'requires' => [
             'jquery-ui',
             'timepicker.css',
         ],
@@ -152,14 +154,16 @@ return [
     */
 
     'bootstrap' => [
-        'set'   => 'styles',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+        'set'     => 'styles',
+        'path'    => '//maxcdn.bootstrapcdn.com/bootstrap/{{version}}/css/bootstrap.min.css',
+        'version' => '3.3.7',
     ],
 
     'bootstrap.js' => [
-        'set'   => 'footer',
-        'path'  => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',
-        'req'   => 'jquery',
+        'set'      => 'footer',
+        'path'     => '//maxcdn.bootstrapcdn.com/bootstrap/{{version}}/js/bootstrap.min.js',
+        'version'  => '3.3.7',
+        'requires' => 'jquery',
     ],
 
     /*
@@ -175,8 +179,9 @@ return [
         'set'   => 'footer',
         'path'  => [
             'default'    => 'vendor/clumsy/utils/js/vue.js',
-            'production' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js',
+            'production' => 'https://cdnjs.cloudflare.com/ajax/libs/vue/{{version}}/vue.min.js',
         ],
+        'version' => '2.1.10',
     ],
 
     /*
@@ -190,43 +195,50 @@ return [
 
     'angular' => [
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular.min.js',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/{{version}}/angular.min.js',
+        'version'  => '1.5.7',
     ],
 
     'angular-animate' => [
-        'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-animate.min.js',
-        'req'   => 'angular',
+        'set'      => 'footer',
+        'path'     => '//ajax.googleapis.com/ajax/libs/angularjs/{{version}}/angular-animate.min.js',
+        'version'  => '1.5.7',
+        'requires' => 'angular',
     ],
 
     'angular-cookies' => [
-        'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-cookies.min.js',
-        'req'   => 'angular',
+        'set'      => 'footer',
+        'path'     => '//ajax.googleapis.com/ajax/libs/angularjs/{{version}}/angular-cookies.min.js',
+        'version'  => '1.5.7',
+        'requires' => 'angular',
     ],
 
     'angular-resource' => [
-        'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-resource.min.js',
-        'req'   => 'angular',
+        'set'      => 'footer',
+        'path'     => '//ajax.googleapis.com/ajax/libs/angularjs/{{version}}/angular-resource.min.js',
+        'version'  => '1.5.7',
+        'requires' => 'angular',
     ],
 
     'angular-route' => [
         'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-route.min.js',
-        'req'   => 'angular',
+        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/{{version}}/angular-route.min.js',
+        'version'  => '1.5.7',
+        'requires'   => 'angular',
     ],
 
     'angular-sanitize' => [
-        'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-sanitize.min.js',
-        'req'   => 'angular',
+        'set'      => 'footer',
+        'path'     => '//ajax.googleapis.com/ajax/libs/angularjs/{{version}}/angular-sanitize.min.js',
+        'version'  => '1.5.7',
+        'requires' => 'angular',
     ],
 
     'angular-touch' => [
-        'set'   => 'footer',
-        'path'  => '//ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-touch.min.js',
-        'req'   => 'angular',
+        'set'      => 'footer',
+        'path'     => '//ajax.googleapis.com/ajax/libs/angularjs/{{version}}/angular-touch.min.js',
+        'version'  => '1.5.7',
+        'requires' => 'angular',
     ],
 
     /*
@@ -239,8 +251,9 @@ return [
     */
 
     'font-awesome' => [
-        'set'   => 'styles',
-        'path'  => '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
+        'set'     => 'styles',
+        'path'    => '//maxcdn.bootstrapcdn.com/font-awesome/{{version}}/css/font-awesome.min.css',
+        'version' => '4.7.0',
     ],
 
     /*
@@ -253,10 +266,36 @@ return [
     */
 
     'tinymce' => [
-        'set'  => 'footer',
-        'path' => '//cdn.tinymce.com/4/tinymce.min.js',
-        'v'    => '4.3.12',
-        'req'  => 'jquery',
+        'set'      => 'footer',
+        'path'     => '//cdn.tinymce.com/4/tinymce.min.js',
+        'version'  => '4.3.12',
+        'requires' => 'jquery',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | SimpleMDE Markdown Editor
+    |--------------------------------------------------------------------------
+    |
+    | https://simplemde.com/
+    |
+    */
+
+    'simplemde.css' => [
+        'set'     => 'styles',
+        'path'    => 'https://cdn.jsdelivr.net/simplemde/{{version}}/simplemde.min.css',
+        'hash'    => false,
+        'version' => '1.11.2',
+    ],
+
+    'simplemde' => [
+        'set'      => 'footer',
+        'path'     => 'https://cdn.jsdelivr.net/simplemde/{{version}}/simplemde.min.js',
+        'hash'     => false,
+        'version'  => '1.11.2',
+        'requires' => [
+            'simplemde.css',
+        ],
     ],
 
     /*
@@ -269,18 +308,18 @@ return [
     */
 
     'chosen.css' => [
-        'set'    => 'styles',
-        'path'   => 'vendor/clumsy/utils/css/chosen.css',
-        'v'      => '1.5.1',
-        'elixir' => false,
+        'set'     => 'styles',
+        'path'    => 'vendor/clumsy/utils/css/chosen.css',
+        'hash'    => false,
+        'version' => '1.6.2',
     ],
 
     'chosen' => [
-        'set'    => 'footer',
-        'path'   => 'vendor/clumsy/utils/js/chosen.min.js',
-        'v'      => '1.5.1',
-        'elixir' => false,
-        'req'    => [
+        'set'      => 'footer',
+        'path'     => 'vendor/clumsy/utils/js/chosen.min.js',
+        'hash'     => false,
+        'version'  => '1.6.2',
+        'requires' => [
             'jquery',
             'chosen.css',
         ],
@@ -296,18 +335,18 @@ return [
     */
 
     'sweetalert.css' => [
-        'set'    => 'styles',
-        'path'   => 'vendor/clumsy/utils/css/sweetalert.css',
-        'v'      => '1.1.3',
-        'elixir' => false,
+        'set'     => 'styles',
+        'path'    => 'vendor/clumsy/utils/css/sweetalert.css',
+        'hash'    => false,
+        'version' => '1.1.3',
     ],
 
     'sweetalert' => [
-        'set'    => 'footer',
-        'path'   => 'vendor/clumsy/utils/js/sweetalert.min.js',
-        'v'      => '1.1.3',
-        'elixir' => false,
-        'req'    => [
+        'set'      => 'footer',
+        'path'     => 'vendor/clumsy/utils/js/sweetalert.min.js',
+        'hash'     => false,
+        'version'  => '1.1.3',
+        'requires' => [
             'sweetalert.css',
         ],
     ],
@@ -322,18 +361,18 @@ return [
     */
 
     'colorpicker.css' => [
-        'set'    => 'styles',
-        'path'   => 'vendor/clumsy/utils/css/iris.css',
-        'v'      => '1.0.7',
-        'elixir' => false,
+        'set'     => 'styles',
+        'path'    => 'vendor/clumsy/utils/css/iris.css',
+        'hash'    => false,
+        'version' => '1.0.7',
     ],
 
     'colorpicker' => [
-        'set'    => 'footer',
-        'path'   => 'vendor/clumsy/utils/js/iris.min.js',
-        'v'      => '1.0.7',
-        'elixir' => false,
-        'req'    => [
+        'set'      => 'footer',
+        'path'     => 'vendor/clumsy/utils/js/iris.min.js',
+        'hash'     => false,
+        'version'  => '1.0.7',
+        'requires' => [
             'jquery',
             'jquery-ui',
             'colorpicker.css',
@@ -351,15 +390,15 @@ return [
 
     'select2.css' => [
         'set'    => 'styles',
-        'path'   => 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css',
-        'elixir' => false,
+        'path'   => 'https://cdnjs.cloudflare.com/ajax/libs/select2/{{version}}/css/select2.min.css',
+        'version'  => '4.0.3',
     ],
 
     'select2' => [
-        'set'    => 'footer',
-        'path'   => 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js',
-        'elixir' => false,
-        'req'    => [
+        'set'      => 'footer',
+        'path'     => 'https://cdnjs.cloudflare.com/ajax/libs/select2/{{version}}/js/select2.min.js',
+        'version'  => '4.0.3',
+        'requires' => [
             'jquery',
             'select2.css',
         ],
@@ -375,8 +414,9 @@ return [
     */
 
     'masonry' => [
-        'set'   => 'footer',
-        'path'  => '//cdnjs.cloudflare.com/ajax/libs/masonry/2.1.08/jquery.masonry.min.js',
-        'req'   => 'jquery',
+        'set'      => 'footer',
+        'path'     => '//cdnjs.cloudflare.com/ajax/libs/masonry/{{version}}/jquery.masonry.min.js',
+        'version'  => '2.1.08',
+        'requires' => 'jquery',
     ],
 ];

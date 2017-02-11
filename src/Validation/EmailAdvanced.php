@@ -1,6 +1,6 @@
 <?php
 
-namespace Clumsy\Utils\Validators;
+namespace Clumsy\Utils\Validation;
 
 class EmailAdvanced
 {

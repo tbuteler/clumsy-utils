@@ -95,6 +95,13 @@ class FieldFactory
                     ->addClass('rich-text');
     }
 
+    public function markdown($name = null, $label = '', $options = '')
+    {
+        return $this->textarea($name, $label, $options)
+                    ->load('simplemde')
+                    ->addClass('markdown-editor');
+    }
+
     public function datepicker($name = null, $label = '', $options = '')
     {
         return $this->make($name, $label, $options)

@@ -15,7 +15,7 @@ class MailServiceProvider extends BaseProvider
      */
     protected function registerSwiftTransport()
     {
-        $this->app['swift.transport'] = $this->app->share(function ($app) {
+        $this->app['swift.transport'] = $this->app->bind(function ($app) {
 
             $transport = new TransportManager($app);
 

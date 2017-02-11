@@ -1,12 +1,12 @@
 <?php
 
-namespace Clumsy\Utils\Validators;
+namespace Clumsy\Utils\Validation;
 
 class Identities
 {
     public $types = [
 
-        'pt_nif' => 'Clumsy\Utils\Validators\PT\Identities@nif',
+        'pt_nif' => 'Clumsy\Utils\Validation\PT\Identities@nif',
     ];
 
     public function validate($attribute, $value, $parameters)

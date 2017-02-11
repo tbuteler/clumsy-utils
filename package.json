@@ -1,7 +1,7 @@
 {
   "name": "ClumsyUtils",
   "description": "A set of utilities for building Laravel applications",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "*",
@@ -13,11 +13,7 @@
     "grunt-contrib-less": "*",
     "grunt-shell": "*",
     "grunt-contrib-watch": "*",
-    "sweetalert": "^1.1.3"
-  },
-  "eslintConfig": {
-    "globals": {
-      "$": false
-    }
+    "sweetalert": "^1.1.3",
+    "eslint": "^3.11.1"
   }
 }

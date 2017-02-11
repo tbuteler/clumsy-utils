@@ -178,7 +178,7 @@ trait MultipleStepForm
 
     public function getCurrentStep()
     {
-        return request()->route()->getParameter('step');
+        return request()->route()->parameter('step');
     }
 
     public function show()
